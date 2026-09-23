@@ -315,6 +315,37 @@
   .juror-no { font-size:0.62rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); }
   footer.court { text-align:center; color:var(--muted); font-size:0.74rem; padding:0 16px 34px; font-family: Georgia, serif; font-style:italic; }
   footer.court b { font-style:normal; letter-spacing:0.14em; text-transform:uppercase; font-size:0.66rem; color:var(--gold); display:block; margin-bottom:4px; }
+
+  #standingsTable, #alltimeTable { display:table; table-layout:auto; }
+  #standingsTable thead, #alltimeTable thead { display:table-header-group; }
+  #standingsTable tbody, #alltimeTable tbody { display:table-row-group; }
+  #standingsTable td, #alltimeTable td { vertical-align:middle; overflow-wrap:break-word; }
+  #standingsTable td.num, #alltimeTable td.num { white-space:nowrap; }
+  .tn-m { display:none; }
+  @media (max-width:640px) {
+    #standingsTable th:nth-child(3), #standingsTable td.tm { display:none; }
+    .tn-m { display:block; color:var(--muted); font-size:0.72rem; font-weight:400; margin-top:2px; }
+    #standingsTable th, #standingsTable td, #alltimeTable th, #alltimeTable td { padding:10px 8px; }
+    #standingsTable th:first-child, #standingsTable td:first-child, #alltimeTable th:first-child, #alltimeTable td:first-child { padding-left:14px; }
+    #standingsTable th:last-child, #standingsTable td:last-child, #alltimeTable th:last-child, #alltimeTable td:last-child { padding-right:14px; }
+  }
+
+  /* wider desktop layout: all tabs on one row */
+  @media (min-width:700px) {
+    nav.tabs, main, .trophy-row { max-width:1180px; }
+    nav.tabs { flex-wrap:nowrap; overflow-x:auto; justify-content:space-between; gap:6px; }
+    nav.tabs button { flex:1 1 auto; padding:9px 12px; text-align:center; white-space:nowrap; }
+  }
+  /* phones: one swipeable row, with a fade at the edge showing there's more */
+  @media (max-width:699px) {
+    nav.tabs { scrollbar-width:none; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+    nav.tabs::-webkit-scrollbar { display:none; }
+    nav.tabs button { padding:8px 13px; font-size:0.8rem; }
+  }
+  @media (min-width:700px) and (max-width:1023px) {
+    nav.tabs { gap:4px; padding-left:12px; padding-right:12px; }
+    nav.tabs button { padding:8px 7px; font-size:0.72rem; }
+  }
 </style>
 </head>
 <body>
@@ -746,7 +777,7 @@ function renderStandings(){
   rows.forEach((r,i) => {
     const tr = document.createElement('tr');
     if (r.champ) tr.classList.add('champ');
-    tr.innerHTML = `<td class="rank">${i+1}</td><td>${r.manager}</td><td>${r.team}</td>
+    tr.innerHTML = `<td class="rank">${i+1}</td><td class="mg">${r.manager}<small class="tn-m">${r.team}</small></td><td class="tm">${r.team}</td>
       <td class="num">${r.wins}</td><td class="num">${r.losses}</td>
       <td class="num">${fmt(r.pf)}</td><td class="num">${fmt(r.pa)}</td>`;
     tbody.appendChild(tr);
@@ -1038,6 +1069,7 @@ document.querySelectorAll('nav.tabs button').forEach(btn => {
     document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.tab).classList.add('active');
+    btn.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
   });
 });
 const PAGE_BUILT = "2026-09-23T21:07:57Z";
@@ -1171,7 +1203,7 @@ function computeLive(DATA, DRAFTS, HIST, rows, games26, wb26, FUT_OLD){
   const rival = own.slice(0,6).map(([, w, l, a, b]) => ({who:`${a} over ${b}`, val:`${w}-${l}`, ctx:''}));
   const h2hOut = {}; for (const [k, v] of h2h) h2hOut[k] = v;
 
-  const RECORDS = {single, streaks: streakTables, weekly, playoff_table, playoff_lists, season, rival, h2h: h2hOut, cur, n_games: games.length};
+  const recs = {single, streaks: streakTables, weekly, playoff_table, playoff_lists, season, rival, h2h: h2hOut, cur, n_games: games.length};
 
   // manager cards
   const X = {};
@@ -1183,7 +1215,7 @@ function computeLive(DATA, DRAFTS, HIST, rows, games26, wb26, FUT_OLD){
   const champ = {}; completed.forEach(s => champ[s] = league[s].find(r => r.champ).manager);
   const ordinal = n => n + ((n % 100 >= 10 && n % 100 <= 20) ? 'th' : ({1:'st',2:'nd',3:'rd'}[n % 10] || 'th'));
   const boards = DRAFTS.boards, slots = DRAFTS.slots;
-  const MANAGERS = rows.map((row, i) => {
+  const mgrs = rows.map((row, i) => {
     const m = row.manager, rank = i + 1;
     const hist = []; completed.forEach(s => league[s].forEach((r, j) => { if (r.manager === m) hist.push([s, j+1, r]); }));
     const w = hist.reduce((a, h) => a + h[2].wins, 0), l = hist.reduce((a, h) => a + h[2].losses, 0), pf = hist.reduce((a, h) => a + h[2].pf, 0);
@@ -1242,11 +1274,11 @@ function computeLive(DATA, DRAFTS, HIST, rows, games26, wb26, FUT_OLD){
   const pyRound = x => { const f = Math.floor(x), d = x - f; return d > 0.5 ? f+1 : d < 0.5 ? f : (f % 2 ? f+1 : f); };
   const american = p => { const o = (1-p)/p*100, st = o < 1000 ? 50 : o < 3000 ? 100 : 500; return Math.max(st, Math.trunc(pyRound(o/st) * st)); };
   const old = {}; FUT_OLD.forEach(f => old[f.m] = f);
-  const FUTURES = fx.map((x, i) => [x, ex[i]]).sort((a,b) => b[1]-a[1]).map(([x, e]) => {
+  const futs = fx.map((x, i) => [x, ex[i]]).sort((a,b) => b[1]-a[1]).map(([x, e]) => {
     const o = old[x.m] || {};
     return {m:x.m, odds:'+' + com(american(e/et)), case: o.case || '', rec:x.rec, line: o.line != null ? o.line : 14.5};
   });
-  return {RECORDS, MANAGERS, FUTURES};
+  return {RECORDS: recs, MANAGERS: mgrs, FUTURES: futs};
 }
 
 async function loadWeekly(){
