@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12 Angry Men — League History</title>
+<style>
+  :root {
+    --bg: #f3f1ea; --bg2: #ffffff; --card: #ffffff; --border: #e4e0d4;
+    --text: #15211d; --muted: #6b7570; --accent: #0f3d33; --accent2: #b8862e;
+    --danger: #a33b3b; --gold: #b8862e; --header: #0e2e28; --header2: #123a32;
+    --pos: #1f7a4d; --neg: #a33b3b;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#12100a; --bg2:#1a1712; --card:#1a1712; --border:#2c2820;
+      --text:#f0ece0; --muted:#a39c8a; --accent:#3fcf9e; --accent2:#e0b25a;
+      --danger:#e07a7a; --pos:#3fcf9e; --neg:#e07a7a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#12100a; --bg2:#1a1712; --card:#1a1712; --border:#2c2820;
+    --text:#f0ece0; --muted:#a39c8a; --accent:#3fcf9e; --accent2:#e0b25a;
+    --danger:#e07a7a; --pos:#3fcf9e; --neg:#e07a7a;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height:100%;
+  }
+  header {
+    padding: 26px 20px 20px; text-align:center;
+    background: var(--header);
+    border-bottom: 3px solid var(--gold);
+  }
+  .est { color:var(--gold); font-size:0.7rem; letter-spacing:0.15em; font-weight:700; text-transform:uppercase; margin-bottom:8px; }
+  .crest {
+    width:56px; height:56px; margin:0 auto 10px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #1c5245, var(--header2) 70%);
+    border:2px solid var(--gold); display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem;
+  }
+  header h1 { margin:0 0 4px; font-size: 1.6rem; letter-spacing:-0.01em; color:#fff; font-weight:800; }
+  header p.tagline { margin:0; color:var(--gold); font-size:0.85rem; font-weight:600; font-style:italic; }
+
+  .trophy-row {
+    display:flex; gap:14px; overflow-x:auto; padding: 20px 16px 14px; max-width:900px; margin:0 auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .trophy-card {
+    flex:0 0 auto; width:112px; background: var(--header2); border:1px solid var(--gold);
+    padding:12px 10px 20px; text-align:center;
+    clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
+  }
+  .trophy-card .yr { color:var(--gold); font-weight:800; font-size:1.05rem; margin-bottom:5px; }
+  .trophy-card .tm { color:#fff; font-size:0.72rem; font-weight:700; line-height:1.25; margin-bottom:3px; }
+  .trophy-card .mg { color:#a9c4bc; font-size:0.65rem; margin-bottom:4px; }
+  .trophy-card .rec { color:var(--gold); font-size:0.65rem; font-weight:700; }
+
+  nav.tabs {
+    display:flex; gap:6px; overflow-x:auto; padding: 14px 16px 2px;
+    max-width: 900px; margin: 0 auto; -webkit-overflow-scrolling: touch;
+  }
+  nav.tabs button {
+    flex: 0 0 auto; background:var(--card); color:var(--muted); border:1px solid var(--border);
+    padding: 8px 16px; border-radius: 8px; font-size:0.82rem; cursor:pointer;
+    font-weight:700; transition: all .15s;
+  }
+  nav.tabs button.active { background:var(--header); color:#fff; border-color:var(--header); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 10px 16px 48px; }
+  section { display:none; }
+  section.active { display:block; animation: fade .2s ease; }
+  @keyframes fade { from{opacity:0; transform:translateY(3px);} to{opacity:1; transform:none;} }
+
+  .panel {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden; margin-top:16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .panel-head {
+    background: var(--header); padding: 14px 18px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  }
+  .panel-head .titles h2 { margin:0; color:#fff; font-size:1.05rem; font-weight:800; }
+  .panel-head .titles p { margin:2px 0 0; color:#a9c4bc; font-size:0.78rem; }
+
+  .season-picker { display:flex; gap:6px; flex-wrap:wrap; }
+  .season-picker button {
+    background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); color:#e8f2ee;
+    padding:5px 12px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-weight:700;
+  }
+  .season-picker button.active { background:var(--gold); color:#1c1200; border-color:var(--gold); }
+
+  .overflow-x { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; display:block; }
+  thead, tbody { display:table; width:100%; table-layout:fixed; }
+  th, td { text-align:left; padding: 11px 16px; border-bottom:1px solid var(--border); font-size:0.85rem; }
+  th { color:var(--muted); font-weight:700; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.04em; background: rgba(15,61,51,0.04); }
+  td.num, th.num { text-align:right; font-variant-numeric: tabular-nums; }
+  tbody tr:nth-child(even) { background: rgba(15,61,51,0.025); }
+  tbody tr:last-child td { border-bottom:none; }
+  tr.champ td:first-child::before { content: "🏆 "; }
+  tr.champ { background: rgba(184,134,46,0.10); }
+  tr.champ td { font-weight:700; }
+  .rank { color:var(--muted); width: 26px; font-weight:700; }
+
+  .panel-body { padding: 4px 0; }
+  .panel-body.pad { padding: 16px 18px; }
+  .note { color:var(--muted); font-size:0.78rem; padding: 12px 18px 16px; }
+
+  .card-grid { display:grid; grid-template-columns: 1fr; gap:1px; background:var(--border); }
+  @media (min-width:640px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-card { background:var(--card); padding:16px 18px; }
+  .stat-card .label { color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; font-weight:700; }
+  .stat-card .value { font-size:1.3rem; font-weight:800; margin-bottom:2px; }
+  .stat-card .sub { color:var(--muted); font-size:0.78rem; }
+  .stat-card.pos .value { color: var(--pos); }
+  .stat-card.neg .value { color: var(--neg); }
+
+  .champ-list { display:flex; flex-direction:column; }
+  .champ-row {
+    display:flex; align-items:center; gap:14px; padding:14px 18px;
+    border-bottom:1px solid var(--border);
+  }
+  .champ-row:last-child { border-bottom:none; }
+  .champ-row .yr {
+    font-weight:800; font-size:1rem; color:#1c1200; width:50px; text-align:center;
+    background: var(--gold); border-radius:6px; padding:6px 0; flex-shrink:0;
+  }
+  .champ-row .who { font-weight:700; }
+  .champ-row .team { color:var(--muted); font-size:0.82rem; }
+
+  .draft-grid { display:grid; grid-template-columns: 1fr; }
+  @media (min-width:640px) { .draft-grid { grid-template-columns: 1fr 1fr; } }
+  .draft-pick {
+    display:flex; align-items:center; gap:12px; padding:11px 18px;
+    border-bottom:1px solid var(--border);
+  }
+  .draft-pick .num {
+    width:26px; height:26px; border-radius:50%; background: var(--header);
+    color:var(--gold); font-size:0.72rem; font-weight:800; display:flex;
+    align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .draft-pick .info { min-width:0; }
+  .draft-pick .player { font-weight:700; font-size:0.85rem; }
+  .draft-pick .meta { color:var(--muted); font-size:0.72rem; }
+  .draft-pick .by { color:var(--gold); font-size:0.72rem; font-weight:700; }
+
+  :root { --qb:#f6dcdc; --rb:#d8efe0; --wr:#dbe7f7; --te:#f7e6cf; --k:#e8e0f4; --def:#e6e4df; --cell-text:#15211d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --qb:#4a2626; --rb:#1f3d2c; --wr:#1f3049; --te:#4a3a1f; --k:#352a49; --def:#33312c; --cell-text:#f0ece0; } }
+  :root[data-theme="dark"] { --qb:#4a2626; --rb:#1f3d2c; --wr:#1f3049; --te:#4a3a1f; --k:#352a49; --def:#33312c; --cell-text:#f0ece0; }
+  .board-wrap { overflow-x:auto; -webkit-overflow-scrolling: touch; }
+  .board { display:grid; grid-template-columns: 34px repeat(12, minmax(92px, 1fr)); gap:3px; padding:10px; min-width: 1150px; }
+  .board .hd { font-size:0.66rem; font-weight:800; color:var(--muted); text-align:center; padding:4px 2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .board .hd.champ { color:var(--gold); }
+  .board .rd { font-size:0.68rem; font-weight:800; color:var(--muted); display:flex; align-items:center; justify-content:center; }
+  .cell { border-radius:6px; padding:6px 7px; min-height:48px; color:var(--cell-text); cursor:default; transition: opacity .15s; }
+  .cell .pn { font-size:0.6rem; opacity:.65; font-weight:700; }
+  .cell .nm { font-size:0.74rem; font-weight:700; line-height:1.15; }
+  .cell .ps { font-size:0.6rem; font-weight:800; opacity:.7; letter-spacing:.03em; }
+  .cell.QB{background:var(--qb)} .cell.RB{background:var(--rb)} .cell.WR{background:var(--wr)} .cell.TE{background:var(--te)} .cell.K{background:var(--k)} .cell.DEF{background:var(--def)}
+  .board.focus .cell { opacity:.28; }
+  .board.focus .cell.on { opacity:1; outline:2px solid var(--gold); }
+  .legend { display:flex; gap:12px; flex-wrap:wrap; padding:4px 18px 14px; font-size:0.72rem; color:var(--muted); align-items:center; }
+  .legend span.sw { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-2px; }
+  .mgr-filter { padding: 12px 18px 4px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:0.78rem; color:var(--muted); }
+  .mgr-filter select { font: inherit; color: var(--text); background: var(--card); border:1px solid var(--border); border-radius:6px; padding:5px 8px; }
+  .scroll-hint { font-size:0.7rem; color:var(--muted); padding:0 18px 10px; }
+  @media (min-width: 1200px) { .scroll-hint { display:none; } }
+  .dna-bar { display:flex; height:10px; border-radius:5px; overflow:hidden; min-width:120px; }
+  .dna-bar i { display:block; height:100%; }
+  #dnaTable, #poTable { display:table; }
+  #dnaTable thead, #poTable thead { display:table-header-group; } #dnaTable tbody, #poTable tbody { display:table-row-group; }
+  .dna-key { display:flex; gap:10px; flex-wrap:wrap; font-size:0.7rem; color:var(--muted); padding:10px 18px 0; }
+  .dna-key i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+
+  .mgr-grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top:16px; }
+  @media (min-width:640px) { .mgr-grid { grid-template-columns: 1fr 1fr; } }
+  .mgr-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,0.06); display:flex; flex-direction:column; gap:12px; }
+  .mgr-top { display:flex; align-items:center; gap:12px; }
+  .avatar { width:46px; height:46px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; color:#fff; border:2px solid var(--gold); }
+  .mgr-top h3 { margin:0; font-size:1.08rem; font-weight:800; font-family: Georgia, "Times New Roman", serif; overflow-wrap:anywhere; }
+  .mgr-top .tn { color:var(--muted); font-size:0.8rem; font-style:italic; overflow-wrap:anywhere; }
+  .mgr-rank { margin-left:auto; flex-shrink:0; font-size:0.7rem; font-weight:800; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:3px 9px; }
+  .case { background:var(--header); border-radius:8px; padding:10px 12px; }
+  .case .ch { color:#a9c4bc; font-size:0.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:7px; }
+  .case .chips { display:flex; flex-wrap:wrap; gap:5px; }
+  .chip { font-size:0.68rem; font-weight:800; border-radius:4px; padding:3px 7px; }
+  .chip.gold { background:var(--gold); color:#1c1200; }
+  .chip.seed { background:transparent; color:#e8f2ee; border:1px solid rgba(255,255,255,0.35); }
+  .case .empty { color:#a9c4bc; font-size:0.72rem; font-style:italic; }
+  .mgr-blurb { font-size:0.82rem; line-height:1.5; font-style:italic; margin:0; }
+  .mgr-stats { width:100%; border-collapse:collapse; display:table; }
+  .mgr-stats tbody { display:table-row-group; }
+  .mgr-stats td { padding:7px 10px; font-size:0.78rem; border-bottom:1px solid var(--border); vertical-align:top; }
+  .mgr-stats td:first-child { font-weight:700; color:var(--muted); width:42%; }
+  .mgr-stats tr:last-child td { border-bottom:none; }
+
+  .rec-grid { display:grid; grid-template-columns: 1fr; gap:1px; background:var(--border); }
+  @media (min-width:640px) { .rec-grid { grid-template-columns: 1fr 1fr; } }
+  .rec-card { background:var(--card); padding:14px 18px 12px; }
+  .rec-card .label { color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; font-weight:700; }
+  .rec-card .note2 { color:var(--muted); font-size:0.7rem; font-style:italic; margin-top:2px; }
+  .rec-lead { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:8px 0 4px; }
+  .rec-lead .who { font-weight:800; font-size:1.02rem; overflow-wrap:anywhere; }
+  .rec-lead .val { font-weight:800; font-size:1.25rem; color:var(--gold); font-variant-numeric: tabular-nums; white-space:nowrap; }
+  .rec-ctx { color:var(--muted); font-size:0.74rem; margin-bottom:8px; }
+  .rec-list { list-style:none; margin:0; padding:0; border-top:1px dashed var(--border); }
+  .rec-list li { display:flex; gap:8px; align-items:baseline; padding:5px 0; font-size:0.76rem; border-bottom:1px dashed var(--border); }
+  .rec-list li:last-child { border-bottom:none; }
+  .rec-list .n { color:var(--muted); width:14px; flex-shrink:0; font-weight:700; }
+  .rec-list .w { flex:1; min-width:0; overflow-wrap:anywhere; }
+  .rec-list .w small { color:var(--muted); display:block; font-size:0.68rem; }
+  .rec-list .v { font-weight:700; font-variant-numeric: tabular-nums; white-space:nowrap; }
+  .rec-grid > .rec-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .rec-sub { color:var(--muted); font-size:0.76rem; padding:12px 18px 0; margin:0; }
+
+  .recap { max-width: 720px; margin: 0 auto; }
+  .recap-kicker { color:var(--gold); font-size:0.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+  .recap-title { font-family: Georgia, "Times New Roman", serif; font-size:1.55rem; line-height:1.2; margin:6px 0 8px; }
+  .recap-dek { color:var(--muted); font-size:0.95rem; font-style:italic; margin:0 0 16px; line-height:1.5; }
+  .recap h4 { font-family: Georgia, "Times New Roman", serif; font-size:1.08rem; margin:22px 0 6px; padding-top:14px; border-top:1px solid var(--border); }
+  .recap p, .recap li { font-size:0.9rem; line-height:1.65; }
+  .recap ul { padding-left:20px; }
+  .recap-stats { display:grid; grid-template-columns: repeat(2, 1fr); gap:1px; background:var(--border); border-radius:10px; overflow:hidden; margin:8px 0 6px; }
+  @media (min-width:640px) { .recap-stats { grid-template-columns: repeat(4, 1fr); } }
+  .recap-stats div { background:var(--header); padding:12px 14px; }
+  .recap-stats b { display:block; color:var(--gold); font-size:1.4rem; font-weight:800; }
+  .recap-stats span { color:#a9c4bc; font-size:0.72rem; }
+  .chat { margin:24px 0 8px; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:8px; }
+  .chat-head { font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:4px; }
+  .chat-head span { text-transform:none; letter-spacing:0; font-weight:600; font-style:italic; }
+  .msg { max-width:82%; padding:8px 12px; border-radius:14px; font-size:0.85rem; line-height:1.4; background:var(--card); border:1px solid var(--border); }
+  .msg b { display:block; font-size:0.68rem; color:var(--gold); margin-bottom:2px; }
+  .msg.r { align-self:flex-end; background:var(--header); color:#e8f2ee; border-color:var(--header); }
+  .msg.l { align-self:flex-start; }
+  #txTable { display:table; } #txTable thead { display:table-header-group; } #txTable tbody { display:table-row-group; }
+  #txTable td, #txTable th { padding:9px 10px; font-size:0.8rem; }
+  .recap-foot { color:var(--muted); font-size:0.75rem !important; }
+  .recap-more { color:var(--muted); font-size:0.8rem; margin-top:26px; padding-top:14px; border-top:1px solid var(--border); }
+
+  table.tx { display:table; } table.tx thead { display:table-header-group; } table.tx tbody { display:table-row-group; }
+  table.tx td, table.tx th { padding:9px 10px; font-size:0.8rem; }
+  details.season { border:1px solid var(--border); border-radius:12px; background:var(--card); margin-bottom:12px; overflow:hidden; }
+  details.season > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:14px 16px; }
+  details.season > summary::-webkit-details-marker { display:none; }
+  details.season > summary .yr { flex-shrink:0; font-weight:900; font-size:1rem; color:#1c1200; background:var(--gold); border-radius:6px; padding:6px 10px; }
+  details.season > summary .sum-main { min-width:0; flex:1; }
+  details.season > summary .sum-main b { display:block; font-family: Georgia, "Times New Roman", serif; font-size:1.02rem; line-height:1.25; }
+  details.season > summary .sum-main small { display:block; color:var(--muted); font-size:0.76rem; margin-top:3px; }
+  details.season > summary .chev { flex-shrink:0; width:10px; height:10px; border-right:2px solid var(--muted); border-bottom:2px solid var(--muted); transform:rotate(45deg); transition:transform .2s; margin-right:4px; }
+  details.season[open] > summary .chev { transform:rotate(-135deg); }
+  details.season[open] > summary { border-bottom:1px solid var(--border); background:rgba(184,134,46,0.06); }
+  details.season > .recap { padding:14px 18px 18px; }
+  details.season > summary:focus-visible { outline:2px solid var(--gold); outline-offset:-2px; }
+
+  .odds { font-weight:800; color:var(--gold); font-variant-numeric: tabular-nums; white-space:nowrap; }
+  #futTable, #ouTable { display:table; }
+  #futTable thead, #ouTable thead { display:table-header-group; } #futTable tbody, #ouTable tbody { display:table-row-group; }
+  #futTable td, #ouTable td { vertical-align:middle; }
+  #futTable td.fcase { color:var(--muted); font-size:0.78rem; line-height:1.45; }
+  @media (max-width:640px) {
+    #futTable thead { display:none; }
+    #futTable tbody tr { display:grid; grid-template-columns: 1fr auto; border-bottom:1px solid var(--border); }
+    #futTable tbody td { border-bottom:none; }
+    #futTable td.fcase { grid-column: 1 / -1; padding-top:0; }
+    #ouTable td, #ouTable th { padding:9px 8px; }
+    #ouTable th:nth-child(2), #ouTable td:nth-child(2) { display:none; }
+    .ou button { padding:6px 9px; min-width:0; }
+  }
+  .ou { display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .ou button { font: inherit; font-size:0.75rem; font-weight:800; padding:6px 12px; border:0; background:var(--card); color:var(--muted); cursor:pointer; min-width:48px; }
+  .ou button + button { border-left:1px solid var(--border); }
+  .ou button[aria-pressed="true"].o { background:var(--pos); color:#fff; }
+  .ou button[aria-pressed="true"].u { background:var(--neg); color:#fff; }
+  .ballot-grid { display:grid; grid-template-columns: 1fr; gap:12px; padding:16px 18px; }
+  @media (min-width:640px) { .ballot-grid { grid-template-columns: 1fr 1fr; } }
+  .ballot-grid label { display:flex; flex-direction:column; gap:5px; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .ballot-grid label.wide { grid-column: 1 / -1; }
+  .ballot-grid select, .ballot-grid input, .ballot-grid textarea, .me-row select {
+    font: inherit; font-size:0.88rem; text-transform:none; letter-spacing:0; font-weight:500; color:var(--text);
+    background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:9px 10px; width:100%; }
+  .ballot-grid textarea { min-height:70px; resize:vertical; }
+  .me-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:14px 18px 0; font-size:0.85rem; }
+  .me-row select { width:auto; min-width:200px; }
+  .ballot-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:0 18px 18px; }
+  .btn { font: inherit; font-weight:800; font-size:0.85rem; padding:10px 16px; border-radius:8px; cursor:pointer; border:1px solid var(--header); background:var(--header); color:#fff; }
+  .btn.ghost { background:transparent; color:var(--text); border-color:var(--border); }
+  .copy-status { font-size:0.8rem; color:var(--muted); }
+  #ballotText { display:none; width:calc(100% - 36px); margin:0 18px 18px; min-height:180px; font: 0.8rem/1.5 ui-monospace, Menlo, monospace; color:var(--text); background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px; }
+  @media (min-width:700px) { nav.tabs { flex-wrap:wrap; overflow-x:visible; } }
+
+  header {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 60%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 2px, transparent 2px 46px),
+      var(--header);
+    padding: 22px 20px 20px;
+  }
+  header .est { letter-spacing:0.22em; }
+  svg.jury { display:block; width:270px; max-width:78%; height:auto; margin:6px auto 8px; }
+  header h1 { font-family: Georgia, "Times New Roman", serif; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:1.9rem; margin:0; }
+  .title-rule { display:flex; align-items:center; gap:10px; justify-content:center; margin:6px auto 6px; max-width:360px; }
+  .title-rule span { flex:1; height:1px; background:var(--gold); opacity:.6; }
+  .title-rule em { color:#cfe0da; font-family: Georgia, serif; font-size:0.78rem; letter-spacing:0.08em; white-space:nowrap; }
+  .panel-head .titles h2 { font-family: Georgia, "Times New Roman", serif; letter-spacing:0.01em; }
+  .trophy-card .vd { color:#a9c4bc; font-size:0.56rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:2px; }
+  .avatar.juror { font-family: Georgia, serif; font-size:1.15rem; background:var(--header) !important; color:var(--gold); }
+  .avatar.juror.eight { background:var(--gold) !important; color:#1c1200; border-color:var(--gold); }
+  .juror-no { font-size:0.62rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); }
+  footer.court { text-align:center; color:var(--muted); font-size:0.74rem; padding:0 16px 34px; font-family: Georgia, serif; font-style:italic; }
+  footer.court b { font-style:normal; letter-spacing:0.14em; text-transform:uppercase; font-size:0.66rem; color:var(--gold); display:block; margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="est">Case File · In Session Since 2023</div>
+  <svg class="jury" viewBox="0 0 220 92" role="img" aria-label="A jury table with twelve numbered chairs; chair 8 is highlighted">
+    <rect x="34" y="28" width="152" height="36" rx="5" fill="rgba(184,134,46,0.10)" stroke="var(--gold)" stroke-width="1.6"/>
+    <text x="110" y="49.5" text-anchor="middle" font-size="9" letter-spacing="2.5" fill="var(--gold)" opacity="0.85" font-family="Georgia,serif">JURY ROOM</text>
+    <rect x="46" y="12" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="54.0" y="20.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">2</text><rect x="73" y="12" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="81.0" y="20.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">3</text><rect x="100" y="12" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="108.0" y="20.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">4</text><rect x="127" y="12" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="135.0" y="20.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">5</text><rect x="154" y="12" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="162.0" y="20.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">6</text><rect x="46" y="67" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="54.0" y="75.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">12</text><rect x="73" y="67" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="81.0" y="75.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">11</text><rect x="100" y="67" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="108.0" y="75.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">10</text><rect x="127" y="67" width="16" height="11" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="135.0" y="75.5" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">9</text><rect x="154" y="67" width="16" height="11" rx="3" fill="var(--gold)" stroke="var(--gold)" stroke-width="1.4"/><text x="162.0" y="75.5" text-anchor="middle" font-size="7" font-weight="700" fill="#1c1200" font-family="Georgia,serif">8</text><rect x="14" y="39" width="11" height="16" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="19.5" y="50.0" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">1</text><rect x="195" y="39" width="11" height="16" rx="3" fill="none" stroke="var(--gold)" stroke-width="1.4"/><text x="200.5" y="50.0" text-anchor="middle" font-size="7" font-weight="700" fill="var(--gold)" font-family="Georgia,serif">7</text>
+  </svg>
+  <h1>12 Angry Men</h1>
+  <div class="title-rule"><span></span><em>A Fantasy Football League</em><span></span></div>
+  <p class="tagline">Twelve managers. One verdict. No reasonable doubt.</p>
+</header>
+
+<div class="trophy-row" id="trophyRow"></div>
+
+<nav class="tabs">
+  <button data-tab="standings" class="active">Standings</button>
+  <button data-tab="managers">2026 Managers</button>
+  <button data-tab="alltime">All-Time</button>
+  <button data-tab="records">Records</button>
+  <button data-tab="supers">Superlatives</button>
+  <button data-tab="champs">Champions</button>
+  <button data-tab="draft">Draft Central</button>
+  <button data-tab="recaps">Recaps</button>
+  <button data-tab="futures">Futures &amp; Ballot</button>
+</nav>
+
+<main>
+
+  <section id="standings" class="active">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2 id="standingsTitle">Standings</h2>
+          <p>Season results by manager</p>
+        </div>
+        <div class="season-picker" id="seasonPicker"></div>
+      </div>
+      <div class="panel-body">
+        <div class="overflow-x">
+          <table id="standingsTable">
+            <thead><tr>
+              <th class="rank">#</th><th>Manager</th><th>Team</th>
+              <th class="num">W</th><th class="num">L</th>
+              <th class="num">PF</th><th class="num">PA</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note" id="seasonNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="managers">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>2026 Managers</h2>
+          <p>The jury of 2026 · numbered by draft slot, in standings order</p>
+        </div>
+      </div>
+    </div>
+    <div class="mgr-grid" id="mgrGrid"></div>
+    <p class="note">Juror numbers follow this year's draft slots. Juror No. 8 drafts from the spot every champion has come from. Trophy case counts titles, #1 regular-season seeds, and most points scored in a season (2023–2025). Summaries are built from league data; send real bios anytime.</p>
+  </section>
+
+  <section id="records">
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Single-Game Records</h2><p>Best, worst, and closest weeks in league history</p></div></div>
+      <div class="panel-body"><div class="rec-grid" id="recSingle"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Streaks &amp; Weekly Awards</h2><p>Streaks count regular-season games and carry over between seasons</p></div></div>
+      <div class="panel-body"><div class="rec-grid" id="recWeekly"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Playoff Records</h2><p>Championship bracket only · 2023–2025</p></div></div>
+      <div class="panel-body">
+        <div class="overflow-x"><table id="poTable"><thead><tr><th>Manager</th><th class="num">Trips</th><th class="num">W</th><th class="num">L</th><th class="num">Finals</th><th class="num">🏆</th></tr></thead><tbody></tbody></table></div>
+        <div class="rec-grid" id="recPlayoff"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Season Records</h2><p>Regular season, completed seasons</p></div></div>
+      <div class="panel-body"><div class="rec-grid" id="recSeason"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Most Lopsided Rivalries</h2><p>Current managers only · at least 4 meetings, playoffs included</p></div></div>
+      <div class="panel-body"><div class="rec-grid" id="recRival"></div></div>
+    </div>
+
+    <p class="note">Covers 279 games: every regular-season week from 2023 through 2026 so far, plus championship-bracket playoff games. Consolation and placement games are left out.</p>
+  </section>
+
+  <section id="alltime">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>All-Time Leaderboard</h2>
+          <p>Career totals, 2023–2025</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="overflow-x">
+          <table id="alltimeTable">
+            <thead><tr>
+              <th class="rank">#</th><th>Manager</th>
+              <th class="num">W</th><th class="num">L</th><th class="num">Win%</th>
+              <th class="num">PF</th><th class="num">🏆</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note">Regular-season totals across 2023–2025 (completed seasons). 2026 is still in progress.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="supers">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>Superlatives</h2>
+          <p>Records, streaks, and heartbreak — all-time</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="card-grid" id="superCards"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="champs">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>Champions</h2>
+          <p>The verdicts, year by year</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="champ-list" id="champList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="draft">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2 id="draftTitle">Draft Board</h2>
+          <p>All 14 rounds · snake order</p>
+        </div>
+        <div class="season-picker" id="draftPicker"></div>
+      </div>
+      <div class="panel-body">
+        <div class="mgr-filter">Highlight a manager:
+          <select id="mgrFilter"><option value="">Everyone</option></select>
+          <span id="mgrSummary"></span>
+        </div>
+        <div class="board-wrap"><div class="board" id="draftBoard"></div></div>
+        <div class="scroll-hint">Swipe sideways to see all 12 teams →</div>
+        <div class="legend">
+          <span><span class="sw" style="background:var(--qb)"></span>QB</span>
+          <span><span class="sw" style="background:var(--rb)"></span>RB</span>
+          <span><span class="sw" style="background:var(--wr)"></span>WR</span>
+          <span><span class="sw" style="background:var(--te)"></span>TE</span>
+          <span><span class="sw" style="background:var(--k)"></span>K</span>
+          <span><span class="sw" style="background:var(--def)"></span>DEF</span>
+          <span>· 🏆 = that year's champion</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>Draft Superlatives</h2>
+          <p>Reaches, runs, and one very lucky draft slot · 2023–2026</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="card-grid" id="draftSuperCards"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>Draft DNA</h2>
+          <p>What each manager spends rounds 1–5 on, all drafts combined</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="dna-key"><span><i style="background:#3f9a63"></i>RB</span><span><i style="background:#4a7fc4"></i>WR</span><span><i style="background:#c75a5a"></i>QB</span><span><i style="background:#d08a2e"></i>TE</span></div>
+        <div class="overflow-x">
+          <table id="dnaTable">
+            <thead><tr><th>Manager</th><th class="num">Drafts</th><th class="num">RB</th><th class="num">WR</th><th class="num">QB</th><th class="num">TE</th><th style="width:34%">Mix</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note">Counts only picks in rounds 1–5. Steals and busts need weekly scoring data, which isn't pulled in yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recaps">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="titles">
+          <h2>Season Recaps</h2>
+          <p>Every season, newest first · tap to expand</p>
+        </div>
+      </div>
+      <div class="panel-body pad" id="recapsBody">
+
+        <details class="season" open>
+          <summary><span class="yr">2026</span><span class="sum-main"><b>So Far: The Trade Machine Is Back On</b><small>In progress · 2 weeks in · Birdgangflyeagles and Bjspjs4 both 4-0</small></span><span class="chev" aria-hidden="true"></span></summary>
+          <article class="recap">
+            <p class="recap-dek">Two weeks in, and with the league-median game counting as a second result each week, two teams haven't lost yet. Here's where things stand.</p>
+            <div class="recap-stats"><div><b>43</b><span>transactions so far</span></div><div><b>3</b><span>trades, all involving Bjspjs4</span></div><div><b>4-0</b><span>Birdgangflyeagles & Bjspjs4</span></div><div><b>55.74</b><span>giJ03's Week 2</span></div></div>
+            
+          <h4>Bjspjs4 is back at it</h4>
+          <p><b>Bjspjs4</b> has made all three trades of the season so far, all in Week 2. He sent Tee Higgins to Goldminers1 for Drake London, got Carnell Tate from dahlilama for RJ Harvey, then flipped Tate to MayockJr for Jacory Croskey-Merritt, all in the same week. The result so far is 4-0, from the 8th draft slot, the same one every champion has picked from.</p>
+
+          <h4>The quiet man leads the league</h4>
+          <p><b>Birdgangflyeagles</b> hasn't made a single move this season. He's 4-0 and leads the league with 267 points, including a 143.60 in Week 2 that beat MayockJr by 71.68. Last year he made seven moves and went 3-11. Two years ago he made twelve and was the #1 seed. Doing nothing has now produced a 1 seed, a 6 seed, a last-place finish, and a 4-0 start.</p>
+
+          <h4>Early trouble</h4>
+          <p><b>Sleon1000</b>, the two-time #1 seed, is 1-3. Rookie <b>giJ03</b> is 0-4 and put up 55.74 in Week 2, the third-lowest score in league history. <b>juleon8</b> is 2-2 overall but has won both head-to-head games, which keeps his record 10-game win streak alive.</p>
+            <div class="chat"><div class="chat-head">The jury room, as we imagine it <span>· dramatization · nobody actually said this</span></div><div class="msg l"><b>Bjspjs4</b>Three trades in one week is called efficiency.</div><div class="msg r"><b>Birdgangflyeagles</b>I haven't opened the app since the draft.</div><div class="msg l"><b>giJ03</b>Is 55 good? That seems like a lot of points.</div><div class="msg l"><b>Sleon1000</b>I peak in December. Just ask… actually don't ask.</div><div class="msg r"><b>juleon8</b>10 straight. Somebody stop me.</div></div>
+            <h4>Transaction report card</h4>
+          <div class="overflow-x"><table class="tx"><thead><tr><th>Manager</th><th class="num">Trades</th><th class="num">Waivers</th><th class="num">FA Adds</th><th class="num">Total</th><th class="num">Record</th><th>Finish</th></tr></thead><tbody><tr><td>Bjspjs4</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num">6</td><td class="num">4-0</td><td>—</td></tr><tr><td>MayockJr</td><td class="num">1</td><td class="num">8</td><td class="num">5</td><td class="num">14</td><td class="num">2-2</td><td>—</td></tr><tr><td>dahlilama</td><td class="num">1</td><td class="num">4</td><td class="num">1</td><td class="num">6</td><td class="num">3-1</td><td>—</td></tr><tr><td>Goldminers1</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">2</td><td class="num">1-3</td><td>—</td></tr><tr><td>Sleon1000</td><td class="num">0</td><td class="num">4</td><td class="num">1</td><td class="num">5</td><td class="num">1-3</td><td>—</td></tr><tr><td>juleon8</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="num">4</td><td class="num">2-2</td><td>—</td></tr><tr><td>rbanuelos3</td><td class="num">0</td><td class="num">3</td><td class="num">0</td><td class="num">3</td><td class="num">3-1</td><td>—</td></tr><tr><td>showmeyourtd23</td><td class="num">0</td><td class="num">3</td><td class="num">0</td><td class="num">3</td><td class="num">1-3</td><td>—</td></tr><tr><td>elysianbeer</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">2-2</td><td>—</td></tr><tr><td>kevinnguu</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">1-3</td><td>—</td></tr><tr><td>giJ03</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">0-4</td><td>—</td></tr><tr><td>Birdgangflyeagles</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">4-0</td><td>—</td></tr></tbody></table></div>
+          <p class="recap-foot">Trades count once for each team involved. Records are regular season.</p>
+          </article>
+        </details>
+        <details class="season">
+          <summary><span class="yr">2025</span><span class="sum-main"><b>424 Moves, One Blockbuster, and a Five Seed With a Ring</b><small>🏆 deetee333 (5 seed) over dahlilama, 125.94–88.98</small></span><span class="chev" aria-hidden="true"></span></summary>
+          <article class="recap">
+            <p class="recap-dek">424 transactions. 11 trades. Two teams that looked unbeatable in October. And the title went to the guy who was 3-4 at the trade deadline.</p>
+            <div class="recap-stats"><div><b>424</b><span>transactions</span></div><div><b>11</b><span>trades</span></div><div><b>7</b><span>trades by Bjspjs4 alone</span></div><div><b>1.02</b><span>points: closest playoff exit</span></div></div>
+            <h4>The champion nobody picked in October</h4>
+          <p>Through seven weeks, <b>deetee333</b> was 3-4 and going nowhere. Then came Week 8 and the biggest deal of the year: Kenneth Walker, Breece Hall and Zay Flowers to <b>elysianbeer</b> for De'Von Achane and Jordan Addison. Deetee went 5-2 the rest of the way, snuck in as the 5 seed at 8-6, and never lost again. He took the quarterfinal 150.78–149.76 over rbanuelos3, beat the 11-3 top seed in the semis, and won the final 125.94–88.98. That's eight wins in his last ten games. He also led the league with <b>38 free-agent pickups</b>. Some guys draft a team. Deetee rented one.</p>
+          <p>On the other side of that trade, elysianbeer was 4-3 before it and 2-5 after it, and missed the playoffs at 6-8.</p>
+
+          <h4>Seven trades, four wins</h4>
+          <p><b>Bjspjs4</b> made seven trades, the most in the league by a mile. He drafted Bijan Robinson 4th overall, then shipped him to MayockJr in Week 9 for George Pickens and Ashton Jeanty. He traded for Travis Etienne in Week 7 and traded him away in Week 8. He was in the three-team deal that brought in Tyreek Hill in Week 2. The result was 4-10, the league's worst point differential (−277). He started 2026 at 4-0, so maybe it was all part of the plan.</p>
+
+          <h4>6-0, Points King, runner-up</h4>
+          <p><b>dahlilama</b> opened 6-0 and scored 1,710 points, the most of anyone in 2025. That included a 176.08 in Week 8, the second-best score in league history. He added Etienne and Omarion Hampton from Bjspjs4 at the deadline, and cruised past MayockJr in the semis. Then he scored 88.98 in the championship. That's his lowest total since Week 13, and it came in the one week that mattered most.</p>
+
+          <h4>The regular-season king, again</h4>
+          <p><b>Sleon1000</b> started 7-0, finished 11-3, and grabbed the #1 seed for the second straight year. His one trade was an early swap of tight ends: Brock Bowers and RJ Harvey for Trey McBride and Jordan Mason. Then came the bye, a 78.10 in the semifinal loss to deetee333, and a loss in the third-place game. He's now 0-2 all-time in playoff games despite two #1 seeds.</p>
+
+          <h4>1-5 to the 3 seed</h4>
+          <p>First-year manager <b>juleon8</b> made four trades in the first three weeks and started 1-5. Then he won eight straight, the best closing run of the season, and finished 9-5. After his last trade he averaged 127.7 points a game, including 167.34 in Week 14. He drew the 6 seed in round one and lost 104.00–91.80. That winning streak is still alive in the record book, because he opened 2026 2-0 in head-to-head games.</p>
+
+          <h4>One point from the semis</h4>
+          <p><b>rbanuelos3</b> made zero trades and closed the regular season on a six-game winning streak to go 9-5. Then he scored 149.76 in the quarterfinal, the second-highest playoff score in league history, and lost by 1.02 points. It's the highest losing score ever in this league.</p>
+
+          <h4>Churn and burn</h4>
+          <p><b>MayockJr</b> led the league in total moves with <b>61</b>. That's 3 trades, 26 waiver claims and 32 free-agent adds. He landed Bijan in Week 9, went 3-3 after, and snuck in as the 6 seed at 7-7. He knocked off the 3 seed, lost to dahlilama in the semis, then won the third-place game over Sleon1000.</p>
+
+          <h4>The set-it-and-forget-it award</h4>
+          <p><b>Birdgangflyeagles</b> made seven moves all year, total. That's six waiver claims, one free-agent add, and no trades. He went 3-11 with a nine-game losing streak to close the season. He's 4-0 in 2026, so the lesson is unclear.</p>
+
+          <h4>Quick hits</h4>
+          <ul>
+            <li><b>showmeyourtd23</b> made no trades and went 6-8, winning his last three to finish on a heater that didn't matter.</li>
+            <li><b>Goldminers1</b> traded Jordan Mason for Stefon Diggs in Week 2, made only 7 waiver claims all year, and went 6-8.</li>
+            <li><b>lxfiggy</b> sent Terry McLaurin and Kenneth Walker out in the Week 2 three-team trade for Tony Pollard and Tetairoa McMillan, flipped McMillan for Courtland Sutton a week later, and went 5-9.</li>
+          </ul>
+
+          
+            <div class="chat"><div class="chat-head">The jury room, as we imagine it <span>· dramatization · nobody actually said this</span></div><div class="msg l"><b>Bjspjs4</b>Anyone want Bijan? Asking for a friend. The friend is me.</div><div class="msg r"><b>MayockJr</b>Accepted before you finished typing.</div><div class="msg l"><b>Birdgangflyeagles</b>What's a waiver wire</div><div class="msg l"><b>Sleon1000</b>11-3. #1 seed. Clear the trophy shelf.</div><div class="msg r"><b>deetee333</b>Scored 78 in the semis huh</div><div class="msg l"><b>juleon8</b>Down 1-5, won eight straight. You're welcome for the content.</div><div class="msg l"><b>rbanuelos3</b>149.76 and I lost. I'm going to lie down.</div><div class="msg l"><b>dahlilama</b>1,710 points. 88.98 in the final. Don't.</div><div class="msg r"><b>deetee333</b>38 free agents and one blockbuster. That's called a process.</div><div class="msg l"><b>elysianbeer</b>I'd like to un-accept a trade from October.</div></div>
+            <h4>Transaction report card</h4>
+          <div class="overflow-x"><table class="tx"><thead><tr><th>Manager</th><th class="num">Trades</th><th class="num">Waivers</th><th class="num">FA Adds</th><th class="num">Total</th><th class="num">Record</th><th>Finish</th></tr></thead><tbody><tr><td>deetee333</td><td class="num">3</td><td class="num">14</td><td class="num">38</td><td class="num">55</td><td class="num">8-6</td><td>🏆 Champion (5 seed)</td></tr><tr><td>dahlilama</td><td class="num">1</td><td class="num">20</td><td class="num">12</td><td class="num">33</td><td class="num">10-4</td><td>Runner-up (2 seed)</td></tr><tr><td>MayockJr</td><td class="num">3</td><td class="num">26</td><td class="num">32</td><td class="num">61</td><td class="num">7-7</td><td>3rd place (6 seed)</td></tr><tr><td>Sleon1000</td><td class="num">1</td><td class="num">20</td><td class="num">15</td><td class="num">36</td><td class="num">11-3</td><td>4th place (1 seed)</td></tr><tr><td>juleon8</td><td class="num">4</td><td class="num">23</td><td class="num">29</td><td class="num">56</td><td class="num">9-5</td><td>Lost quarterfinal (3 seed)</td></tr><tr><td>rbanuelos3</td><td class="num">0</td><td class="num">11</td><td class="num">19</td><td class="num">30</td><td class="num">9-5</td><td>Lost quarterfinal (4 seed)</td></tr><tr><td>Goldminers1</td><td class="num">1</td><td class="num">7</td><td class="num">11</td><td class="num">19</td><td class="num">6-8</td><td>Missed playoffs</td></tr><tr><td>elysianbeer</td><td class="num">1</td><td class="num">13</td><td class="num">9</td><td class="num">23</td><td class="num">6-8</td><td>Missed playoffs</td></tr><tr><td>showmeyourtd23</td><td class="num">0</td><td class="num">13</td><td class="num">6</td><td class="num">19</td><td class="num">6-8</td><td>Missed playoffs</td></tr><tr><td>lxfiggy</td><td class="num">2</td><td class="num">25</td><td class="num">11</td><td class="num">38</td><td class="num">5-9</td><td>Missed playoffs</td></tr><tr><td>Bjspjs4</td><td class="num">7</td><td class="num">26</td><td class="num">26</td><td class="num">59</td><td class="num">4-10</td><td>Missed playoffs</td></tr><tr><td>Birdgangflyeagles</td><td class="num">0</td><td class="num">6</td><td class="num">1</td><td class="num">7</td><td class="num">3-11</td><td>Last place</td></tr></tbody></table></div>
+          <p class="recap-foot">Trades count once for each team involved. Records are regular season.</p>
+          </article>
+        </details>
+        <details class="season">
+          <summary><span class="yr">2024</span><span class="sum-main"><b>Thirteen Trades, a Points Record, and a Title That Went to the Trader Who Stopped</b><small>🏆 sugarmaverick (4 seed) over rbanuelos3, 127.86–105.18</small></span><span class="chev" aria-hidden="true"></span></summary>
+          <article class="recap">
+            <p class="recap-dek">418 transactions, 16 trades, and one manager involved in thirteen of them. Meanwhile, the champion made his big move in Week 6 and then mostly stood still.</p>
+            <div class="recap-stats"><div><b>418</b><span>transactions</span></div><div><b>16</b><span>trades</span></div><div><b>13</b><span>trades by Bjspjs4</span></div><div><b>1,858</b><span>points: rbanuelos3, all-time record</span></div></div>
+            
+          <h4>The champion: one move, then cruise control</h4>
+          <p><b>sugarmaverick</b> was 2-3 after five weeks. In Week 6 he got DJ Moore and Jonathan Taylor from lxfiggy and took part in a three-team deal with dahlilama and Bjspjs4. From there he went 6-3, averaging 123.0 points a game, and slid in as the 4 seed at 8-6. Then he didn't lose again. He beat lxfiggy in the quarterfinal, beat the 1 seed Sleon1000 147.02–126.86 in the semis, and won the final 127.86–105.18. Two seasons in the league, one title, and a perfect 3-0 playoff record.</p>
+
+          <h4>Thirteen trades</h4>
+          <p><b>Bjspjs4</b> made <b>13 trades</b> in 2024, more than the rest of the league's top three traders combined. Bijan Robinson alone showed up in four trades that year. Bjspjs4 got him twice and eventually sent him to jayy2690 in Week 10 for Justin Jefferson. After all that shuffling he finished 4-10. He was 1-4 before the Week 6 flurry and 3-6 after it.</p>
+
+          <h4>The greatest regular season that didn't end in a ring</h4>
+          <p><b>rbanuelos3</b> scored <b>1,858 points</b>, the most in league history by 148. That includes the two highest single-game scores ever: 180.24 in Week 9 and 173.56 in Week 3. He went 9-5, beat Birdgangflyeagles in the semis, then scored 105.18 in the final. That was 27 points below his season average, at the worst possible time.</p>
+
+          <h4>0-5 to the playoffs</h4>
+          <p><b>lxfiggy</b> started <b>0-5</b>. Then in Week 6 he made two deals. He sent Bijan Robinson, Davante Adams and Stefon Diggs to Bjspjs4 for a package including DJ Moore and Jonathan Taylor, then flipped Moore and Taylor to sugarmaverick for Terry McLaurin and Brian Robinson. He went <b>8-1</b> the rest of the way at 126.6 points a game and made the playoffs as the 5 seed. He lost to sugarmaverick in round one, the same guy he'd helped build.</p>
+
+          <h4>The collapse</h4>
+          <p><b>showmeyourtd23</b> was 4-2 when he traded for Stefon Diggs, Raheem Mostert and Nick Chubb in Week 7. He didn't win another game. He lost his last nine, finished 4-10 in last place, and the streak carried into 2025 for a league-record 11 straight losses.</p>
+
+          <h4>The defending champ's hangover</h4>
+          <p><b>dahlilama</b> won the 2023 title and made five trades in 2024. He also scored 48.42 in Week 3, still the lowest single-game score in league history, and went 6-8. He lost five straight from Week 9 to Week 13 and missed the playoffs.</p>
+
+          <h4>Quick hits</h4>
+          <ul>
+            <li><b>Sleon1000</b> took the 1 seed at 10-4 and lost 147.02–126.86 to the eventual champ in the semis. He won the third-place game.</li>
+            <li><b>Birdgangflyeagles</b> made 14 moves all year, no trades, went 8-6 as the 6 seed, and upset the 3 seed MayockJr in round one.</li>
+            <li><b>deetee333</b> went 8-6 and missed the playoffs. He was one of four 8-6 teams and the only one left out, on points.</li>
+            <li><b>jayy2690</b> played one season, went 5-9, and was on the other end of the Jefferson-for-Bijan trade.</li>
+          </ul>
+            <div class="chat"><div class="chat-head">The jury room, as we imagine it <span>· dramatization · nobody actually said this</span></div><div class="msg l"><b>Bjspjs4</b>Anyone want to trade? Anyone? I'll take anything.</div><div class="msg r"><b>jayy2690</b>I'll give you Jefferson for Bijan.</div><div class="msg l"><b>Bjspjs4</b>Deal. Wait, didn't I already have Bijan?</div><div class="msg l"><b>rbanuelos3</b>1,858 points. Where's my trophy?</div><div class="msg r"><b>sugarmaverick</b>It's on my shelf. Next to your 105 in the final.</div><div class="msg l"><b>lxfiggy</b>0-5 to the playoffs. Write that down.</div><div class="msg l"><b>showmeyourtd23</b>Traded for Diggs and never won again. Great trade, everyone.</div><div class="msg l"><b>dahlilama</b>48 points. Defending champ. I'd like to be left alone.</div></div>
+            <h4>Transaction report card</h4>
+          <div class="overflow-x"><table class="tx"><thead><tr><th>Manager</th><th class="num">Trades</th><th class="num">Waivers</th><th class="num">FA Adds</th><th class="num">Total</th><th class="num">Record</th><th>Finish</th></tr></thead><tbody><tr><td>sugarmaverick</td><td class="num">3</td><td class="num">20</td><td class="num">9</td><td class="num">32</td><td class="num">8-6</td><td>🏆 Champion (4 seed)</td></tr><tr><td>rbanuelos3</td><td class="num">1</td><td class="num">16</td><td class="num">13</td><td class="num">30</td><td class="num">9-5</td><td>Runner-up (2 seed)</td></tr><tr><td>Sleon1000</td><td class="num">1</td><td class="num">22</td><td class="num">21</td><td class="num">44</td><td class="num">10-4</td><td>3rd place (1 seed)</td></tr><tr><td>Birdgangflyeagles</td><td class="num">0</td><td class="num">9</td><td class="num">5</td><td class="num">14</td><td class="num">8-6</td><td>4th place (6 seed)</td></tr><tr><td>MayockJr</td><td class="num">1</td><td class="num">21</td><td class="num">28</td><td class="num">50</td><td class="num">9-5</td><td>Lost quarterfinal (3 seed)</td></tr><tr><td>lxfiggy</td><td class="num">3</td><td class="num">21</td><td class="num">16</td><td class="num">40</td><td class="num">8-6</td><td>Lost quarterfinal (5 seed)</td></tr><tr><td>deetee333</td><td class="num">1</td><td class="num">19</td><td class="num">37</td><td class="num">57</td><td class="num">8-6</td><td>Missed playoffs</td></tr><tr><td>dahlilama</td><td class="num">5</td><td class="num">22</td><td class="num">5</td><td class="num">32</td><td class="num">6-8</td><td>Missed playoffs</td></tr><tr><td>jayy2690</td><td class="num">1</td><td class="num">5</td><td class="num">7</td><td class="num">13</td><td class="num">5-9</td><td>Missed playoffs</td></tr><tr><td>Goldminers1</td><td class="num">2</td><td class="num">8</td><td class="num">13</td><td class="num">23</td><td class="num">5-9</td><td>Missed playoffs</td></tr><tr><td>Bjspjs4</td><td class="num">13</td><td class="num">29</td><td class="num">20</td><td class="num">62</td><td class="num">4-10</td><td>Missed playoffs</td></tr><tr><td>showmeyourtd23</td><td class="num">1</td><td class="num">20</td><td class="num">17</td><td class="num">38</td><td class="num">4-10</td><td>Last place</td></tr></tbody></table></div>
+          <p class="recap-foot">Trades count once for each team involved. Records are regular season.</p>
+          </article>
+        </details>
+        <details class="season">
+          <summary><span class="yr">2023</span><span class="sum-main"><b>Red Solo Kupp Trades Kupp, Wins It All</b><small>🏆 dahlilama (3 seed) over showmeyourtd23, 141.66–118.40</small></span><span class="chev" aria-hidden="true"></span></summary>
+          <article class="recap">
+            <p class="recap-dek">The first season. 425 transactions, 14 trades, one trade that was undone the same week, and a champion who traded away the player his team was named after.</p>
+            <div class="recap-stats"><div><b>425</b><span>transactions</span></div><div><b>14</b><span>trades</span></div><div><b>0.66</b><span>points: dahlilama's semifinal margin</span></div><div><b>62</b><span>moves by deetee333</span></div></div>
+            
+          <h4>He traded his namesake and won</h4>
+          <p><b>dahlilama</b>'s team was called <b>Red Solo Kupp</b>. He drafted Cooper Kupp 8th overall, and in Week 11 he traded Kupp to MayockJr for Saquon Barkley. He made four trades in all, including picking up Mike Evans in a three-team deal in Week 4. He went 9-5 as the 3 seed, beat luieloo 143.16–74.64, then beat the 2 seed Bjspjs4 in the semis <b>116.66–116.00</b>. That 0.66-point margin is the closest playoff game in league history. He won the final 141.66–118.40. The league's first champion traded the player on his letterhead.</p>
+
+          <h4>The zero-trade finalist</h4>
+          <p><b>showmeyourtd23</b> didn't make a single trade all year. He went 8-6 as the 4 seed, beat deetee333 134.60–109.66, and knocked out the 1 seed Birdgangflyeagles 110.90–100.68 to reach the first title game. It's still his best finish.</p>
+
+          <h4>The top seed who didn't touch anything</h4>
+          <p><b>Birdgangflyeagles</b> made 12 moves all season and no trades. He went 10-4 and took the 1 seed, then lost the semifinal to showmeyourtd23. He bounced back to score 158.84 in the third-place game, the highest score of the entire 2023 season.</p>
+
+          <h4>The trade that happened twice</h4>
+          <p>In Week 4, <b>deetee333</b> and <b>sugarmaverick</b> swapped David Montgomery, Travis Etienne and Dameon Pierce. Then they swapped them straight back, the same week. Then both jumped into a three-team deal with dahlilama instead. sugarmaverick made <b>7 trades</b>, the most that year, and went 7-7. deetee333 made 5 trades and a league-high <b>45 free-agent adds</b> (62 moves total), went 8-6, and lost in the quarterfinals.</p>
+
+          <h4>The unluckiest season on record</h4>
+          <p><b>Sleon1000</b> scored 1,552 points, fifth-most in the league, and went 5-9. He had <b>1,675 points scored against him</b>, the most of any team in any season. He'd go on to win the next two regular-season titles.</p>
+
+          <h4>Quick hits</h4>
+          <ul>
+            <li><b>Bjspjs4</b> made 5 trades, including getting Jahmyr Gibbs from rbanuelos3 in Week 11, went 9-5 as the 2 seed, and lost the semi by 0.66. He scored 98.82 in the third-place game.</li>
+            <li><b>MayockJr</b> was 4-3 when he traded Brandon Aiyuk and Kyren Williams for four players in Week 8, then went 2-5 and finished 6-8.</li>
+            <li><b>Goldminers1</b> lost eight straight after Week 1, went 4-10, and scored 57.28 in Week 4.</li>
+            <li><b>Criscutfries</b> made eight moves all year, went 3-11, and finished last in his only season.</li>
+            <li><b>luieloo</b> made 47 moves in his one season and snuck in as the 6 seed at 8-6.</li>
+          </ul>
+            <div class="chat"><div class="chat-head">The jury room, as we imagine it <span>· dramatization · nobody actually said this</span></div><div class="msg r"><b>dahlilama</b>Trading Kupp for Saquon. Team name stays.</div><div class="msg l"><b>MayockJr</b>Your team is literally named after him.</div><div class="msg r"><b>dahlilama</b>Championship's named after me now.</div><div class="msg l"><b>deetee333</b>Trade accepted.</div><div class="msg l"><b>sugarmaverick</b>Actually can we undo that</div><div class="msg l"><b>deetee333</b>Trade reversed. Love this league.</div><div class="msg l"><b>Bjspjs4</b>Lost the semi by 0.66. I'm fine. Everything's fine.</div><div class="msg l"><b>Sleon1000</b>1,675 points against. The schedule hates me personally.</div><div class="msg r"><b>showmeyourtd23</b>Zero trades, made the final. Maybe you all should try it.</div></div>
+            <h4>Transaction report card</h4>
+          <div class="overflow-x"><table class="tx"><thead><tr><th>Manager</th><th class="num">Trades</th><th class="num">Waivers</th><th class="num">FA Adds</th><th class="num">Total</th><th class="num">Record</th><th>Finish</th></tr></thead><tbody><tr><td>dahlilama</td><td class="num">4</td><td class="num">20</td><td class="num">26</td><td class="num">50</td><td class="num">9-5</td><td>🏆 Champion (3 seed)</td></tr><tr><td>showmeyourtd23</td><td class="num">0</td><td class="num">9</td><td class="num">21</td><td class="num">30</td><td class="num">8-6</td><td>Runner-up (4 seed)</td></tr><tr><td>Birdgangflyeagles</td><td class="num">0</td><td class="num">6</td><td class="num">6</td><td class="num">12</td><td class="num">10-4</td><td>3rd place (1 seed)</td></tr><tr><td>Bjspjs4</td><td class="num">5</td><td class="num">12</td><td class="num">14</td><td class="num">31</td><td class="num">9-5</td><td>4th place (2 seed)</td></tr><tr><td>deetee333</td><td class="num">5</td><td class="num">12</td><td class="num">45</td><td class="num">62</td><td class="num">8-6</td><td>Lost quarterfinal (5 seed)</td></tr><tr><td>luieloo</td><td class="num">2</td><td class="num">8</td><td class="num">37</td><td class="num">47</td><td class="num">8-6</td><td>Lost quarterfinal (6 seed)</td></tr><tr><td>rbanuelos3</td><td class="num">2</td><td class="num">19</td><td class="num">15</td><td class="num">36</td><td class="num">7-7</td><td>Missed playoffs</td></tr><tr><td>sugarmaverick</td><td class="num">7</td><td class="num">20</td><td class="num">19</td><td class="num">46</td><td class="num">7-7</td><td>Missed playoffs</td></tr><tr><td>MayockJr</td><td class="num">3</td><td class="num">13</td><td class="num">34</td><td class="num">50</td><td class="num">6-8</td><td>Missed playoffs</td></tr><tr><td>Sleon1000</td><td class="num">0</td><td class="num">14</td><td class="num">17</td><td class="num">31</td><td class="num">5-9</td><td>Missed playoffs</td></tr><tr><td>Goldminers1</td><td class="num">1</td><td class="num">9</td><td class="num">27</td><td class="num">37</td><td class="num">4-10</td><td>Missed playoffs</td></tr><tr><td>Criscutfries</td><td class="num">0</td><td class="num">1</td><td class="num">7</td><td class="num">8</td><td class="num">3-11</td><td>Last place</td></tr></tbody></table></div>
+          <p class="recap-foot">Trades count once for each team involved. Records are regular season.</p>
+          </article>
+        </details>
+        <p class="recap-more">Tap a season to open or close it. The group-chat bits are made up for fun; every stat is real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="futures">
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Futures — 2026 Champion</h2><p>Mock odds · all-time record, this year's start, and points per week</p></div></div>
+      <div class="panel-body">
+        <div class="overflow-x"><table id="futTable"><thead><tr><th>Manager</th><th class="num">Odds</th><th class="fcase">The Case</th></tr></thead><tbody></tbody></table></div>
+        <p class="note">For fun, not for betting. Odds weight all-time win rate (45%), this season's points per week (35%) and this season's record (20%), then get converted to American odds.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><div class="titles"><h2>Jury Ballot</h2><p>Cast your votes · copy them into the group chat</p></div></div>
+      <div class="panel-body">
+        <div class="me-row"><b>Juror:</b> <select id="meSel" aria-label="Your manager name"><option value="">Pick your name…</option></select></div>
+
+        <h4 style="margin:18px 18px 4px;font-family:Georgia,serif;font-size:1rem;">Win-Total Over / Unders</h4>
+        <p class="rec-sub" style="padding-top:0">28-game season: 14 weeks, each with a head-to-head game plus a game against the league median. Lines include wins already banked.</p>
+        <div class="overflow-x"><table id="ouTable"><thead><tr><th>Manager</th><th class="num">Now</th><th class="num">Line</th><th>Your pick</th></tr></thead><tbody></tbody></table></div>
+
+        <h4 style="margin:18px 18px 0;font-family:Georgia,serif;font-size:1rem;">Award Ballot</h4>
+        <div class="ballot-grid" id="awardGrid"></div>
+
+        <div class="ballot-actions">
+          <button class="btn" id="copyBtn" type="button">Copy my ballot</button>
+          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+          <span class="copy-status" id="copyStatus" role="status"></span>
+        </div>
+        <textarea id="ballotText" readonly aria-label="Your ballot text"></textarea>
+        <p class="note">Your picks stay on this device. Nobody else sees them until you paste them somewhere.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer class="court"><b>Court is in session</b>Twelve managers, one room, and the fan still doesn't work.</footer>
+
+<script>
+const DATA = {"seasons": ["2023", "2024", "2025", "2026"], "completed_seasons": ["2023", "2024", "2025"], "league": {"2023": [{"manager": "Birdgangflyeagles", "team": "(unnamed)", "wins": 10, "losses": 4, "ties": 0, "pf": 1494, "pa": 1360, "champ": false}, {"manager": "Bjspjs4", "team": "The Capsules", "wins": 9, "losses": 5, "ties": 0, "pf": 1617, "pa": 1491, "champ": false}, {"manager": "dahlilama", "team": "Red Solo Kupp", "wins": 9, "losses": 5, "ties": 0, "pf": 1565, "pa": 1447, "champ": true}, {"manager": "showmeyourtd23", "team": "(unnamed)", "wins": 8, "losses": 6, "ties": 0, "pf": 1580, "pa": 1420, "champ": false}, {"manager": "deetee333", "team": "(unnamed)", "wins": 8, "losses": 6, "ties": 0, "pf": 1573, "pa": 1525, "champ": false}, {"manager": "luieloo", "team": "Keenan and Kel", "wins": 8, "losses": 6, "ties": 0, "pf": 1451, "pa": 1515, "champ": false}, {"manager": "rbanuelos3", "team": "(unnamed)", "wins": 7, "losses": 7, "ties": 0, "pf": 1425, "pa": 1474, "champ": false}, {"manager": "sugarmaverick", "team": "Bijan Mustard", "wins": 7, "losses": 7, "ties": 0, "pf": 1424, "pa": 1373, "champ": false}, {"manager": "MayockJr", "team": "Tee Time", "wins": 6, "losses": 8, "ties": 0, "pf": 1532, "pa": 1507, "champ": false}, {"manager": "Sleon1000", "team": "(unnamed)", "wins": 5, "losses": 9, "ties": 0, "pf": 1552, "pa": 1675, "champ": false}, {"manager": "Goldminers1", "team": "(unnamed)", "wins": 4, "losses": 10, "ties": 0, "pf": 1311, "pa": 1508, "champ": false}, {"manager": "Criscutfries", "team": "(unnamed)", "wins": 3, "losses": 11, "ties": 0, "pf": 1272, "pa": 1500, "champ": false}], "2024": [{"manager": "Sleon1000", "team": "(unnamed)", "wins": 10, "losses": 4, "ties": 0, "pf": 1632, "pa": 1436, "champ": false}, {"manager": "rbanuelos3", "team": "Mean Machine", "wins": 9, "losses": 5, "ties": 0, "pf": 1858, "pa": 1570, "champ": false}, {"manager": "MayockJr", "team": "Rashee didnt do it", "wins": 9, "losses": 5, "ties": 0, "pf": 1547, "pa": 1394, "champ": false}, {"manager": "sugarmaverick", "team": "Ja'marrus Pitt", "wins": 8, "losses": 6, "ties": 0, "pf": 1677, "pa": 1648, "champ": true}, {"manager": "lxfiggy", "team": "i touch diggs", "wins": 8, "losses": 6, "ties": 0, "pf": 1606, "pa": 1555, "champ": false}, {"manager": "Birdgangflyeagles", "team": "(unnamed)", "wins": 8, "losses": 6, "ties": 0, "pf": 1521, "pa": 1546, "champ": false}, {"manager": "deetee333", "team": "(unnamed)", "wins": 8, "losses": 6, "ties": 0, "pf": 1516, "pa": 1422, "champ": false}, {"manager": "dahlilama", "team": "A B Ceedee", "wins": 6, "losses": 8, "ties": 0, "pf": 1422, "pa": 1516, "champ": false}, {"manager": "jayy2690", "team": "(unnamed)", "wins": 5, "losses": 9, "ties": 0, "pf": 1457, "pa": 1549, "champ": false}, {"manager": "Goldminers1", "team": "(unnamed)", "wins": 5, "losses": 9, "ties": 0, "pf": 1434, "pa": 1656, "champ": false}, {"manager": "Bjspjs4", "team": "LeSperms", "wins": 4, "losses": 10, "ties": 0, "pf": 1512, "pa": 1645, "champ": false}, {"manager": "showmeyourtd23", "team": "(unnamed)", "wins": 4, "losses": 10, "ties": 0, "pf": 1371, "pa": 1613, "champ": false}], "2025": [{"manager": "Sleon1000", "team": "Thundercatz", "wins": 11, "losses": 3, "ties": 0, "pf": 1518, "pa": 1349, "champ": false}, {"manager": "dahlilama", "team": "Air Jordans", "wins": 10, "losses": 4, "ties": 0, "pf": 1710, "pa": 1573, "champ": false}, {"manager": "juleon8", "team": "MAYEthe4RCEBWU", "wins": 9, "losses": 5, "ties": 0, "pf": 1687, "pa": 1445, "champ": false}, {"manager": "rbanuelos3", "team": "Mean Machine", "wins": 9, "losses": 5, "ties": 0, "pf": 1525, "pa": 1504, "champ": false}, {"manager": "deetee333", "team": "(unnamed)", "wins": 8, "losses": 6, "ties": 0, "pf": 1434, "pa": 1380, "champ": true}, {"manager": "MayockJr", "team": "AsHIM Jeanty", "wins": 7, "losses": 7, "ties": 0, "pf": 1517, "pa": 1536, "champ": false}, {"manager": "Goldminers1", "team": "Charlottes Pop Pop", "wins": 6, "losses": 8, "ties": 0, "pf": 1525, "pa": 1556, "champ": false}, {"manager": "elysianbeer", "team": "Space Dusted", "wins": 6, "losses": 8, "ties": 0, "pf": 1487, "pa": 1473, "champ": false}, {"manager": "showmeyourtd23", "team": "(unnamed)", "wins": 6, "losses": 8, "ties": 0, "pf": 1455, "pa": 1485, "champ": false}, {"manager": "lxfiggy", "team": "Bo Ners", "wins": 5, "losses": 9, "ties": 0, "pf": 1429, "pa": 1485, "champ": false}, {"manager": "Bjspjs4", "team": "You Got Booked", "wins": 4, "losses": 10, "ties": 0, "pf": 1392, "pa": 1669, "champ": false}, {"manager": "Birdgangflyeagles", "team": "(unnamed)", "wins": 3, "losses": 11, "ties": 0, "pf": 1397, "pa": 1621, "champ": false}], "2026": [{"manager": "Birdgangflyeagles", "team": "Im sorry Ms. Jackson", "wins": 4, "losses": 0, "ties": 0, "pf": 267, "pa": 168, "champ": false}, {"manager": "Bjspjs4", "team": "Maye be this year", "wins": 4, "losses": 0, "ties": 0, "pf": 243, "pa": 219, "champ": false}, {"manager": "dahlilama", "team": "Gettin’ Jigba Wit It", "wins": 3, "losses": 1, "ties": 0, "pf": 251, "pa": 200, "champ": false}, {"manager": "rbanuelos3", "team": "Mean Machine", "wins": 3, "losses": 1, "ties": 0, "pf": 244, "pa": 147, "champ": false}, {"manager": "elysianbeer", "team": "Space Dusted", "wins": 2, "losses": 2, "ties": 0, "pf": 235, "pa": 265, "champ": false}, {"manager": "juleon8", "team": "REVENGE TOUR: EPISODE I", "wins": 2, "losses": 2, "ties": 0, "pf": 219, "pa": 206, "champ": false}, {"manager": "MayockJr", "team": "SwiggityMan", "wins": 2, "losses": 2, "ties": 0, "pf": 207, "pa": 266, "champ": false}, {"manager": "Goldminers1", "team": "Charlottes Pop Pop", "wins": 1, "losses": 3, "ties": 0, "pf": 223, "pa": 268, "champ": false}, {"manager": "showmeyourtd23", "team": "Ashton Powers", "wins": 1, "losses": 3, "ties": 0, "pf": 221, "pa": 249, "champ": false}, {"manager": "kevinnguu", "team": "Puka’s Baby Mama", "wins": 1, "losses": 3, "ties": 0, "pf": 220, "pa": 247, "champ": false}, {"manager": "Sleon1000", "team": "Thundercatz⚡️", "wins": 1, "losses": 3, "ties": 0, "pf": 217, "pa": 237, "champ": false}, {"manager": "giJ03", "team": "swaggots", "wins": 0, "losses": 4, "ties": 0, "pf": 146, "pa": 220, "champ": false}]}, "alltime": {"Birdgangflyeagles": {"wins": 21, "losses": 21, "ties": 0, "pf": 4412, "pa": 4527, "seasons": 3, "champs": 0, "best_season_pf": 1521, "best_season": "2024", "worst_season_pf": 1397, "worst_season": "2025"}, "Bjspjs4": {"wins": 17, "losses": 25, "ties": 0, "pf": 4521, "pa": 4805, "seasons": 3, "champs": 0, "best_season_pf": 1617, "best_season": "2023", "worst_season_pf": 1392, "worst_season": "2025"}, "dahlilama": {"wins": 25, "losses": 17, "ties": 0, "pf": 4697, "pa": 4536, "seasons": 3, "champs": 1, "best_season_pf": 1710, "best_season": "2025", "worst_season_pf": 1422, "worst_season": "2024"}, "showmeyourtd23": {"wins": 18, "losses": 24, "ties": 0, "pf": 4406, "pa": 4518, "seasons": 3, "champs": 0, "best_season_pf": 1580, "best_season": "2023", "worst_season_pf": 1371, "worst_season": "2024"}, "deetee333": {"wins": 24, "losses": 18, "ties": 0, "pf": 4523, "pa": 4327, "seasons": 3, "champs": 1, "best_season_pf": 1573, "best_season": "2023", "worst_season_pf": 1434, "worst_season": "2025"}, "luieloo": {"wins": 8, "losses": 6, "ties": 0, "pf": 1451, "pa": 1515, "seasons": 1, "champs": 0, "best_season_pf": 1451, "best_season": "2023", "worst_season_pf": 1451, "worst_season": "2023"}, "rbanuelos3": {"wins": 25, "losses": 17, "ties": 0, "pf": 4808, "pa": 4548, "seasons": 3, "champs": 0, "best_season_pf": 1858, "best_season": "2024", "worst_season_pf": 1425, "worst_season": "2023"}, "sugarmaverick": {"wins": 15, "losses": 13, "ties": 0, "pf": 3101, "pa": 3021, "seasons": 2, "champs": 1, "best_season_pf": 1677, "best_season": "2024", "worst_season_pf": 1424, "worst_season": "2023"}, "MayockJr": {"wins": 22, "losses": 20, "ties": 0, "pf": 4596, "pa": 4437, "seasons": 3, "champs": 0, "best_season_pf": 1547, "best_season": "2024", "worst_season_pf": 1517, "worst_season": "2025"}, "Sleon1000": {"wins": 26, "losses": 16, "ties": 0, "pf": 4702, "pa": 4460, "seasons": 3, "champs": 0, "best_season_pf": 1632, "best_season": "2024", "worst_season_pf": 1518, "worst_season": "2025"}, "Goldminers1": {"wins": 15, "losses": 27, "ties": 0, "pf": 4270, "pa": 4720, "seasons": 3, "champs": 0, "best_season_pf": 1525, "best_season": "2025", "worst_season_pf": 1311, "worst_season": "2023"}, "Criscutfries": {"wins": 3, "losses": 11, "ties": 0, "pf": 1272, "pa": 1500, "seasons": 1, "champs": 0, "best_season_pf": 1272, "best_season": "2023", "worst_season_pf": 1272, "worst_season": "2023"}, "lxfiggy": {"wins": 13, "losses": 15, "ties": 0, "pf": 3035, "pa": 3040, "seasons": 2, "champs": 0, "best_season_pf": 1606, "best_season": "2024", "worst_season_pf": 1429, "worst_season": "2025"}, "jayy2690": {"wins": 5, "losses": 9, "ties": 0, "pf": 1457, "pa": 1549, "seasons": 1, "champs": 0, "best_season_pf": 1457, "best_season": "2024", "worst_season_pf": 1457, "worst_season": "2024"}, "juleon8": {"wins": 9, "losses": 5, "ties": 0, "pf": 1687, "pa": 1445, "seasons": 1, "champs": 0, "best_season_pf": 1687, "best_season": "2025", "worst_season_pf": 1687, "worst_season": "2025"}, "elysianbeer": {"wins": 6, "losses": 8, "ties": 0, "pf": 1487, "pa": 1473, "seasons": 1, "champs": 0, "best_season_pf": 1487, "best_season": "2025", "worst_season_pf": 1487, "worst_season": "2025"}}, "supers": {"most_wins": {"manager": "Sleon1000", "wins": 26, "losses": 16, "ties": 0, "pf": 4702, "pa": 4460, "seasons": 3, "champs": 0, "best_season_pf": 1632, "best_season": "2024", "worst_season_pf": 1518, "worst_season": "2025"}, "best_winpct": {"manager": "juleon8", "pct": 64.3, "wins": 9, "losses": 5, "ties": 0, "pf": 1687, "pa": 1445, "seasons": 1, "champs": 0, "best_season_pf": 1687, "best_season": "2025", "worst_season_pf": 1687, "worst_season": "2025"}, "worst_winpct": {"manager": "Criscutfries", "pct": 21.4, "wins": 3, "losses": 11, "ties": 0, "pf": 1272, "pa": 1500, "seasons": 1, "champs": 0, "best_season_pf": 1272, "best_season": "2023", "worst_season_pf": 1272, "worst_season": "2023"}, "most_pf": {"manager": "rbanuelos3", "wins": 25, "losses": 17, "ties": 0, "pf": 4808, "pa": 4548, "seasons": 3, "champs": 0, "best_season_pf": 1858, "best_season": "2024", "worst_season_pf": 1425, "worst_season": "2023"}, "most_champs": {"manager": "dahlilama", "wins": 25, "losses": 17, "ties": 0, "pf": 4697, "pa": 4536, "seasons": 3, "champs": 1, "best_season_pf": 1710, "best_season": "2025", "worst_season_pf": 1422, "worst_season": "2024"}, "best_single_season_pf": {"season": "2024", "manager": "rbanuelos3", "team": "Mean Machine", "wins": 9, "losses": 5, "ties": 0, "pf": 1858, "pa": 1570, "champ": false}, "worst_single_season_pf": {"season": "2023", "manager": "Criscutfries", "team": "(unnamed)", "wins": 3, "losses": 11, "ties": 0, "pf": 1272, "pa": 1500, "champ": false}, "best_diff_season": {"season": "2024", "diff": 288, "manager": "rbanuelos3", "team": "Mean Machine", "wins": 9, "losses": 5, "ties": 0, "pf": 1858, "pa": 1570, "champ": false}, "worst_diff_season": {"season": "2025", "diff": -277, "manager": "Bjspjs4", "team": "You Got Booked", "wins": 4, "losses": 10, "ties": 0, "pf": 1392, "pa": 1669, "champ": false}, "unluckiest_season": {"season": "2023", "manager": "Sleon1000", "team": "(unnamed)", "wins": 5, "losses": 9, "ties": 0, "pf": 1552, "pa": 1675, "champ": false}}};
+
+const MANAGERS = [{"manager": "Birdgangflyeagles", "team": "Im sorry Ms. Jackson", "trophies": [{"t": "2023 #1 Seed", "k": "seed"}], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 10-4 in 2023 (1st in standings). Currently 4-0 and 1st in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "21-21 (50.0%)"], ["2026 Record", "4-0 · 1st"], ["Championships", "0"], ["Playoff Record", "1-2 · 2 trips"], ["Best Week", "155.24 · Week 4, 2023"], ["Best Reg. Season", "10-4 · 1st in 2023"], ["Career Points", "4,412"], ["2026 Draft Slot", "#12 · took Derrick Henry"], ["Can't Quit Him", "Lamar Jackson (3×)"]]}, {"manager": "Bjspjs4", "team": "Maye be this year", "trophies": [{"t": "2023 Points King", "k": "seed"}], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 9-5 in 2023 (2nd in standings). Currently 4-0 and 2nd in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "17-25 (40.5%)"], ["2026 Record", "4-0 · 2nd"], ["Championships", "0"], ["Playoff Record", "0-1 · 1 trip"], ["Best Week", "147.18 · Week 4, 2025"], ["Best Reg. Season", "9-5 · 2nd in 2023"], ["Career Points", "4,521"], ["2026 Draft Slot", "#8 · took Amon-Ra St. Brown"], ["Can't Quit Him", "Christian Kirk (2×)"]]}, {"manager": "dahlilama", "team": "Gettin’ Jigba Wit It", "trophies": [{"t": "2023 Champ", "k": "gold"}, {"t": "2025 Points King", "k": "seed"}], "blurb": "Charter member — here since the first draft. Won it all in 2023. Best year: 10-4 in 2025 (2nd in standings). Currently 3-1 and 3rd in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "25-17 (59.5%)"], ["2026 Record", "3-1 · 3rd"], ["Championships", "1"], ["Playoff Record", "4-1 · 2 trips"], ["Best Week", "176.08 · Week 8, 2025"], ["Best Reg. Season", "10-4 · 2nd in 2025"], ["Career Points", "4,697"], ["2026 Draft Slot", "#5 · took Jaxon Smith-Njigba"], ["Can't Quit Him", "Jaxon Smith-Njigba (3×)"]]}, {"manager": "rbanuelos3", "team": "Mean Machine", "trophies": [{"t": "2024 Points King", "k": "seed"}], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 9-5 in 2024 (2nd in standings). Currently 3-1 and 4th in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "25-17 (59.5%)"], ["2026 Record", "3-1 · 4th"], ["Championships", "0"], ["Playoff Record", "1-2 · 2 trips"], ["Best Week", "180.24 · Week 9, 2024"], ["Best Reg. Season", "9-5 · 2nd in 2024"], ["Career Points", "4,808"], ["2026 Draft Slot", "#1 · took Jahmyr Gibbs"], ["Can't Quit Him", "Jahmyr Gibbs (2×)"]]}, {"manager": "elysianbeer", "team": "Space Dusted", "trophies": [], "blurb": "In the league since 2025. Still chasing a first title. Best year: 6-8 in 2025 (8th in standings). Currently 2-2 and 5th in 2026.", "stats": [["Since / Seasons", "2025 · 2"], ["All-Time Record", "6-8 (42.9%)"], ["2026 Record", "2-2 · 5th"], ["Championships", "0"], ["Playoff Record", "No trips yet"], ["Best Week", "144.08 · Week 2, 2026"], ["Best Reg. Season", "6-8 · 8th in 2025"], ["Career Points", "1,487"], ["2026 Draft Slot", "#11 · took De'Von Achane"], ["Can't Quit Him", "De'Von Achane (2×)"]]}, {"manager": "juleon8", "team": "REVENGE TOUR: EPISODE I", "trophies": [], "blurb": "In the league since 2025. Still chasing a first title. Best year: 9-5 in 2025 (3rd in standings). Currently 2-2 and 6th in 2026.", "stats": [["Since / Seasons", "2025 · 2"], ["All-Time Record", "9-5 (64.3%)"], ["2026 Record", "2-2 · 6th"], ["Championships", "0"], ["Playoff Record", "0-1 · 1 trip"], ["Best Week", "167.34 · Week 14, 2025"], ["Best Reg. Season", "9-5 · 3rd in 2025"], ["Career Points", "1,687"], ["2026 Draft Slot", "#9 · took James Cook"], ["Can't Quit Him", "Chase Brown (2×)"]]}, {"manager": "MayockJr", "team": "SwiggityMan", "trophies": [], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 9-5 in 2024 (3rd in standings). Currently 2-2 and 7th in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "22-20 (52.4%)"], ["2026 Record", "2-2 · 7th"], ["Championships", "0"], ["Playoff Record", "1-2 · 2 trips"], ["Best Week", "152.70 · Week 4, 2025"], ["Best Reg. Season", "9-5 · 3rd in 2024"], ["Career Points", "4,596"], ["2026 Draft Slot", "#3 · took Ja'Marr Chase"], ["Can't Quit Him", "Jalen Hurts (2×)"]]}, {"manager": "Goldminers1", "team": "Charlottes Pop Pop", "trophies": [], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 6-8 in 2025 (7th in standings). Currently 1-3 and 8th in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "15-27 (35.7%)"], ["2026 Record", "1-3 · 8th"], ["Championships", "0"], ["Playoff Record", "No trips yet"], ["Best Week", "149.80 · Week 11, 2025"], ["Best Reg. Season", "6-8 · 7th in 2025"], ["Career Points", "4,270"], ["2026 Draft Slot", "#4 · took Christian McCaffrey"], ["Can't Quit Him", "Brock Purdy (3×)"]]}, {"manager": "showmeyourtd23", "team": "Ashton Powers", "trophies": [], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 8-6 in 2023 (4th in standings). Currently 1-3 and 9th in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "18-24 (42.9%)"], ["2026 Record", "1-3 · 9th"], ["Championships", "0"], ["Playoff Record", "2-1 · 1 trip"], ["Best Week", "143.50 · Week 2, 2023"], ["Best Reg. Season", "8-6 · 4th in 2023"], ["Career Points", "4,406"], ["2026 Draft Slot", "#6 · took Jonathan Taylor"], ["Can't Quit Him", "Christian McCaffrey (2×)"]]}, {"manager": "kevinnguu", "team": "Puka’s Baby Mama", "trophies": [], "blurb": "Rookie manager, first season in 2026. Currently 1-3 and 10th in 2026.", "stats": [["Since / Seasons", "2026 · 1"], ["All-Time Record", "— (first season)"], ["2026 Record", "1-3 · 10th"], ["Championships", "0"], ["Playoff Record", "No trips yet"], ["Best Week", "122.86 · Week 1, 2026"], ["Best Reg. Season", "—"], ["Career Points", "—"], ["2026 Draft Slot", "#7 · took Puka Nacua"], ["Can't Quit Him", "— (one draft so far)"]]}, {"manager": "Sleon1000", "team": "Thundercatz⚡️", "trophies": [{"t": "2024 #1 Seed", "k": "seed"}, {"t": "2025 #1 Seed", "k": "seed"}], "blurb": "Charter member — here since the first draft. Still chasing a first title. Best year: 11-3 in 2025 (1st in standings). Currently 1-3 and 11th in 2026.", "stats": [["Since / Seasons", "2023 · 4"], ["All-Time Record", "26-16 (61.9%)"], ["2026 Record", "1-3 · 11th"], ["Championships", "0"], ["Playoff Record", "0-2 · 2 trips"], ["Best Week", "154.76 · Week 7, 2025"], ["Best Reg. Season", "11-3 · 1st in 2025"], ["Career Points", "4,702"], ["2026 Draft Slot", "#10 · took Saquon Barkley"], ["Can't Quit Him", "Josh Allen (3×)"]]}, {"manager": "giJ03", "team": "swaggots", "trophies": [], "blurb": "Rookie manager, first season in 2026. Currently 0-4 and 12th in 2026.", "stats": [["Since / Seasons", "2026 · 1"], ["All-Time Record", "— (first season)"], ["2026 Record", "0-4 · 12th"], ["Championships", "0"], ["Playoff Record", "No trips yet"], ["Best Week", "90.56 · Week 1, 2026"], ["Best Reg. Season", "—"], ["Career Points", "—"], ["2026 Draft Slot", "#2 · took Bijan Robinson"], ["Can't Quit Him", "— (one draft so far)"]]}];
+const RECORDS = {"single": [{"title": "Highest Score", "rows": [{"who": "rbanuelos3", "val": "180.24", "ctx": "vs showmeyourtd23 (82.40) · Week 9, 2024"}, {"who": "dahlilama", "val": "176.08", "ctx": "vs MayockJr (98.36) · Week 8, 2025"}, {"who": "rbanuelos3", "val": "173.56", "ctx": "vs Goldminers1 (78.60) · Week 3, 2024"}, {"who": "juleon8", "val": "167.34", "ctx": "vs Bjspjs4 (79.76) · Week 14, 2025"}, {"who": "Birdgangflyeagles", "val": "155.24", "ctx": "vs luieloo (111.62) · Week 4, 2023"}]}, {"title": "Lowest Score", "rows": [{"who": "dahlilama", "val": "48.42", "ctx": "vs MayockJr (97.38) · Week 3, 2024"}, {"who": "Criscutfries", "val": "53.24", "ctx": "vs Goldminers1 (103.00) · Week 11, 2023"}, {"who": "giJ03", "val": "55.74", "ctx": "vs rbanuelos3 (105.16) · Week 2, 2026"}, {"who": "Birdgangflyeagles", "val": "57.12", "ctx": "vs Sleon1000 (104.58) · Week 11, 2025"}, {"who": "Goldminers1", "val": "57.28", "ctx": "vs rbanuelos3 (107.14) · Week 4, 2023"}]}, {"title": "Biggest Blowout", "rows": [{"who": "rbanuelos3 over showmeyourtd23", "val": "+97.84", "ctx": "180.24–82.40 · Week 9, 2024"}, {"who": "rbanuelos3 over Goldminers1", "val": "+94.96", "ctx": "173.56–78.60 · Week 3, 2024"}, {"who": "juleon8 over Bjspjs4", "val": "+87.58", "ctx": "167.34–79.76 · Week 14, 2025"}, {"who": "dahlilama over MayockJr", "val": "+77.72", "ctx": "176.08–98.36 · Week 8, 2025"}, {"who": "showmeyourtd23 over rbanuelos3", "val": "+75.16", "ctx": "135.16–60.00 · Week 7, 2023"}]}, {"title": "Closest Game", "rows": [{"who": "sugarmaverick over dahlilama", "val": "0.10", "ctx": "88.48–88.38 · Week 4, 2023"}, {"who": "luieloo over Criscutfries", "val": "0.18", "ctx": "83.66–83.48 · Week 10, 2023"}, {"who": "deetee333 over Goldminers1", "val": "0.22", "ctx": "81.04–80.82 · Week 12, 2025"}, {"who": "Sleon1000 over showmeyourtd23", "val": "0.24", "ctx": "107.94–107.70 · Week 10, 2025"}, {"who": "dahlilama over showmeyourtd23", "val": "0.40", "ctx": "113.34–112.94 · Week 1, 2023"}]}, {"title": "Highest Score in a Loss", "rows": [{"who": "rbanuelos3", "val": "149.76", "ctx": "vs deetee333 (150.78) · Week 15, 2025 · playoffs"}, {"who": "MayockJr", "val": "142.00", "ctx": "vs deetee333 (152.46) · Week 12, 2023"}, {"who": "Goldminers1", "val": "141.66", "ctx": "vs MayockJr (152.70) · Week 4, 2025"}, {"who": "deetee333", "val": "140.04", "ctx": "vs lxfiggy (154.40) · Week 13, 2024"}, {"who": "Goldminers1", "val": "135.16", "ctx": "vs Bjspjs4 (137.46) · Week 3, 2023"}]}, {"title": "Lowest Score in a Win", "rows": [{"who": "deetee333", "val": "72.26", "ctx": "vs MayockJr (70.40) · Week 1, 2023"}, {"who": "MayockJr", "val": "77.00", "ctx": "vs elysianbeer (64.20) · Week 11, 2025"}, {"who": "rbanuelos3", "val": "79.98", "ctx": "vs Sleon1000 (71.12) · Week 12, 2025"}, {"who": "deetee333", "val": "81.04", "ctx": "vs Goldminers1 (80.82) · Week 12, 2025"}, {"who": "luieloo", "val": "83.66", "ctx": "vs Criscutfries (83.48) · Week 10, 2023"}]}, {"title": "Most Combined Points", "rows": [{"who": "deetee333 over rbanuelos3", "val": "300.54", "ctx": "150.78–149.76 · Week 15, 2025 · playoffs"}, {"who": "deetee333 over MayockJr", "val": "294.46", "ctx": "152.46–142.00 · Week 12, 2023"}, {"who": "lxfiggy over deetee333", "val": "294.44", "ctx": "154.40–140.04 · Week 13, 2024"}, {"who": "MayockJr over Goldminers1", "val": "294.36", "ctx": "152.70–141.66 · Week 4, 2025"}, {"who": "Sleon1000 over dahlilama", "val": "287.72", "ctx": "154.76–132.96 · Week 7, 2025"}]}, {"title": "Fewest Combined Points", "rows": [{"who": "MayockJr over elysianbeer", "val": "141.20", "ctx": "77.00–64.20 · Week 11, 2025"}, {"who": "deetee333 over MayockJr", "val": "142.66", "ctx": "72.26–70.40 · Week 1, 2023"}, {"who": "MayockJr over dahlilama", "val": "145.80", "ctx": "97.38–48.42 · Week 3, 2024"}, {"who": "rbanuelos3 over Sleon1000", "val": "151.10", "ctx": "79.98–71.12 · Week 12, 2025"}, {"who": "Goldminers1 over Criscutfries", "val": "156.24", "ctx": "103.00–53.24 · Week 11, 2023"}]}], "streaks": [{"title": "Longest Winning Streak", "rows": [{"who": "juleon8", "val": "10 straight", "ctx": "Wk 7 2025 → Wk 2 2026"}, {"who": "Sleon1000", "val": "9 straight", "ctx": "Wk 13 2024 → Wk 7 2025"}, {"who": "rbanuelos3", "val": "8 straight", "ctx": "Wk 9 2025 → Wk 2 2026"}, {"who": "dahlilama", "val": "7 straight", "ctx": "Wk 14 2024 → Wk 6 2025"}, {"who": "Birdgangflyeagles", "val": "6 straight", "ctx": "Wk 2 2023 → Wk 7 2023"}]}, {"title": "Longest Losing Streak", "rows": [{"who": "showmeyourtd23", "val": "11 straight", "ctx": "Wk 6 2024 → Wk 2 2025"}, {"who": "Birdgangflyeagles", "val": "9 straight", "ctx": "Wk 6 2025 → Wk 14 2025"}, {"who": "Goldminers1", "val": "8 straight", "ctx": "Wk 2 2023 → Wk 9 2023"}, {"who": "Bjspjs4", "val": "7 straight", "ctx": "Wk 5 2025 → Wk 11 2025"}, {"who": "dahlilama", "val": "5 straight", "ctx": "Wk 9 2024 → Wk 13 2024"}]}], "weekly": [{"title": "Most Weekly High Scores", "rows": [{"who": "rbanuelos3", "val": "8 weeks", "ctx": ""}, {"who": "dahlilama", "val": "6 weeks", "ctx": ""}, {"who": "MayockJr", "val": "5 weeks", "ctx": ""}, {"who": "Birdgangflyeagles", "val": "3 weeks", "ctx": ""}, {"who": "deetee333", "val": "3 weeks", "ctx": ""}]}, {"title": "Most Weekly Low Scores", "rows": [{"who": "Goldminers1", "val": "10 weeks", "ctx": ""}, {"who": "Criscutfries", "val": "5 weeks", "ctx": ""}, {"who": "deetee333", "val": "4 weeks", "ctx": ""}, {"who": "MayockJr", "val": "3 weeks", "ctx": ""}, {"who": "Sleon1000", "val": "3 weeks", "ctx": ""}]}, {"title": "Tough-Luck Losses", "note": "Lost while scoring above that week's league median", "rows": [{"who": "Sleon1000", "val": "9 losses", "ctx": ""}, {"who": "showmeyourtd23", "val": "7 losses", "ctx": ""}, {"who": "MayockJr", "val": "7 losses", "ctx": ""}, {"who": "Bjspjs4", "val": "7 losses", "ctx": ""}, {"who": "Goldminers1", "val": "6 losses", "ctx": ""}]}, {"title": "Lucky Wins", "note": "Won while scoring below that week's league median", "rows": [{"who": "dahlilama", "val": "8 wins", "ctx": ""}, {"who": "Sleon1000", "val": "8 wins", "ctx": ""}, {"who": "rbanuelos3", "val": "7 wins", "ctx": ""}, {"who": "Birdgangflyeagles", "val": "6 wins", "ctx": ""}, {"who": "showmeyourtd23", "val": "6 wins", "ctx": ""}]}], "playoff_table": [{"manager": "dahlilama", "apps": 2, "w": 4, "l": 1, "finals": 2, "titles": 1}, {"manager": "sugarmaverick", "apps": 1, "w": 3, "l": 0, "finals": 1, "titles": 1}, {"manager": "deetee333", "apps": 2, "w": 3, "l": 1, "finals": 1, "titles": 1}, {"manager": "showmeyourtd23", "apps": 1, "w": 2, "l": 1, "finals": 1, "titles": 0}, {"manager": "Birdgangflyeagles", "apps": 2, "w": 1, "l": 2, "finals": 0, "titles": 0}, {"manager": "MayockJr", "apps": 2, "w": 1, "l": 2, "finals": 0, "titles": 0}, {"manager": "rbanuelos3", "apps": 2, "w": 1, "l": 2, "finals": 1, "titles": 0}, {"manager": "Bjspjs4", "apps": 1, "w": 0, "l": 1, "finals": 0, "titles": 0}, {"manager": "juleon8", "apps": 1, "w": 0, "l": 1, "finals": 0, "titles": 0}, {"manager": "luieloo", "apps": 1, "w": 0, "l": 1, "finals": 0, "titles": 0}, {"manager": "lxfiggy", "apps": 1, "w": 0, "l": 1, "finals": 0, "titles": 0}, {"manager": "Sleon1000", "apps": 2, "w": 0, "l": 2, "finals": 0, "titles": 0}], "playoff_lists": [{"title": "Championship Games", "rows": [{"who": "deetee333 over dahlilama", "val": "125.94–88.98", "ctx": "2025"}, {"who": "sugarmaverick over rbanuelos3", "val": "127.86–105.18", "ctx": "2024"}, {"who": "dahlilama over showmeyourtd23", "val": "141.66–118.40", "ctx": "2023"}]}, {"title": "Highest Playoff Score", "rows": [{"who": "deetee333", "val": "150.78", "ctx": "Quarterfinal vs rbanuelos3 · 2025"}, {"who": "rbanuelos3", "val": "149.76", "ctx": "Quarterfinal vs deetee333 · 2025"}, {"who": "sugarmaverick", "val": "147.02", "ctx": "Semifinal vs Sleon1000 · 2024"}, {"who": "dahlilama", "val": "143.16", "ctx": "Quarterfinal vs luieloo · 2023"}, {"who": "dahlilama", "val": "141.66", "ctx": "Championship vs showmeyourtd23 · 2023"}]}], "season": [{"title": "Most Points, Season", "rows": [{"who": "rbanuelos3", "val": "1,858", "ctx": "9-5 · 2024"}, {"who": "dahlilama", "val": "1,710", "ctx": "10-4 · 2025"}, {"who": "juleon8", "val": "1,687", "ctx": "9-5 · 2025"}, {"who": "sugarmaverick", "val": "1,677", "ctx": "8-6 · 2024"}, {"who": "Sleon1000", "val": "1,632", "ctx": "10-4 · 2024"}]}, {"title": "Fewest Points, Season", "rows": [{"who": "Criscutfries", "val": "1,272", "ctx": "3-11 · 2023"}, {"who": "Goldminers1", "val": "1,311", "ctx": "4-10 · 2023"}, {"who": "showmeyourtd23", "val": "1,371", "ctx": "4-10 · 2024"}, {"who": "Bjspjs4", "val": "1,392", "ctx": "4-10 · 2025"}, {"who": "Birdgangflyeagles", "val": "1,397", "ctx": "3-11 · 2025"}]}, {"title": "Most Points Against, Season", "rows": [{"who": "Sleon1000", "val": "1,675", "ctx": "5-9 · 2023"}, {"who": "Bjspjs4", "val": "1,669", "ctx": "4-10 · 2025"}, {"who": "Goldminers1", "val": "1,656", "ctx": "5-9 · 2024"}, {"who": "sugarmaverick", "val": "1,648", "ctx": "8-6 · 2024"}, {"who": "Bjspjs4", "val": "1,645", "ctx": "4-10 · 2024"}]}, {"title": "Best Record, Season", "rows": [{"who": "Sleon1000", "val": "11-3", "ctx": "11-3 · 2025"}, {"who": "dahlilama", "val": "10-4", "ctx": "10-4 · 2025"}, {"who": "Sleon1000", "val": "10-4", "ctx": "10-4 · 2024"}, {"who": "Birdgangflyeagles", "val": "10-4", "ctx": "10-4 · 2023"}, {"who": "rbanuelos3", "val": "9-5", "ctx": "9-5 · 2024"}]}], "rival": [{"who": "dahlilama over showmeyourtd23", "val": "5-1", "ctx": ""}, {"who": "MayockJr over Bjspjs4", "val": "4-0", "ctx": ""}, {"who": "rbanuelos3 over Birdgangflyeagles", "val": "4-1", "ctx": ""}, {"who": "Sleon1000 over Goldminers1", "val": "4-1", "ctx": ""}, {"who": "rbanuelos3 over Sleon1000", "val": "4-1", "ctx": ""}, {"who": "dahlilama over MayockJr", "val": "4-2", "ctx": ""}], "h2h": {"dahlilama|showmeyourtd23": [5, 1], "showmeyourtd23|dahlilama": [1, 5], "Bjspjs4|Sleon1000": [2, 3], "Sleon1000|Bjspjs4": [3, 2], "rbanuelos3|Birdgangflyeagles": [4, 1], "Birdgangflyeagles|rbanuelos3": [1, 4], "showmeyourtd23|MayockJr": [2, 2], "MayockJr|showmeyourtd23": [2, 2], "Sleon1000|Goldminers1": [4, 1], "Goldminers1|Sleon1000": [1, 4], "dahlilama|MayockJr": [4, 2], "MayockJr|dahlilama": [2, 4], "Bjspjs4|Goldminers1": [3, 1], "Goldminers1|Bjspjs4": [1, 3], "MayockJr|Bjspjs4": [4, 0], "Bjspjs4|MayockJr": [0, 4], "rbanuelos3|Goldminers1": [3, 1], "Goldminers1|rbanuelos3": [1, 3], "MayockJr|Sleon1000": [2, 2], "Sleon1000|MayockJr": [2, 2], "Birdgangflyeagles|Goldminers1": [3, 2], "Goldminers1|Birdgangflyeagles": [2, 3], "Birdgangflyeagles|showmeyourtd23": [2, 3], "showmeyourtd23|Birdgangflyeagles": [3, 2], "dahlilama|rbanuelos3": [2, 1], "rbanuelos3|dahlilama": [1, 2], "MayockJr|Goldminers1": [3, 0], "Goldminers1|MayockJr": [0, 3], "showmeyourtd23|rbanuelos3": [1, 2], "rbanuelos3|showmeyourtd23": [2, 1], "Birdgangflyeagles|dahlilama": [2, 2], "dahlilama|Birdgangflyeagles": [2, 2], "dahlilama|Goldminers1": [3, 0], "Goldminers1|dahlilama": [0, 3], "Bjspjs4|Birdgangflyeagles": [2, 2], "Birdgangflyeagles|Bjspjs4": [2, 2], "rbanuelos3|Sleon1000": [4, 1], "Sleon1000|rbanuelos3": [1, 4], "showmeyourtd23|Goldminers1": [3, 1], "Goldminers1|showmeyourtd23": [1, 3], "rbanuelos3|Bjspjs4": [3, 0], "Bjspjs4|rbanuelos3": [0, 3], "Sleon1000|Birdgangflyeagles": [3, 0], "Birdgangflyeagles|Sleon1000": [0, 3], "Birdgangflyeagles|MayockJr": [4, 2], "MayockJr|Birdgangflyeagles": [2, 4], "showmeyourtd23|Bjspjs4": [1, 2], "Bjspjs4|showmeyourtd23": [2, 1], "dahlilama|Sleon1000": [1, 2], "Sleon1000|dahlilama": [2, 1], "rbanuelos3|MayockJr": [3, 1], "MayockJr|rbanuelos3": [1, 3], "Sleon1000|showmeyourtd23": [3, 0], "showmeyourtd23|Sleon1000": [0, 3], "Bjspjs4|dahlilama": [3, 3], "dahlilama|Bjspjs4": [3, 3], "juleon8|elysianbeer": [2, 0], "elysianbeer|juleon8": [0, 2], "elysianbeer|Bjspjs4": [1, 1], "Bjspjs4|elysianbeer": [1, 1], "dahlilama|juleon8": [1, 1], "juleon8|dahlilama": [1, 1], "dahlilama|elysianbeer": [2, 0], "elysianbeer|dahlilama": [0, 2], "Bjspjs4|juleon8": [1, 1], "juleon8|Bjspjs4": [1, 1], "Sleon1000|elysianbeer": [1, 0], "elysianbeer|Sleon1000": [0, 1], "rbanuelos3|juleon8": [1, 0], "juleon8|rbanuelos3": [0, 1], "Sleon1000|juleon8": [1, 1], "juleon8|Sleon1000": [1, 1], "elysianbeer|rbanuelos3": [1, 1], "rbanuelos3|elysianbeer": [1, 1], "Goldminers1|juleon8": [1, 0], "juleon8|Goldminers1": [0, 1], "elysianbeer|Goldminers1": [2, 0], "Goldminers1|elysianbeer": [0, 2], "showmeyourtd23|elysianbeer": [1, 0], "elysianbeer|showmeyourtd23": [0, 1], "juleon8|Birdgangflyeagles": [1, 0], "Birdgangflyeagles|juleon8": [0, 1], "elysianbeer|Birdgangflyeagles": [1, 0], "Birdgangflyeagles|elysianbeer": [0, 1], "juleon8|showmeyourtd23": [2, 0], "showmeyourtd23|juleon8": [0, 2], "juleon8|MayockJr": [1, 1], "MayockJr|juleon8": [1, 1], "MayockJr|elysianbeer": [1, 0], "elysianbeer|MayockJr": [0, 1], "dahlilama|giJ03": [1, 0], "giJ03|dahlilama": [0, 1], "MayockJr|kevinnguu": [1, 0], "kevinnguu|MayockJr": [0, 1], "rbanuelos3|giJ03": [1, 0], "giJ03|rbanuelos3": [0, 1], "Bjspjs4|kevinnguu": [1, 0], "kevinnguu|Bjspjs4": [0, 1]}, "cur": ["Birdgangflyeagles", "Bjspjs4", "dahlilama", "rbanuelos3", "elysianbeer", "juleon8", "MayockJr", "Goldminers1", "showmeyourtd23", "kevinnguu", "Sleon1000", "giJ03"], "n_games": 279};
+const FUTURES = [{"m": "dahlilama", "odds": "+350", "case": "2023 champ, 2025 runner-up and Points King, 4-1 all-time in the playoffs. Off to a 3-1 start at 125.5 a week.", "rec": "3-1", "line": 16.5}, {"m": "rbanuelos3", "odds": "+450", "case": "Owns the season points record (1,858) and the two highest scores ever. Two playoff trips, no ring, and 8 straight head-to-head wins.", "rec": "3-1", "line": 16.5}, {"m": "Birdgangflyeagles", "odds": "+500", "case": "Leads the league in points at 4-0 without making a single move. Has been a 1 seed and a last-place team. No middle gear.", "rec": "4-0", "line": 17.5}, {"m": "juleon8", "odds": "+900", "case": "Riding a league-record 10-game head-to-head win streak. Went from 1-5 to the 3 seed last year.", "rec": "2-2", "line": 15.5}, {"m": "Sleon1000", "odds": "+950", "case": "Best all-time record (26-16) and two straight #1 seeds, but 0-2 in the playoffs and 1-3 this year.", "rec": "1-3", "line": 13.5}, {"m": "Bjspjs4", "odds": "+1,700", "case": "4-0 with three trades already, drafting from slot 8, the slot that's won all three titles. The 17-25 career mark is why the number's this long.", "rec": "4-0", "line": 16.5}, {"m": "MayockJr", "odds": "+1,900", "case": "The league's busiest manager. 61 moves last year turned a 7-7 team into a third-place finish.", "rec": "2-2", "line": 14.5}, {"m": "elysianbeer", "odds": "+2,100", "case": "Dropped 144.08 in Week 2. Still paying off last October's trade.", "rec": "2-2", "line": 13.5}, {"m": "kevinnguu", "odds": "+2,400", "case": "Rookie. 122.86 in his debut. Nobody has film on him.", "rec": "1-3", "line": 12.5}, {"m": "showmeyourtd23", "odds": "+4,000", "case": "Reached the first title game without making a trade. Hasn't made the playoffs since.", "rec": "1-3", "line": 11.5}, {"m": "Goldminers1", "odds": "+6,500", "case": "Four seasons, no playoff trips yet, and a league-record 10 weekly low scores.", "rec": "1-3", "line": 10.5}, {"m": "giJ03", "odds": "+10,000", "case": "Rookie, 0-4, averaging 73 points a week. The field.", "rec": "0-4", "line": 10.5}];
+const DRAFTS = {"slots": {"2023": ["showmeyourtd23", "Goldminers1", "rbanuelos3", "Sleon1000", "Bjspjs4", "deetee333", "luieloo", "dahlilama", "Criscutfries", "MayockJr", "sugarmaverick", "Birdgangflyeagles"], "2024": ["deetee333", "showmeyourtd23", "jayy2690", "Sleon1000", "lxfiggy", "dahlilama", "Birdgangflyeagles", "sugarmaverick", "MayockJr", "Bjspjs4", "rbanuelos3", "Goldminers1"], "2025": ["Sleon1000", "showmeyourtd23", "juleon8", "Bjspjs4", "Birdgangflyeagles", "lxfiggy", "dahlilama", "deetee333", "Goldminers1", "elysianbeer", "MayockJr", "rbanuelos3"], "2026": ["rbanuelos3", "giJ03", "MayockJr", "Goldminers1", "dahlilama", "showmeyourtd23", "kevinnguu", "Bjspjs4", "juleon8", "Sleon1000", "elysianbeer", "Birdgangflyeagles"]}, "boards": {"2023": [{"n": 1, "r": 1, "slot": 1, "mgr": "showmeyourtd23", "p": "Christian McCaffrey", "pos": "RB"}, {"n": 2, "r": 1, "slot": 2, "mgr": "Goldminers1", "p": "Austin Ekeler", "pos": "RB"}, {"n": 3, "r": 1, "slot": 3, "mgr": "rbanuelos3", "p": "Justin Jefferson", "pos": "WR"}, {"n": 4, "r": 1, "slot": 4, "mgr": "Sleon1000", "p": "Ja'Marr Chase", "pos": "WR"}, {"n": 5, "r": 1, "slot": 5, "mgr": "Bjspjs4", "p": "Tyreek Hill", "pos": "WR"}, {"n": 6, "r": 1, "slot": 6, "mgr": "deetee333", "p": "Derrick Henry", "pos": "RB"}, {"n": 7, "r": 1, "slot": 7, "mgr": "luieloo", "p": "Travis Kelce", "pos": "TE"}, {"n": 8, "r": 1, "slot": 8, "mgr": "dahlilama", "p": "Cooper Kupp", "pos": "WR"}, {"n": 9, "r": 1, "slot": 9, "mgr": "Criscutfries", "p": "Joe Mixon", "pos": "RB"}, {"n": 10, "r": 1, "slot": 10, "mgr": "MayockJr", "p": "Saquon Barkley", "pos": "RB"}, {"n": 11, "r": 1, "slot": 11, "mgr": "sugarmaverick", "p": "Bijan Robinson", "pos": "RB"}, {"n": 12, "r": 1, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Stefon Diggs", "pos": "WR"}, {"n": 13, "r": 2, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Davante Adams", "pos": "WR"}, {"n": 14, "r": 2, "slot": 11, "mgr": "sugarmaverick", "p": "Garrett Wilson", "pos": "WR"}, {"n": 15, "r": 2, "slot": 10, "mgr": "MayockJr", "p": "Nick Chubb", "pos": "RB"}, {"n": 16, "r": 2, "slot": 9, "mgr": "Criscutfries", "p": "A.J. Brown", "pos": "WR"}, {"n": 17, "r": 2, "slot": 8, "mgr": "dahlilama", "p": "CeeDee Lamb", "pos": "WR"}, {"n": 18, "r": 2, "slot": 7, "mgr": "luieloo", "p": "Tony Pollard", "pos": "RB"}, {"n": 19, "r": 2, "slot": 6, "mgr": "deetee333", "p": "Amon-Ra St. Brown", "pos": "WR"}, {"n": 20, "r": 2, "slot": 5, "mgr": "Bjspjs4", "p": "Josh Jacobs", "pos": "RB"}, {"n": 21, "r": 2, "slot": 4, "mgr": "Sleon1000", "p": "Jonathan Taylor", "pos": "RB"}, {"n": 22, "r": 2, "slot": 3, "mgr": "rbanuelos3", "p": "Jaylen Waddle", "pos": "WR"}, {"n": 23, "r": 2, "slot": 2, "mgr": "Goldminers1", "p": "Darren Waller", "pos": "TE"}, {"n": 24, "r": 2, "slot": 1, "mgr": "showmeyourtd23", "p": "DK Metcalf", "pos": "WR"}, {"n": 25, "r": 3, "slot": 1, "mgr": "showmeyourtd23", "p": "Patrick Mahomes", "pos": "QB"}, {"n": 26, "r": 3, "slot": 2, "mgr": "Goldminers1", "p": "Deebo Samuel", "pos": "WR"}, {"n": 27, "r": 3, "slot": 3, "mgr": "rbanuelos3", "p": "Jahmyr Gibbs", "pos": "RB"}, {"n": 28, "r": 3, "slot": 4, "mgr": "Sleon1000", "p": "Josh Allen", "pos": "QB"}, {"n": 29, "r": 3, "slot": 5, "mgr": "Bjspjs4", "p": "Chris Olave", "pos": "WR"}, {"n": 30, "r": 3, "slot": 6, "mgr": "deetee333", "p": "Travis Etienne", "pos": "RB"}, {"n": 31, "r": 3, "slot": 7, "mgr": "luieloo", "p": "Keenan Allen", "pos": "WR"}, {"n": 32, "r": 3, "slot": 8, "mgr": "dahlilama", "p": "Rhamondre Stevenson", "pos": "RB"}, {"n": 33, "r": 3, "slot": 9, "mgr": "Criscutfries", "p": "Joe Burrow", "pos": "QB"}, {"n": 34, "r": 3, "slot": 10, "mgr": "MayockJr", "p": "Jalen Hurts", "pos": "QB"}, {"n": 35, "r": 3, "slot": 11, "mgr": "sugarmaverick", "p": "DeVonta Smith", "pos": "WR"}, {"n": 36, "r": 3, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Najee Harris", "pos": "RB"}, {"n": 37, "r": 4, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Lamar Jackson", "pos": "QB"}, {"n": 38, "r": 4, "slot": 11, "mgr": "sugarmaverick", "p": "Dameon Pierce", "pos": "RB"}, {"n": 39, "r": 4, "slot": 10, "mgr": "MayockJr", "p": "Tee Higgins", "pos": "WR"}, {"n": 40, "r": 4, "slot": 9, "mgr": "Criscutfries", "p": "Amari Cooper", "pos": "WR"}, {"n": 41, "r": 4, "slot": 8, "mgr": "dahlilama", "p": "Calvin Ridley", "pos": "WR"}, {"n": 42, "r": 4, "slot": 7, "mgr": "luieloo", "p": "DeAndre Hopkins", "pos": "WR"}, {"n": 43, "r": 4, "slot": 6, "mgr": "deetee333", "p": "Mark Andrews", "pos": "TE"}, {"n": 44, "r": 4, "slot": 5, "mgr": "Bjspjs4", "p": "Kenneth Walker", "pos": "RB"}, {"n": 45, "r": 4, "slot": 4, "mgr": "Sleon1000", "p": "Aaron Jones", "pos": "RB"}, {"n": 46, "r": 4, "slot": 3, "mgr": "rbanuelos3", "p": "Breece Hall", "pos": "RB"}, {"n": 47, "r": 4, "slot": 2, "mgr": "Goldminers1", "p": "James Conner", "pos": "RB"}, {"n": 48, "r": 4, "slot": 1, "mgr": "showmeyourtd23", "p": "T.J. Hockenson", "pos": "TE"}, {"n": 49, "r": 5, "slot": 1, "mgr": "showmeyourtd23", "p": "Rachaad White", "pos": "RB"}, {"n": 50, "r": 5, "slot": 2, "mgr": "Goldminers1", "p": "Chris Godwin", "pos": "WR"}, {"n": 51, "r": 5, "slot": 3, "mgr": "rbanuelos3", "p": "Alexander Mattison", "pos": "RB"}, {"n": 52, "r": 5, "slot": 4, "mgr": "Sleon1000", "p": "Diontae Johnson", "pos": "WR"}, {"n": 53, "r": 5, "slot": 5, "mgr": "Bjspjs4", "p": "Justin Fields", "pos": "QB"}, {"n": 54, "r": 5, "slot": 6, "mgr": "deetee333", "p": "George Pickens", "pos": "WR"}, {"n": 55, "r": 5, "slot": 7, "mgr": "luieloo", "p": "Miles Sanders", "pos": "RB"}, {"n": 56, "r": 5, "slot": 8, "mgr": "dahlilama", "p": "J.K. Dobbins", "pos": "RB"}, {"n": 57, "r": 5, "slot": 9, "mgr": "Criscutfries", "p": "Mike Williams", "pos": "WR"}, {"n": 58, "r": 5, "slot": 10, "mgr": "MayockJr", "p": "DJ Moore", "pos": "WR"}, {"n": 59, "r": 5, "slot": 11, "mgr": "sugarmaverick", "p": "David Montgomery", "pos": "RB"}, {"n": 60, "r": 5, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Alvin Kamara", "pos": "RB"}, {"n": 61, "r": 6, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Kyle Pitts", "pos": "TE"}, {"n": 62, "r": 6, "slot": 11, "mgr": "sugarmaverick", "p": "Justin Herbert", "pos": "QB"}, {"n": 63, "r": 6, "slot": 10, "mgr": "MayockJr", "p": "Dallas Goedert", "pos": "TE"}, {"n": 64, "r": 6, "slot": 9, "mgr": "Criscutfries", "p": "Dalvin Cook", "pos": "RB"}, {"n": 65, "r": 6, "slot": 8, "mgr": "dahlilama", "p": "Cam Akers", "pos": "RB"}, {"n": 66, "r": 6, "slot": 7, "mgr": "luieloo", "p": "Terry McLaurin", "pos": "WR"}, {"n": 67, "r": 6, "slot": 6, "mgr": "deetee333", "p": "Mike Evans", "pos": "WR"}, {"n": 68, "r": 6, "slot": 5, "mgr": "Bjspjs4", "p": "Evan Engram", "pos": "TE"}, {"n": 69, "r": 6, "slot": 4, "mgr": "Sleon1000", "p": "George Kittle", "pos": "TE"}, {"n": 70, "r": 6, "slot": 3, "mgr": "rbanuelos3", "p": "D'Andre Swift", "pos": "RB"}, {"n": 71, "r": 6, "slot": 2, "mgr": "Goldminers1", "p": "Tyler Higbee", "pos": "TE"}, {"n": 72, "r": 6, "slot": 1, "mgr": "showmeyourtd23", "p": "Jerry Jeudy", "pos": "WR"}, {"n": 73, "r": 7, "slot": 1, "mgr": "showmeyourtd23", "p": "Marquise Brown", "pos": "WR"}, {"n": 74, "r": 7, "slot": 2, "mgr": "Goldminers1", "p": "49ers", "pos": "DEF"}, {"n": 75, "r": 7, "slot": 3, "mgr": "rbanuelos3", "p": "Christian Watson", "pos": "WR"}, {"n": 76, "r": 7, "slot": 4, "mgr": "Sleon1000", "p": "James Cook", "pos": "RB"}, {"n": 77, "r": 7, "slot": 5, "mgr": "Bjspjs4", "p": "Jordan Addison", "pos": "WR"}, {"n": 78, "r": 7, "slot": 6, "mgr": "deetee333", "p": "Isiah Pacheco", "pos": "RB"}, {"n": 79, "r": 7, "slot": 7, "mgr": "luieloo", "p": "Javonte Williams", "pos": "RB"}, {"n": 80, "r": 7, "slot": 8, "mgr": "dahlilama", "p": "Khalil Herbert", "pos": "RB"}, {"n": 81, "r": 7, "slot": 9, "mgr": "Criscutfries", "p": "Antonio Gibson", "pos": "RB"}, {"n": 82, "r": 7, "slot": 10, "mgr": "MayockJr", "p": "Brandon Aiyuk", "pos": "WR"}, {"n": 83, "r": 7, "slot": 11, "mgr": "sugarmaverick", "p": "Drake London", "pos": "WR"}, {"n": 84, "r": 7, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Skyy Moore", "pos": "WR"}, {"n": 85, "r": 8, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Jahan Dotson", "pos": "WR"}, {"n": 86, "r": 8, "slot": 11, "mgr": "sugarmaverick", "p": "David Njoku", "pos": "TE"}, {"n": 87, "r": 8, "slot": 10, "mgr": "MayockJr", "p": "Zach Charbonnet", "pos": "RB"}, {"n": 88, "r": 8, "slot": 9, "mgr": "Criscutfries", "p": "Pat Freiermuth", "pos": "TE"}, {"n": 89, "r": 8, "slot": 8, "mgr": "dahlilama", "p": "Trevor Lawrence", "pos": "QB"}, {"n": 90, "r": 8, "slot": 7, "mgr": "luieloo", "p": "Michael Thomas", "pos": "WR"}, {"n": 91, "r": 8, "slot": 6, "mgr": "deetee333", "p": "Michael Pittman", "pos": "WR"}, {"n": 92, "r": 8, "slot": 5, "mgr": "Bjspjs4", "p": "Christian Kirk", "pos": "WR"}, {"n": 93, "r": 8, "slot": 4, "mgr": "Sleon1000", "p": "Tyler Lockett", "pos": "WR"}, {"n": 94, "r": 8, "slot": 3, "mgr": "rbanuelos3", "p": "Deshaun Watson", "pos": "QB"}, {"n": 95, "r": 8, "slot": 2, "mgr": "Goldminers1", "p": "Brandin Cooks", "pos": "WR"}, {"n": 96, "r": 8, "slot": 1, "mgr": "showmeyourtd23", "p": "Brian Robinson", "pos": "RB"}, {"n": 97, "r": 9, "slot": 1, "mgr": "showmeyourtd23", "p": "JuJu Smith-Schuster", "pos": "WR"}, {"n": 98, "r": 9, "slot": 2, "mgr": "Goldminers1", "p": "Dalton Schultz", "pos": "TE"}, {"n": 99, "r": 9, "slot": 3, "mgr": "rbanuelos3", "p": "Treylon Burks", "pos": "WR"}, {"n": 100, "r": 9, "slot": 4, "mgr": "Sleon1000", "p": "Courtland Sutton", "pos": "WR"}, {"n": 101, "r": 9, "slot": 5, "mgr": "Bjspjs4", "p": "Odell Beckham", "pos": "WR"}, {"n": 102, "r": 9, "slot": 6, "mgr": "deetee333", "p": "Quentin Johnston", "pos": "WR"}, {"n": 103, "r": 9, "slot": 7, "mgr": "luieloo", "p": "AJ Dillon", "pos": "RB"}, {"n": 104, "r": 9, "slot": 8, "mgr": "dahlilama", "p": "Jaxon Smith-Njigba", "pos": "WR"}, {"n": 105, "r": 9, "slot": 9, "mgr": "Criscutfries", "p": "Dak Prescott", "pos": "QB"}, {"n": 106, "r": 9, "slot": 10, "mgr": "MayockJr", "p": "Gabe Davis", "pos": "WR"}, {"n": 107, "r": 9, "slot": 11, "mgr": "sugarmaverick", "p": "Zay Flowers", "pos": "WR"}, {"n": 108, "r": 9, "slot": 12, "mgr": "Birdgangflyeagles", "p": "DJ Chark", "pos": "WR"}, {"n": 109, "r": 10, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Jaylen Warren", "pos": "RB"}, {"n": 110, "r": 10, "slot": 11, "mgr": "sugarmaverick", "p": "Jerick McKinnon", "pos": "RB"}, {"n": 111, "r": 10, "slot": 10, "mgr": "MayockJr", "p": "Samaje Perine", "pos": "RB"}, {"n": 112, "r": 10, "slot": 9, "mgr": "Criscutfries", "p": "Justin Tucker", "pos": "K"}, {"n": 113, "r": 10, "slot": 8, "mgr": "dahlilama", "p": "Raheem Mostert", "pos": "RB"}, {"n": 114, "r": 10, "slot": 7, "mgr": "luieloo", "p": "Elijah Mitchell", "pos": "RB"}, {"n": 115, "r": 10, "slot": 6, "mgr": "deetee333", "p": "Daniel Jones", "pos": "QB"}, {"n": 116, "r": 10, "slot": 5, "mgr": "Bjspjs4", "p": "Tank Bigsby", "pos": "RB"}, {"n": 117, "r": 10, "slot": 4, "mgr": "Sleon1000", "p": "Kirk Cousins", "pos": "QB"}, {"n": 118, "r": 10, "slot": 3, "mgr": "rbanuelos3", "p": "Daniel Carlson", "pos": "K"}, {"n": 119, "r": 10, "slot": 2, "mgr": "Goldminers1", "p": "Jamaal Williams", "pos": "RB"}, {"n": 120, "r": 10, "slot": 1, "mgr": "showmeyourtd23", "p": "Hunter Renfrow", "pos": "WR"}, {"n": 121, "r": 11, "slot": 1, "mgr": "showmeyourtd23", "p": "Eagles", "pos": "DEF"}, {"n": 122, "r": 11, "slot": 2, "mgr": "Goldminers1", "p": "Tua Tagovailoa", "pos": "QB"}, {"n": 123, "r": 11, "slot": 3, "mgr": "rbanuelos3", "p": "Steelers", "pos": "DEF"}, {"n": 124, "r": 11, "slot": 4, "mgr": "Sleon1000", "p": "Bills", "pos": "DEF"}, {"n": 125, "r": 11, "slot": 5, "mgr": "Bjspjs4", "p": "Cowboys", "pos": "DEF"}, {"n": 126, "r": 11, "slot": 6, "mgr": "deetee333", "p": "Tyjae Spears", "pos": "RB"}, {"n": 127, "r": 11, "slot": 7, "mgr": "luieloo", "p": "Aaron Rodgers", "pos": "QB"}, {"n": 128, "r": 11, "slot": 8, "mgr": "dahlilama", "p": "Harrison Butker", "pos": "K"}, {"n": 129, "r": 11, "slot": 9, "mgr": "Criscutfries", "p": "Saints", "pos": "DEF"}, {"n": 130, "r": 11, "slot": 10, "mgr": "MayockJr", "p": "Elijah Moore", "pos": "WR"}, {"n": 131, "r": 11, "slot": 11, "mgr": "sugarmaverick", "p": "Jets", "pos": "DEF"}, {"n": 132, "r": 11, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Anthony Richardson", "pos": "QB"}, {"n": 133, "r": 12, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Tyler Allgeier", "pos": "RB"}, {"n": 134, "r": 12, "slot": 11, "mgr": "sugarmaverick", "p": "Younghoe Koo", "pos": "K"}, {"n": 135, "r": 12, "slot": 10, "mgr": "MayockJr", "p": "Evan McPherson", "pos": "K"}, {"n": 136, "r": 12, "slot": 9, "mgr": "Criscutfries", "p": "Ezekiel Elliott", "pos": "RB"}, {"n": 137, "r": 12, "slot": 8, "mgr": "dahlilama", "p": "Greg Dulcich", "pos": "TE"}, {"n": 138, "r": 12, "slot": 7, "mgr": "luieloo", "p": "Patriots", "pos": "DEF"}, {"n": 139, "r": 12, "slot": 6, "mgr": "deetee333", "p": "Adam Thielen", "pos": "WR"}, {"n": 140, "r": 12, "slot": 5, "mgr": "Bjspjs4", "p": "Kadarius Toney", "pos": "WR"}, {"n": 141, "r": 12, "slot": 4, "mgr": "Sleon1000", "p": "Tyler Bass", "pos": "K"}, {"n": 142, "r": 12, "slot": 3, "mgr": "rbanuelos3", "p": "Cole Kmet", "pos": "TE"}, {"n": 143, "r": 12, "slot": 2, "mgr": "Goldminers1", "p": "Jake Moody", "pos": "K"}, {"n": 144, "r": 12, "slot": 1, "mgr": "showmeyourtd23", "p": "Jason Myers", "pos": "K"}, {"n": 145, "r": 13, "slot": 1, "mgr": "showmeyourtd23", "p": "Kenneth Gainwell", "pos": "RB"}, {"n": 146, "r": 13, "slot": 2, "mgr": "Goldminers1", "p": "Jeff Wilson", "pos": "RB"}, {"n": 147, "r": 13, "slot": 3, "mgr": "rbanuelos3", "p": "Geno Smith", "pos": "QB"}, {"n": 148, "r": 13, "slot": 4, "mgr": "Sleon1000", "p": "De'Von Achane", "pos": "RB"}, {"n": 149, "r": 13, "slot": 5, "mgr": "Bjspjs4", "p": "Matt Gay", "pos": "K"}, {"n": 150, "r": 13, "slot": 6, "mgr": "deetee333", "p": "Dolphins", "pos": "DEF"}, {"n": 151, "r": 13, "slot": 7, "mgr": "luieloo", "p": "Jake Elliott", "pos": "K"}, {"n": 152, "r": 13, "slot": 8, "mgr": "dahlilama", "p": "Romeo Doubs", "pos": "WR"}, {"n": 153, "r": 13, "slot": 9, "mgr": "Criscutfries", "p": "Juwan Johnson", "pos": "TE"}, {"n": 154, "r": 13, "slot": 10, "mgr": "MayockJr", "p": "D'Onta Foreman", "pos": "RB"}, {"n": 155, "r": 13, "slot": 11, "mgr": "sugarmaverick", "p": "Gus Edwards", "pos": "RB"}, {"n": 156, "r": 13, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Brandon McManus", "pos": "K"}, {"n": 157, "r": 14, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Ravens", "pos": "DEF"}, {"n": 158, "r": 14, "slot": 11, "mgr": "sugarmaverick", "p": "Tyler Boyd", "pos": "WR"}, {"n": 159, "r": 14, "slot": 10, "mgr": "MayockJr", "p": "Marvin Mims", "pos": "WR"}, {"n": 160, "r": 14, "slot": 9, "mgr": "Criscutfries", "p": "Darnell Mooney", "pos": "WR"}, {"n": 161, "r": 14, "slot": 8, "mgr": "dahlilama", "p": "Tank Dell", "pos": "WR"}, {"n": 162, "r": 14, "slot": 7, "mgr": "luieloo", "p": "Dalton Kincaid", "pos": "TE"}, {"n": 163, "r": 14, "slot": 6, "mgr": "deetee333", "p": "Jalin Hyatt", "pos": "WR"}, {"n": 164, "r": 14, "slot": 5, "mgr": "Bjspjs4", "p": "Chigoziem Okonkwo", "pos": "TE"}, {"n": 165, "r": 14, "slot": 4, "mgr": "Sleon1000", "p": "Matthew Stafford", "pos": "QB"}, {"n": 166, "r": 14, "slot": 3, "mgr": "rbanuelos3", "p": "Zach Ertz", "pos": "TE"}, {"n": 167, "r": 14, "slot": 2, "mgr": "Goldminers1", "p": "Brock Purdy", "pos": "QB"}, {"n": 168, "r": 14, "slot": 1, "mgr": "showmeyourtd23", "p": "Jared Goff", "pos": "QB"}], "2024": [{"n": 1, "r": 1, "slot": 1, "mgr": "deetee333", "p": "Tyreek Hill", "pos": "WR"}, {"n": 2, "r": 1, "slot": 2, "mgr": "showmeyourtd23", "p": "Christian McCaffrey", "pos": "RB"}, {"n": 3, "r": 1, "slot": 3, "mgr": "jayy2690", "p": "Justin Jefferson", "pos": "WR"}, {"n": 4, "r": 1, "slot": 4, "mgr": "Sleon1000", "p": "Breece Hall", "pos": "RB"}, {"n": 5, "r": 1, "slot": 5, "mgr": "lxfiggy", "p": "Bijan Robinson", "pos": "RB"}, {"n": 6, "r": 1, "slot": 6, "mgr": "dahlilama", "p": "CeeDee Lamb", "pos": "WR"}, {"n": 7, "r": 1, "slot": 7, "mgr": "Birdgangflyeagles", "p": "A.J. Brown", "pos": "WR"}, {"n": 8, "r": 1, "slot": 8, "mgr": "sugarmaverick", "p": "Ja'Marr Chase", "pos": "WR"}, {"n": 9, "r": 1, "slot": 9, "mgr": "MayockJr", "p": "Amon-Ra St. Brown", "pos": "WR"}, {"n": 10, "r": 1, "slot": 10, "mgr": "Bjspjs4", "p": "Jonathan Taylor", "pos": "RB"}, {"n": 11, "r": 1, "slot": 11, "mgr": "rbanuelos3", "p": "Saquon Barkley", "pos": "RB"}, {"n": 12, "r": 1, "slot": 12, "mgr": "Goldminers1", "p": "Travis Etienne", "pos": "RB"}, {"n": 13, "r": 2, "slot": 12, "mgr": "Goldminers1", "p": "Travis Kelce", "pos": "TE"}, {"n": 14, "r": 2, "slot": 11, "mgr": "rbanuelos3", "p": "Garrett Wilson", "pos": "WR"}, {"n": 15, "r": 2, "slot": 10, "mgr": "Bjspjs4", "p": "Kyren Williams", "pos": "RB"}, {"n": 16, "r": 2, "slot": 9, "mgr": "MayockJr", "p": "Jahmyr Gibbs", "pos": "RB"}, {"n": 17, "r": 2, "slot": 8, "mgr": "sugarmaverick", "p": "Marvin Harrison", "pos": "WR"}, {"n": 18, "r": 2, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Derrick Henry", "pos": "RB"}, {"n": 19, "r": 2, "slot": 6, "mgr": "dahlilama", "p": "Isiah Pacheco", "pos": "RB"}, {"n": 20, "r": 2, "slot": 5, "mgr": "lxfiggy", "p": "Davante Adams", "pos": "WR"}, {"n": 21, "r": 2, "slot": 4, "mgr": "Sleon1000", "p": "Puka Nacua", "pos": "WR"}, {"n": 22, "r": 2, "slot": 3, "mgr": "jayy2690", "p": "Drake London", "pos": "WR"}, {"n": 23, "r": 2, "slot": 2, "mgr": "showmeyourtd23", "p": "Deebo Samuel", "pos": "WR"}, {"n": 24, "r": 2, "slot": 1, "mgr": "deetee333", "p": "Josh Jacobs", "pos": "RB"}, {"n": 25, "r": 3, "slot": 1, "mgr": "deetee333", "p": "De'Von Achane", "pos": "RB"}, {"n": 26, "r": 3, "slot": 2, "mgr": "showmeyourtd23", "p": "Chris Olave", "pos": "WR"}, {"n": 27, "r": 3, "slot": 3, "mgr": "jayy2690", "p": "James Cook", "pos": "RB"}, {"n": 28, "r": 3, "slot": 4, "mgr": "Sleon1000", "p": "Nico Collins", "pos": "WR"}, {"n": 29, "r": 3, "slot": 5, "mgr": "lxfiggy", "p": "Joe Mixon", "pos": "RB"}, {"n": 30, "r": 3, "slot": 6, "mgr": "dahlilama", "p": "Mike Evans", "pos": "WR"}, {"n": 31, "r": 3, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Rachaad White", "pos": "RB"}, {"n": 32, "r": 3, "slot": 8, "mgr": "sugarmaverick", "p": "Sam LaPorta", "pos": "TE"}, {"n": 33, "r": 3, "slot": 9, "mgr": "MayockJr", "p": "Kenneth Walker", "pos": "RB"}, {"n": 34, "r": 3, "slot": 10, "mgr": "Bjspjs4", "p": "DJ Moore", "pos": "WR"}, {"n": 35, "r": 3, "slot": 11, "mgr": "rbanuelos3", "p": "Cooper Kupp", "pos": "WR"}, {"n": 36, "r": 3, "slot": 12, "mgr": "Goldminers1", "p": "Brandon Aiyuk", "pos": "WR"}, {"n": 37, "r": 4, "slot": 12, "mgr": "Goldminers1", "p": "James Conner", "pos": "RB"}, {"n": 38, "r": 4, "slot": 11, "mgr": "rbanuelos3", "p": "Alvin Kamara", "pos": "RB"}, {"n": 39, "r": 4, "slot": 10, "mgr": "Bjspjs4", "p": "Jaylen Waddle", "pos": "WR"}, {"n": 40, "r": 4, "slot": 9, "mgr": "MayockJr", "p": "DeVonta Smith", "pos": "WR"}, {"n": 41, "r": 4, "slot": 8, "mgr": "sugarmaverick", "p": "D'Andre Swift", "pos": "RB"}, {"n": 42, "r": 4, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Jalen Hurts", "pos": "QB"}, {"n": 43, "r": 4, "slot": 6, "mgr": "dahlilama", "p": "Trey McBride", "pos": "TE"}, {"n": 44, "r": 4, "slot": 5, "mgr": "lxfiggy", "p": "Stefon Diggs", "pos": "WR"}, {"n": 45, "r": 4, "slot": 4, "mgr": "Sleon1000", "p": "Josh Allen", "pos": "QB"}, {"n": 46, "r": 4, "slot": 3, "mgr": "jayy2690", "p": "Patrick Mahomes", "pos": "QB"}, {"n": 47, "r": 4, "slot": 2, "mgr": "showmeyourtd23", "p": "Lamar Jackson", "pos": "QB"}, {"n": 48, "r": 4, "slot": 1, "mgr": "deetee333", "p": "DK Metcalf", "pos": "WR"}, {"n": 49, "r": 5, "slot": 1, "mgr": "deetee333", "p": "Zamir White", "pos": "RB"}, {"n": 50, "r": 5, "slot": 2, "mgr": "showmeyourtd23", "p": "Zay Flowers", "pos": "WR"}, {"n": 51, "r": 5, "slot": 3, "mgr": "jayy2690", "p": "George Kittle", "pos": "TE"}, {"n": 52, "r": 5, "slot": 4, "mgr": "Sleon1000", "p": "Malik Nabers", "pos": "WR"}, {"n": 53, "r": 5, "slot": 5, "mgr": "lxfiggy", "p": "Amari Cooper", "pos": "WR"}, {"n": 54, "r": 5, "slot": 6, "mgr": "dahlilama", "p": "Tank Dell", "pos": "WR"}, {"n": 55, "r": 5, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Dalton Kincaid", "pos": "TE"}, {"n": 56, "r": 5, "slot": 8, "mgr": "sugarmaverick", "p": "Anthony Richardson", "pos": "QB"}, {"n": 57, "r": 5, "slot": 9, "mgr": "MayockJr", "p": "Mark Andrews", "pos": "TE"}, {"n": 58, "r": 5, "slot": 10, "mgr": "Bjspjs4", "p": "Brock Bowers", "pos": "TE"}, {"n": 59, "r": 5, "slot": 11, "mgr": "rbanuelos3", "p": "Michael Pittman", "pos": "WR"}, {"n": 60, "r": 5, "slot": 12, "mgr": "Goldminers1", "p": "C.J. Stroud", "pos": "QB"}, {"n": 61, "r": 6, "slot": 12, "mgr": "Goldminers1", "p": "Aaron Jones", "pos": "RB"}, {"n": 62, "r": 6, "slot": 11, "mgr": "rbanuelos3", "p": "Joe Burrow", "pos": "QB"}, {"n": 63, "r": 6, "slot": 10, "mgr": "Bjspjs4", "p": "Terry McLaurin", "pos": "WR"}, {"n": 64, "r": 6, "slot": 9, "mgr": "MayockJr", "p": "Rashee Rice", "pos": "WR"}, {"n": 65, "r": 6, "slot": 8, "mgr": "sugarmaverick", "p": "Kyle Pitts", "pos": "TE"}, {"n": 66, "r": 6, "slot": 7, "mgr": "Birdgangflyeagles", "p": "George Pickens", "pos": "WR"}, {"n": 67, "r": 6, "slot": 6, "mgr": "dahlilama", "p": "Raheem Mostert", "pos": "RB"}, {"n": 68, "r": 6, "slot": 5, "mgr": "lxfiggy", "p": "Evan Engram", "pos": "TE"}, {"n": 69, "r": 6, "slot": 4, "mgr": "Sleon1000", "p": "Jake Ferguson", "pos": "TE"}, {"n": 70, "r": 6, "slot": 3, "mgr": "jayy2690", "p": "Tee Higgins", "pos": "WR"}, {"n": 71, "r": 6, "slot": 2, "mgr": "showmeyourtd23", "p": "David Njoku", "pos": "TE"}, {"n": 72, "r": 6, "slot": 1, "mgr": "deetee333", "p": "Rhamondre Stevenson", "pos": "RB"}, {"n": 73, "r": 7, "slot": 1, "mgr": "deetee333", "p": "Jayden Reed", "pos": "WR"}, {"n": 74, "r": 7, "slot": 2, "mgr": "showmeyourtd23", "p": "David Montgomery", "pos": "RB"}, {"n": 75, "r": 7, "slot": 3, "mgr": "jayy2690", "p": "Zack Moss", "pos": "RB"}, {"n": 76, "r": 7, "slot": 4, "mgr": "Sleon1000", "p": "Najee Harris", "pos": "RB"}, {"n": 77, "r": 7, "slot": 5, "mgr": "lxfiggy", "p": "Tony Pollard", "pos": "RB"}, {"n": 78, "r": 7, "slot": 6, "mgr": "dahlilama", "p": "Gus Edwards", "pos": "RB"}, {"n": 79, "r": 7, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Rome Odunze", "pos": "WR"}, {"n": 80, "r": 7, "slot": 8, "mgr": "sugarmaverick", "p": "Chris Godwin", "pos": "WR"}, {"n": 81, "r": 7, "slot": 9, "mgr": "MayockJr", "p": "Kyler Murray", "pos": "QB"}, {"n": 82, "r": 7, "slot": 10, "mgr": "Bjspjs4", "p": "Javonte Williams", "pos": "RB"}, {"n": 83, "r": 7, "slot": 11, "mgr": "rbanuelos3", "p": "Jonathon Brooks", "pos": "RB"}, {"n": 84, "r": 7, "slot": 12, "mgr": "Goldminers1", "p": "Christian Kirk", "pos": "WR"}, {"n": 85, "r": 8, "slot": 12, "mgr": "Goldminers1", "p": "Calvin Ridley", "pos": "WR"}, {"n": 86, "r": 8, "slot": 11, "mgr": "rbanuelos3", "p": "Dak Prescott", "pos": "QB"}, {"n": 87, "r": 8, "slot": 10, "mgr": "Bjspjs4", "p": "Caleb Williams", "pos": "QB"}, {"n": 88, "r": 8, "slot": 9, "mgr": "MayockJr", "p": "Keenan Allen", "pos": "WR"}, {"n": 89, "r": 8, "slot": 8, "mgr": "sugarmaverick", "p": "Nick Chubb", "pos": "RB"}, {"n": 90, "r": 8, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Xavier Worthy", "pos": "WR"}, {"n": 91, "r": 8, "slot": 6, "mgr": "dahlilama", "p": "Jordan Love", "pos": "QB"}, {"n": 92, "r": 8, "slot": 5, "mgr": "lxfiggy", "p": "Ladd McConkey", "pos": "WR"}, {"n": 93, "r": 8, "slot": 4, "mgr": "Sleon1000", "p": "Tyjae Spears", "pos": "RB"}, {"n": 94, "r": 8, "slot": 3, "mgr": "jayy2690", "p": "T.J. Hockenson", "pos": "TE"}, {"n": 95, "r": 8, "slot": 2, "mgr": "showmeyourtd23", "p": "Christian Watson", "pos": "WR"}, {"n": 96, "r": 8, "slot": 1, "mgr": "deetee333", "p": "Jayden Daniels", "pos": "QB"}, {"n": 97, "r": 9, "slot": 1, "mgr": "deetee333", "p": "Diontae Johnson", "pos": "WR"}, {"n": 98, "r": 9, "slot": 2, "mgr": "showmeyourtd23", "p": "Keon Coleman", "pos": "WR"}, {"n": 99, "r": 9, "slot": 3, "mgr": "jayy2690", "p": "DeAndre Hopkins", "pos": "WR"}, {"n": 100, "r": 9, "slot": 4, "mgr": "Sleon1000", "p": "Ezekiel Elliott", "pos": "RB"}, {"n": 101, "r": 9, "slot": 5, "mgr": "lxfiggy", "p": "Brock Purdy", "pos": "QB"}, {"n": 102, "r": 9, "slot": 6, "mgr": "dahlilama", "p": "Brian Thomas", "pos": "WR"}, {"n": 103, "r": 9, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Jordan Addison", "pos": "WR"}, {"n": 104, "r": 9, "slot": 8, "mgr": "sugarmaverick", "p": "Brian Robinson", "pos": "RB"}, {"n": 105, "r": 9, "slot": 9, "mgr": "MayockJr", "p": "Devin Singletary", "pos": "RB"}, {"n": 106, "r": 9, "slot": 10, "mgr": "Bjspjs4", "p": "Trey Benson", "pos": "RB"}, {"n": 107, "r": 9, "slot": 11, "mgr": "rbanuelos3", "p": "Brandon Aubrey", "pos": "K"}, {"n": 108, "r": 9, "slot": 12, "mgr": "Goldminers1", "p": "Jerome Ford", "pos": "RB"}, {"n": 109, "r": 10, "slot": 12, "mgr": "Goldminers1", "p": "Jameson Williams", "pos": "WR"}, {"n": 110, "r": 10, "slot": 11, "mgr": "rbanuelos3", "p": "49ers", "pos": "DEF"}, {"n": 111, "r": 10, "slot": 10, "mgr": "Bjspjs4", "p": "Jaxon Smith-Njigba", "pos": "WR"}, {"n": 112, "r": 10, "slot": 9, "mgr": "MayockJr", "p": "Chase Brown", "pos": "RB"}, {"n": 113, "r": 10, "slot": 8, "mgr": "sugarmaverick", "p": "Jets", "pos": "DEF"}, {"n": 114, "r": 10, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Austin Ekeler", "pos": "RB"}, {"n": 115, "r": 10, "slot": 6, "mgr": "dahlilama", "p": "Joshua Palmer", "pos": "WR"}, {"n": 116, "r": 10, "slot": 5, "mgr": "lxfiggy", "p": "Blake Corum", "pos": "RB"}, {"n": 117, "r": 10, "slot": 4, "mgr": "Sleon1000", "p": "Chuba Hubbard", "pos": "RB"}, {"n": 118, "r": 10, "slot": 3, "mgr": "jayy2690", "p": "Ravens", "pos": "DEF"}, {"n": 119, "r": 10, "slot": 2, "mgr": "showmeyourtd23", "p": "Tua Tagovailoa", "pos": "QB"}, {"n": 120, "r": 10, "slot": 1, "mgr": "deetee333", "p": "Curtis Samuel", "pos": "WR"}, {"n": 121, "r": 11, "slot": 1, "mgr": "deetee333", "p": "Courtland Sutton", "pos": "WR"}, {"n": 122, "r": 11, "slot": 2, "mgr": "showmeyourtd23", "p": "Cowboys", "pos": "DEF"}, {"n": 123, "r": 11, "slot": 3, "mgr": "jayy2690", "p": "Jared Goff", "pos": "QB"}, {"n": 124, "r": 11, "slot": 4, "mgr": "Sleon1000", "p": "Chiefs", "pos": "DEF"}, {"n": 125, "r": 11, "slot": 5, "mgr": "lxfiggy", "p": "Jakobi Meyers", "pos": "WR"}, {"n": 126, "r": 11, "slot": 6, "mgr": "dahlilama", "p": "Tyler Lockett", "pos": "WR"}, {"n": 127, "r": 11, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Justin Tucker", "pos": "K"}, {"n": 128, "r": 11, "slot": 8, "mgr": "sugarmaverick", "p": "Harrison Butker", "pos": "K"}, {"n": 129, "r": 11, "slot": 9, "mgr": "MayockJr", "p": "Browns", "pos": "DEF"}, {"n": 130, "r": 11, "slot": 10, "mgr": "Bjspjs4", "p": "Jerry Jeudy", "pos": "WR"}, {"n": 131, "r": 11, "slot": 11, "mgr": "rbanuelos3", "p": "Jaylen Warren", "pos": "RB"}, {"n": 132, "r": 11, "slot": 12, "mgr": "Goldminers1", "p": "Steelers", "pos": "DEF"}, {"n": 133, "r": 12, "slot": 12, "mgr": "Goldminers1", "p": "Jake Moody", "pos": "K"}, {"n": 134, "r": 12, "slot": 11, "mgr": "rbanuelos3", "p": "Hollywood Brown", "pos": "WR"}, {"n": 135, "r": 12, "slot": 10, "mgr": "Bjspjs4", "p": "Zach Charbonnet", "pos": "RB"}, {"n": 136, "r": 12, "slot": 9, "mgr": "MayockJr", "p": "Ja'Lynn Polk", "pos": "WR"}, {"n": 137, "r": 12, "slot": 8, "mgr": "sugarmaverick", "p": "J.K. Dobbins", "pos": "RB"}, {"n": 138, "r": 12, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Tyler Allgeier", "pos": "RB"}, {"n": 139, "r": 12, "slot": 6, "mgr": "dahlilama", "p": "Rico Dowdle", "pos": "RB"}, {"n": 140, "r": 12, "slot": 5, "mgr": "lxfiggy", "p": "Justin Herbert", "pos": "QB"}, {"n": 141, "r": 12, "slot": 4, "mgr": "Sleon1000", "p": "Khalil Shakir", "pos": "WR"}, {"n": 142, "r": 12, "slot": 3, "mgr": "jayy2690", "p": "Ty Chandler", "pos": "RB"}, {"n": 143, "r": 12, "slot": 2, "mgr": "showmeyourtd23", "p": "Mike Williams", "pos": "WR"}, {"n": 144, "r": 12, "slot": 1, "mgr": "deetee333", "p": "Cole Kmet", "pos": "TE"}, {"n": 145, "r": 13, "slot": 1, "mgr": "deetee333", "p": "Adonai Mitchell", "pos": "WR"}, {"n": 146, "r": 13, "slot": 2, "mgr": "showmeyourtd23", "p": "Rashid Shaheed", "pos": "WR"}, {"n": 147, "r": 13, "slot": 3, "mgr": "jayy2690", "p": "Evan McPherson", "pos": "K"}, {"n": 148, "r": 13, "slot": 4, "mgr": "Sleon1000", "p": "Kirk Cousins", "pos": "QB"}, {"n": 149, "r": 13, "slot": 5, "mgr": "lxfiggy", "p": "Daniel Carlson", "pos": "K"}, {"n": 150, "r": 13, "slot": 6, "mgr": "dahlilama", "p": "Ka'imi Fairbairn", "pos": "K"}, {"n": 151, "r": 13, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Elijah Mitchell", "pos": "RB"}, {"n": 152, "r": 13, "slot": 8, "mgr": "sugarmaverick", "p": "Aaron Rodgers", "pos": "QB"}, {"n": 153, "r": 13, "slot": 9, "mgr": "MayockJr", "p": "Romeo Doubs", "pos": "WR"}, {"n": 154, "r": 13, "slot": 10, "mgr": "Bjspjs4", "p": "Cameron Dicker", "pos": "K"}, {"n": 155, "r": 13, "slot": 11, "mgr": "rbanuelos3", "p": "Dallas Goedert", "pos": "TE"}, {"n": 156, "r": 13, "slot": 12, "mgr": "Goldminers1", "p": "Jaylen Wright", "pos": "RB"}, {"n": 157, "r": 14, "slot": 12, "mgr": "Goldminers1", "p": "Ricky Pearsall", "pos": "WR"}, {"n": 158, "r": 14, "slot": 11, "mgr": "rbanuelos3", "p": "Eagles", "pos": "DEF"}, {"n": 159, "r": 14, "slot": 10, "mgr": "Bjspjs4", "p": "Saints", "pos": "DEF"}, {"n": 160, "r": 14, "slot": 9, "mgr": "MayockJr", "p": "Jordan Mason", "pos": "RB"}, {"n": 161, "r": 14, "slot": 8, "mgr": "sugarmaverick", "p": "Jaleel McLaughlin", "pos": "RB"}, {"n": 162, "r": 14, "slot": 7, "mgr": "Birdgangflyeagles", "p": "Vikings", "pos": "DEF"}, {"n": 163, "r": 14, "slot": 6, "mgr": "dahlilama", "p": "Seahawks", "pos": "DEF"}, {"n": 164, "r": 14, "slot": 5, "mgr": "lxfiggy", "p": "Raiders", "pos": "DEF"}, {"n": 165, "r": 14, "slot": 4, "mgr": "Sleon1000", "p": "Braelon Allen", "pos": "RB"}, {"n": 166, "r": 14, "slot": 3, "mgr": "jayy2690", "p": "Dalton Schultz", "pos": "TE"}, {"n": 167, "r": 14, "slot": 2, "mgr": "showmeyourtd23", "p": "Younghoe Koo", "pos": "K"}, {"n": 168, "r": 14, "slot": 1, "mgr": "deetee333", "p": "Trevor Lawrence", "pos": "QB"}], "2025": [{"n": 1, "r": 1, "slot": 1, "mgr": "Sleon1000", "p": "Ja'Marr Chase", "pos": "WR"}, {"n": 2, "r": 1, "slot": 2, "mgr": "showmeyourtd23", "p": "Saquon Barkley", "pos": "RB"}, {"n": 3, "r": 1, "slot": 3, "mgr": "juleon8", "p": "Jahmyr Gibbs", "pos": "RB"}, {"n": 4, "r": 1, "slot": 4, "mgr": "Bjspjs4", "p": "Bijan Robinson", "pos": "RB"}, {"n": 5, "r": 1, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Derrick Henry", "pos": "RB"}, {"n": 6, "r": 1, "slot": 6, "mgr": "lxfiggy", "p": "CeeDee Lamb", "pos": "WR"}, {"n": 7, "r": 1, "slot": 7, "mgr": "dahlilama", "p": "Justin Jefferson", "pos": "WR"}, {"n": 8, "r": 1, "slot": 8, "mgr": "deetee333", "p": "Amon-Ra St. Brown", "pos": "WR"}, {"n": 9, "r": 1, "slot": 9, "mgr": "Goldminers1", "p": "Christian McCaffrey", "pos": "RB"}, {"n": 10, "r": 1, "slot": 10, "mgr": "elysianbeer", "p": "Puka Nacua", "pos": "WR"}, {"n": 11, "r": 1, "slot": 11, "mgr": "MayockJr", "p": "Ashton Jeanty", "pos": "RB"}, {"n": 12, "r": 1, "slot": 12, "mgr": "rbanuelos3", "p": "Nico Collins", "pos": "WR"}, {"n": 13, "r": 2, "slot": 12, "mgr": "rbanuelos3", "p": "Josh Jacobs", "pos": "RB"}, {"n": 14, "r": 2, "slot": 11, "mgr": "MayockJr", "p": "Malik Nabers", "pos": "WR"}, {"n": 15, "r": 2, "slot": 10, "mgr": "elysianbeer", "p": "De'Von Achane", "pos": "RB"}, {"n": 16, "r": 2, "slot": 9, "mgr": "Goldminers1", "p": "Drake London", "pos": "WR"}, {"n": 17, "r": 2, "slot": 8, "mgr": "deetee333", "p": "Kyren Williams", "pos": "RB"}, {"n": 18, "r": 2, "slot": 7, "mgr": "dahlilama", "p": "Jonathan Taylor", "pos": "RB"}, {"n": 19, "r": 2, "slot": 6, "mgr": "lxfiggy", "p": "Bucky Irving", "pos": "RB"}, {"n": 20, "r": 2, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Lamar Jackson", "pos": "QB"}, {"n": 21, "r": 2, "slot": 4, "mgr": "Bjspjs4", "p": "Brian Thomas", "pos": "WR"}, {"n": 22, "r": 2, "slot": 3, "mgr": "juleon8", "p": "Chase Brown", "pos": "RB"}, {"n": 23, "r": 2, "slot": 2, "mgr": "showmeyourtd23", "p": "James Cook", "pos": "RB"}, {"n": 24, "r": 2, "slot": 1, "mgr": "Sleon1000", "p": "Brock Bowers", "pos": "TE"}, {"n": 25, "r": 3, "slot": 1, "mgr": "Sleon1000", "p": "Josh Allen", "pos": "QB"}, {"n": 26, "r": 3, "slot": 2, "mgr": "showmeyourtd23", "p": "A.J. Brown", "pos": "WR"}, {"n": 27, "r": 3, "slot": 3, "mgr": "juleon8", "p": "Trey McBride", "pos": "TE"}, {"n": 28, "r": 3, "slot": 4, "mgr": "Bjspjs4", "p": "Omarion Hampton", "pos": "RB"}, {"n": 29, "r": 3, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Ladd McConkey", "pos": "WR"}, {"n": 30, "r": 3, "slot": 6, "mgr": "lxfiggy", "p": "Kenneth Walker", "pos": "RB"}, {"n": 31, "r": 3, "slot": 7, "mgr": "dahlilama", "p": "Jaxon Smith-Njigba", "pos": "WR"}, {"n": 32, "r": 3, "slot": 8, "mgr": "deetee333", "p": "Breece Hall", "pos": "RB"}, {"n": 33, "r": 3, "slot": 9, "mgr": "Goldminers1", "p": "Alvin Kamara", "pos": "RB"}, {"n": 34, "r": 3, "slot": 10, "mgr": "elysianbeer", "p": "Tee Higgins", "pos": "WR"}, {"n": 35, "r": 3, "slot": 11, "mgr": "MayockJr", "p": "Jalen Hurts", "pos": "QB"}, {"n": 36, "r": 3, "slot": 12, "mgr": "rbanuelos3", "p": "TreVeyon Henderson", "pos": "RB"}, {"n": 37, "r": 4, "slot": 12, "mgr": "rbanuelos3", "p": "Marvin Harrison", "pos": "WR"}, {"n": 38, "r": 4, "slot": 11, "mgr": "MayockJr", "p": "Davante Adams", "pos": "WR"}, {"n": 39, "r": 4, "slot": 10, "mgr": "elysianbeer", "p": "Jayden Daniels", "pos": "QB"}, {"n": 40, "r": 4, "slot": 9, "mgr": "Goldminers1", "p": "George Kittle", "pos": "TE"}, {"n": 41, "r": 4, "slot": 8, "mgr": "deetee333", "p": "Tyreek Hill", "pos": "WR"}, {"n": 42, "r": 4, "slot": 7, "mgr": "dahlilama", "p": "Mike Evans", "pos": "WR"}, {"n": 43, "r": 4, "slot": 6, "mgr": "lxfiggy", "p": "Terry McLaurin", "pos": "WR"}, {"n": 44, "r": 4, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Garrett Wilson", "pos": "WR"}, {"n": 45, "r": 4, "slot": 4, "mgr": "Bjspjs4", "p": "Tetairoa McMillan", "pos": "WR"}, {"n": 46, "r": 4, "slot": 3, "mgr": "juleon8", "p": "James Conner", "pos": "RB"}, {"n": 47, "r": 4, "slot": 2, "mgr": "showmeyourtd23", "p": "Sam LaPorta", "pos": "TE"}, {"n": 48, "r": 4, "slot": 1, "mgr": "Sleon1000", "p": "Chuba Hubbard", "pos": "RB"}, {"n": 49, "r": 5, "slot": 1, "mgr": "Sleon1000", "p": "RJ Harvey", "pos": "RB"}, {"n": 50, "r": 5, "slot": 2, "mgr": "showmeyourtd23", "p": "Joe Burrow", "pos": "QB"}, {"n": 51, "r": 5, "slot": 3, "mgr": "juleon8", "p": "Courtland Sutton", "pos": "WR"}, {"n": 52, "r": 5, "slot": 4, "mgr": "Bjspjs4", "p": "DK Metcalf", "pos": "WR"}, {"n": 53, "r": 5, "slot": 5, "mgr": "Birdgangflyeagles", "p": "D'Andre Swift", "pos": "RB"}, {"n": 54, "r": 5, "slot": 6, "mgr": "lxfiggy", "p": "Isiah Pacheco", "pos": "RB"}, {"n": 55, "r": 5, "slot": 7, "mgr": "dahlilama", "p": "DJ Moore", "pos": "WR"}, {"n": 56, "r": 5, "slot": 8, "mgr": "deetee333", "p": "Tony Pollard", "pos": "RB"}, {"n": 57, "r": 5, "slot": 9, "mgr": "Goldminers1", "p": "Jameson Williams", "pos": "WR"}, {"n": 58, "r": 5, "slot": 10, "mgr": "elysianbeer", "p": "David Montgomery", "pos": "RB"}, {"n": 59, "r": 5, "slot": 11, "mgr": "MayockJr", "p": "George Pickens", "pos": "WR"}, {"n": 60, "r": 5, "slot": 12, "mgr": "rbanuelos3", "p": "Patrick Mahomes", "pos": "QB"}, {"n": 61, "r": 6, "slot": 12, "mgr": "rbanuelos3", "p": "Xavier Worthy", "pos": "WR"}, {"n": 62, "r": 6, "slot": 11, "mgr": "MayockJr", "p": "Kaleb Johnson", "pos": "RB"}, {"n": 63, "r": 6, "slot": 10, "mgr": "elysianbeer", "p": "DeVonta Smith", "pos": "WR"}, {"n": 64, "r": 6, "slot": 9, "mgr": "Goldminers1", "p": "Brock Purdy", "pos": "QB"}, {"n": 65, "r": 6, "slot": 8, "mgr": "deetee333", "p": "Zay Flowers", "pos": "WR"}, {"n": 66, "r": 6, "slot": 7, "mgr": "dahlilama", "p": "Aaron Jones", "pos": "RB"}, {"n": 67, "r": 6, "slot": 6, "mgr": "lxfiggy", "p": "Rashee Rice", "pos": "WR"}, {"n": 68, "r": 6, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Travis Kelce", "pos": "TE"}, {"n": 69, "r": 6, "slot": 4, "mgr": "Bjspjs4", "p": "Calvin Ridley", "pos": "WR"}, {"n": 70, "r": 6, "slot": 3, "mgr": "juleon8", "p": "Travis Hunter", "pos": "WR"}, {"n": 71, "r": 6, "slot": 2, "mgr": "showmeyourtd23", "p": "Jaylen Waddle", "pos": "WR"}, {"n": 72, "r": 6, "slot": 1, "mgr": "Sleon1000", "p": "Tyrone Tracy", "pos": "RB"}, {"n": 73, "r": 7, "slot": 1, "mgr": "Sleon1000", "p": "Matthew Golden", "pos": "WR"}, {"n": 74, "r": 7, "slot": 2, "mgr": "showmeyourtd23", "p": "Jerry Jeudy", "pos": "WR"}, {"n": 75, "r": 7, "slot": 3, "mgr": "juleon8", "p": "Deebo Samuel", "pos": "WR"}, {"n": 76, "r": 7, "slot": 4, "mgr": "Bjspjs4", "p": "Colston Loveland", "pos": "TE"}, {"n": 77, "r": 7, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Chris Olave", "pos": "WR"}, {"n": 78, "r": 7, "slot": 6, "mgr": "lxfiggy", "p": "Emeka Egbuka", "pos": "WR"}, {"n": 79, "r": 7, "slot": 7, "mgr": "dahlilama", "p": "Jacory Croskey-Merritt", "pos": "RB"}, {"n": 80, "r": 7, "slot": 8, "mgr": "deetee333", "p": "Jayden Higgins", "pos": "WR"}, {"n": 81, "r": 7, "slot": 9, "mgr": "Goldminers1", "p": "Jordan Mason", "pos": "RB"}, {"n": 82, "r": 7, "slot": 10, "mgr": "elysianbeer", "p": "T.J. Hockenson", "pos": "TE"}, {"n": 83, "r": 7, "slot": 11, "mgr": "MayockJr", "p": "Travis Etienne", "pos": "RB"}, {"n": 84, "r": 7, "slot": 12, "mgr": "rbanuelos3", "p": "Ricky Pearsall", "pos": "WR"}, {"n": 85, "r": 8, "slot": 12, "mgr": "rbanuelos3", "p": "Mark Andrews", "pos": "TE"}, {"n": 86, "r": 8, "slot": 11, "mgr": "MayockJr", "p": "Tyler Warren", "pos": "TE"}, {"n": 87, "r": 8, "slot": 10, "mgr": "elysianbeer", "p": "Brian Robinson", "pos": "RB"}, {"n": 88, "r": 8, "slot": 9, "mgr": "Goldminers1", "p": "Rome Odunze", "pos": "WR"}, {"n": 89, "r": 8, "slot": 8, "mgr": "deetee333", "p": "Tank Bigsby", "pos": "RB"}, {"n": 90, "r": 8, "slot": 7, "mgr": "dahlilama", "p": "Cam Skattebo", "pos": "RB"}, {"n": 91, "r": 8, "slot": 6, "mgr": "lxfiggy", "p": "Bo Nix", "pos": "QB"}, {"n": 92, "r": 8, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Evan Engram", "pos": "TE"}, {"n": 93, "r": 8, "slot": 4, "mgr": "Bjspjs4", "p": "Zach Charbonnet", "pos": "RB"}, {"n": 94, "r": 8, "slot": 3, "mgr": "juleon8", "p": "Stefon Diggs", "pos": "WR"}, {"n": 95, "r": 8, "slot": 2, "mgr": "showmeyourtd23", "p": "Jakobi Meyers", "pos": "WR"}, {"n": 96, "r": 8, "slot": 1, "mgr": "Sleon1000", "p": "Khalil Shakir", "pos": "WR"}, {"n": 97, "r": 9, "slot": 1, "mgr": "Sleon1000", "p": "Quinshon Judkins", "pos": "RB"}, {"n": 98, "r": 9, "slot": 2, "mgr": "showmeyourtd23", "p": "Kyler Murray", "pos": "QB"}, {"n": 99, "r": 9, "slot": 3, "mgr": "juleon8", "p": "Dak Prescott", "pos": "QB"}, {"n": 100, "r": 9, "slot": 4, "mgr": "Bjspjs4", "p": "Jaylen Warren", "pos": "RB"}, {"n": 101, "r": 9, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Nick Chubb", "pos": "RB"}, {"n": 102, "r": 9, "slot": 6, "mgr": "lxfiggy", "p": "David Njoku", "pos": "TE"}, {"n": 103, "r": 9, "slot": 7, "mgr": "dahlilama", "p": "Tucker Kraft", "pos": "TE"}, {"n": 104, "r": 9, "slot": 8, "mgr": "deetee333", "p": "Baker Mayfield", "pos": "QB"}, {"n": 105, "r": 9, "slot": 9, "mgr": "Goldminers1", "p": "J.K. Dobbins", "pos": "RB"}, {"n": 106, "r": 9, "slot": 10, "mgr": "elysianbeer", "p": "Jordan Addison", "pos": "WR"}, {"n": 107, "r": 9, "slot": 11, "mgr": "MayockJr", "p": "Austin Ekeler", "pos": "RB"}, {"n": 108, "r": 9, "slot": 12, "mgr": "rbanuelos3", "p": "Javonte Williams", "pos": "RB"}, {"n": 109, "r": 10, "slot": 12, "mgr": "rbanuelos3", "p": "Broncos", "pos": "DEF"}, {"n": 110, "r": 10, "slot": 11, "mgr": "MayockJr", "p": "Keon Coleman", "pos": "WR"}, {"n": 111, "r": 10, "slot": 10, "mgr": "elysianbeer", "p": "Jared Goff", "pos": "QB"}, {"n": 112, "r": 10, "slot": 9, "mgr": "Goldminers1", "p": "Cooper Kupp", "pos": "WR"}, {"n": 113, "r": 10, "slot": 8, "mgr": "deetee333", "p": "Braelon Allen", "pos": "RB"}, {"n": 114, "r": 10, "slot": 7, "mgr": "dahlilama", "p": "Jordan Love", "pos": "QB"}, {"n": 115, "r": 10, "slot": 6, "mgr": "lxfiggy", "p": "Jaydon Blue", "pos": "RB"}, {"n": 116, "r": 10, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Caleb Williams", "pos": "QB"}, {"n": 117, "r": 10, "slot": 4, "mgr": "Bjspjs4", "p": "Trey Benson", "pos": "RB"}, {"n": 118, "r": 10, "slot": 3, "mgr": "juleon8", "p": "Michael Pittman", "pos": "WR"}, {"n": 119, "r": 10, "slot": 2, "mgr": "showmeyourtd23", "p": "Joe Mixon", "pos": "RB"}, {"n": 120, "r": 10, "slot": 1, "mgr": "Sleon1000", "p": "Ray Davis", "pos": "RB"}, {"n": 121, "r": 11, "slot": 1, "mgr": "Sleon1000", "p": "Chris Godwin", "pos": "WR"}, {"n": 122, "r": 11, "slot": 2, "mgr": "showmeyourtd23", "p": "Jayden Reed", "pos": "WR"}, {"n": 123, "r": 11, "slot": 3, "mgr": "juleon8", "p": "Rhamondre Stevenson", "pos": "RB"}, {"n": 124, "r": 11, "slot": 4, "mgr": "Bjspjs4", "p": "Christian Kirk", "pos": "WR"}, {"n": 125, "r": 11, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Marvin Mims", "pos": "WR"}, {"n": 126, "r": 11, "slot": 6, "mgr": "lxfiggy", "p": "Rachaad White", "pos": "RB"}, {"n": 127, "r": 11, "slot": 7, "mgr": "dahlilama", "p": "Keenan Allen", "pos": "WR"}, {"n": 128, "r": 11, "slot": 8, "mgr": "deetee333", "p": "Ollie Gordon", "pos": "RB"}, {"n": 129, "r": 11, "slot": 9, "mgr": "Goldminers1", "p": "Jauan Jennings", "pos": "WR"}, {"n": 130, "r": 11, "slot": 10, "mgr": "elysianbeer", "p": "Kyle Pitts", "pos": "TE"}, {"n": 131, "r": 11, "slot": 11, "mgr": "MayockJr", "p": "Drake Maye", "pos": "QB"}, {"n": 132, "r": 11, "slot": 12, "mgr": "rbanuelos3", "p": "Justin Fields", "pos": "QB"}, {"n": 133, "r": 12, "slot": 12, "mgr": "rbanuelos3", "p": "Brandon Aubrey", "pos": "K"}, {"n": 134, "r": 12, "slot": 11, "mgr": "MayockJr", "p": "Dylan Sampson", "pos": "RB"}, {"n": 135, "r": 12, "slot": 10, "mgr": "elysianbeer", "p": "Najee Harris", "pos": "RB"}, {"n": 136, "r": 12, "slot": 9, "mgr": "Goldminers1", "p": "Steelers", "pos": "DEF"}, {"n": 137, "r": 12, "slot": 8, "mgr": "deetee333", "p": "Zach Ertz", "pos": "TE"}, {"n": 138, "r": 12, "slot": 7, "mgr": "dahlilama", "p": "Cameron Dicker", "pos": "K"}, {"n": 139, "r": 12, "slot": 6, "mgr": "lxfiggy", "p": "Rashid Shaheed", "pos": "WR"}, {"n": 140, "r": 12, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Eagles", "pos": "DEF"}, {"n": 141, "r": 12, "slot": 4, "mgr": "Bjspjs4", "p": "Vikings", "pos": "DEF"}, {"n": 142, "r": 12, "slot": 3, "mgr": "juleon8", "p": "Tyjae Spears", "pos": "RB"}, {"n": 143, "r": 12, "slot": 2, "mgr": "showmeyourtd23", "p": "Dalton Kincaid", "pos": "TE"}, {"n": 144, "r": 12, "slot": 1, "mgr": "Sleon1000", "p": "Bhayshul Tuten", "pos": "RB"}, {"n": 145, "r": 13, "slot": 1, "mgr": "Sleon1000", "p": "Ravens", "pos": "DEF"}, {"n": 146, "r": 13, "slot": 2, "mgr": "showmeyourtd23", "p": "Commanders", "pos": "DEF"}, {"n": 147, "r": 13, "slot": 3, "mgr": "juleon8", "p": "Brandon Aiyuk", "pos": "WR"}, {"n": 148, "r": 13, "slot": 4, "mgr": "Bjspjs4", "p": "Jake Bates", "pos": "K"}, {"n": 149, "r": 13, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Tyler Allgeier", "pos": "RB"}, {"n": 150, "r": 13, "slot": 6, "mgr": "lxfiggy", "p": "Chris Boswell", "pos": "K"}, {"n": 151, "r": 13, "slot": 7, "mgr": "dahlilama", "p": "Packers", "pos": "DEF"}, {"n": 152, "r": 13, "slot": 8, "mgr": "deetee333", "p": "Jerome Ford", "pos": "RB"}, {"n": 153, "r": 13, "slot": 9, "mgr": "Goldminers1", "p": "Chase McLaughlin", "pos": "K"}, {"n": 154, "r": 13, "slot": 10, "mgr": "elysianbeer", "p": "Harrison Butker", "pos": "K"}, {"n": 155, "r": 13, "slot": 11, "mgr": "MayockJr", "p": "Cam Little", "pos": "K"}, {"n": 156, "r": 13, "slot": 12, "mgr": "rbanuelos3", "p": "Jake Ferguson", "pos": "TE"}, {"n": 157, "r": 14, "slot": 12, "mgr": "rbanuelos3", "p": "Woody Marks", "pos": "RB"}, {"n": 158, "r": 14, "slot": 11, "mgr": "MayockJr", "p": "Luther Burden", "pos": "WR"}, {"n": 159, "r": 14, "slot": 10, "mgr": "elysianbeer", "p": "49ers", "pos": "DEF"}, {"n": 160, "r": 14, "slot": 9, "mgr": "Goldminers1", "p": "Kareem Hunt", "pos": "RB"}, {"n": 161, "r": 14, "slot": 8, "mgr": "deetee333", "p": "Tre' Harris", "pos": "WR"}, {"n": 162, "r": 14, "slot": 7, "mgr": "dahlilama", "p": "Justin Herbert", "pos": "QB"}, {"n": 163, "r": 14, "slot": 6, "mgr": "lxfiggy", "p": "Patriots", "pos": "DEF"}, {"n": 164, "r": 14, "slot": 5, "mgr": "Birdgangflyeagles", "p": "Jake Elliott", "pos": "K"}, {"n": 165, "r": 14, "slot": 4, "mgr": "Bjspjs4", "p": "J.J. McCarthy", "pos": "QB"}, {"n": 166, "r": 14, "slot": 3, "mgr": "juleon8", "p": "Cardinals", "pos": "DEF"}, {"n": 167, "r": 14, "slot": 2, "mgr": "showmeyourtd23", "p": "Tyler Bass", "pos": "K"}, {"n": 168, "r": 14, "slot": 1, "mgr": "Sleon1000", "p": "Younghoe Koo", "pos": "K"}], "2026": [{"n": 1, "r": 1, "slot": 1, "mgr": "rbanuelos3", "p": "Jahmyr Gibbs", "pos": "RB"}, {"n": 2, "r": 1, "slot": 2, "mgr": "giJ03", "p": "Bijan Robinson", "pos": "RB"}, {"n": 3, "r": 1, "slot": 3, "mgr": "MayockJr", "p": "Ja'Marr Chase", "pos": "WR"}, {"n": 4, "r": 1, "slot": 4, "mgr": "Goldminers1", "p": "Christian McCaffrey", "pos": "RB"}, {"n": 5, "r": 1, "slot": 5, "mgr": "dahlilama", "p": "Jaxon Smith-Njigba", "pos": "WR"}, {"n": 6, "r": 1, "slot": 6, "mgr": "showmeyourtd23", "p": "Jonathan Taylor", "pos": "RB"}, {"n": 7, "r": 1, "slot": 7, "mgr": "kevinnguu", "p": "Puka Nacua", "pos": "WR"}, {"n": 8, "r": 1, "slot": 8, "mgr": "Bjspjs4", "p": "Amon-Ra St. Brown", "pos": "WR"}, {"n": 9, "r": 1, "slot": 9, "mgr": "juleon8", "p": "James Cook", "pos": "RB"}, {"n": 10, "r": 1, "slot": 10, "mgr": "Sleon1000", "p": "Saquon Barkley", "pos": "RB"}, {"n": 11, "r": 1, "slot": 11, "mgr": "elysianbeer", "p": "De'Von Achane", "pos": "RB"}, {"n": 12, "r": 1, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Derrick Henry", "pos": "RB"}, {"n": 13, "r": 2, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Omarion Hampton", "pos": "RB"}, {"n": 14, "r": 2, "slot": 11, "mgr": "elysianbeer", "p": "CeeDee Lamb", "pos": "WR"}, {"n": 15, "r": 2, "slot": 10, "mgr": "Sleon1000", "p": "Kenneth Walker", "pos": "RB"}, {"n": 16, "r": 2, "slot": 9, "mgr": "juleon8", "p": "Chase Brown", "pos": "RB"}, {"n": 17, "r": 2, "slot": 8, "mgr": "Bjspjs4", "p": "Justin Jefferson", "pos": "WR"}, {"n": 18, "r": 2, "slot": 7, "mgr": "kevinnguu", "p": "Josh Allen", "pos": "QB"}, {"n": 19, "r": 2, "slot": 6, "mgr": "showmeyourtd23", "p": "Ashton Jeanty", "pos": "RB"}, {"n": 20, "r": 2, "slot": 5, "mgr": "dahlilama", "p": "Brock Bowers", "pos": "TE"}, {"n": 21, "r": 2, "slot": 4, "mgr": "Goldminers1", "p": "Drake London", "pos": "WR"}, {"n": 22, "r": 2, "slot": 3, "mgr": "MayockJr", "p": "A.J. Brown", "pos": "WR"}, {"n": 23, "r": 2, "slot": 2, "mgr": "giJ03", "p": "Jeremiyah Love", "pos": "RB"}, {"n": 24, "r": 2, "slot": 1, "mgr": "rbanuelos3", "p": "Trey McBride", "pos": "TE"}, {"n": 25, "r": 3, "slot": 1, "mgr": "rbanuelos3", "p": "Malik Nabers", "pos": "WR"}, {"n": 26, "r": 3, "slot": 2, "mgr": "giJ03", "p": "Nico Collins", "pos": "WR"}, {"n": 27, "r": 3, "slot": 3, "mgr": "MayockJr", "p": "George Pickens", "pos": "WR"}, {"n": 28, "r": 3, "slot": 4, "mgr": "Goldminers1", "p": "Kyren Williams", "pos": "RB"}, {"n": 29, "r": 3, "slot": 5, "mgr": "dahlilama", "p": "Javonte Williams", "pos": "RB"}, {"n": 30, "r": 3, "slot": 6, "mgr": "showmeyourtd23", "p": "Rashee Rice", "pos": "WR"}, {"n": 31, "r": 3, "slot": 7, "mgr": "kevinnguu", "p": "Breece Hall", "pos": "RB"}, {"n": 32, "r": 3, "slot": 8, "mgr": "Bjspjs4", "p": "Travis Etienne", "pos": "RB"}, {"n": 33, "r": 3, "slot": 9, "mgr": "juleon8", "p": "DeVonta Smith", "pos": "WR"}, {"n": 34, "r": 3, "slot": 10, "mgr": "Sleon1000", "p": "Ladd McConkey", "pos": "WR"}, {"n": 35, "r": 3, "slot": 11, "mgr": "elysianbeer", "p": "Tetairoa McMillan", "pos": "WR"}, {"n": 36, "r": 3, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Chris Olave", "pos": "WR"}, {"n": 37, "r": 4, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Lamar Jackson", "pos": "QB"}, {"n": 38, "r": 4, "slot": 11, "mgr": "elysianbeer", "p": "Cam Skattebo", "pos": "RB"}, {"n": 39, "r": 4, "slot": 10, "mgr": "Sleon1000", "p": "Jaylen Waddle", "pos": "WR"}, {"n": 40, "r": 4, "slot": 9, "mgr": "juleon8", "p": "D'Andre Swift", "pos": "RB"}, {"n": 41, "r": 4, "slot": 8, "mgr": "Bjspjs4", "p": "Tee Higgins", "pos": "WR"}, {"n": 42, "r": 4, "slot": 7, "mgr": "kevinnguu", "p": "Zay Flowers", "pos": "WR"}, {"n": 43, "r": 4, "slot": 6, "mgr": "showmeyourtd23", "p": "Emeka Egbuka", "pos": "WR"}, {"n": 44, "r": 4, "slot": 5, "mgr": "dahlilama", "p": "Bhayshul Tuten", "pos": "RB"}, {"n": 45, "r": 4, "slot": 4, "mgr": "Goldminers1", "p": "Garrett Wilson", "pos": "WR"}, {"n": 46, "r": 4, "slot": 3, "mgr": "MayockJr", "p": "Bucky Irving", "pos": "RB"}, {"n": 47, "r": 4, "slot": 2, "mgr": "giJ03", "p": "Terry McLaurin", "pos": "WR"}, {"n": 48, "r": 4, "slot": 1, "mgr": "rbanuelos3", "p": "DJ Moore", "pos": "WR"}, {"n": 49, "r": 5, "slot": 1, "mgr": "rbanuelos3", "p": "Jadarian Price", "pos": "RB"}, {"n": 50, "r": 5, "slot": 2, "mgr": "giJ03", "p": "Colston Loveland", "pos": "TE"}, {"n": 51, "r": 5, "slot": 3, "mgr": "MayockJr", "p": "David Montgomery", "pos": "RB"}, {"n": 52, "r": 5, "slot": 4, "mgr": "Goldminers1", "p": "George Kittle", "pos": "TE"}, {"n": 53, "r": 5, "slot": 5, "mgr": "dahlilama", "p": "Christian Watson", "pos": "WR"}, {"n": 54, "r": 5, "slot": 6, "mgr": "showmeyourtd23", "p": "Tyler Warren", "pos": "TE"}, {"n": 55, "r": 5, "slot": 7, "mgr": "kevinnguu", "p": "Quinshon Judkins", "pos": "RB"}, {"n": 56, "r": 5, "slot": 8, "mgr": "Bjspjs4", "p": "Drake Maye", "pos": "QB"}, {"n": 57, "r": 5, "slot": 9, "mgr": "juleon8", "p": "Jameson Williams", "pos": "WR"}, {"n": 58, "r": 5, "slot": 10, "mgr": "Sleon1000", "p": "Luther Burden", "pos": "WR"}, {"n": 59, "r": 5, "slot": 11, "mgr": "elysianbeer", "p": "Josh Jacobs", "pos": "RB"}, {"n": 60, "r": 5, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Davante Adams", "pos": "WR"}, {"n": 61, "r": 6, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Mike Evans", "pos": "WR"}, {"n": 62, "r": 6, "slot": 11, "mgr": "elysianbeer", "p": "Rome Odunze", "pos": "WR"}, {"n": 63, "r": 6, "slot": 10, "mgr": "Sleon1000", "p": "Parker Washington", "pos": "WR"}, {"n": 64, "r": 6, "slot": 9, "mgr": "juleon8", "p": "Tucker Kraft", "pos": "TE"}, {"n": 65, "r": 6, "slot": 8, "mgr": "Bjspjs4", "p": "Tony Pollard", "pos": "RB"}, {"n": 66, "r": 6, "slot": 7, "mgr": "kevinnguu", "p": "TreVeyon Henderson", "pos": "RB"}, {"n": 67, "r": 6, "slot": 6, "mgr": "showmeyourtd23", "p": "Joe Burrow", "pos": "QB"}, {"n": 68, "r": 6, "slot": 5, "mgr": "dahlilama", "p": "Carnell Tate", "pos": "WR"}, {"n": 69, "r": 6, "slot": 4, "mgr": "Goldminers1", "p": "Jaylen Warren", "pos": "RB"}, {"n": 70, "r": 6, "slot": 3, "mgr": "MayockJr", "p": "Rhamondre Stevenson", "pos": "RB"}, {"n": 71, "r": 6, "slot": 2, "mgr": "giJ03", "p": "Marvin Harrison", "pos": "WR"}, {"n": 72, "r": 6, "slot": 1, "mgr": "rbanuelos3", "p": "Jonathon Brooks", "pos": "RB"}, {"n": 73, "r": 7, "slot": 1, "mgr": "rbanuelos3", "p": "Jalen Hurts", "pos": "QB"}, {"n": 74, "r": 7, "slot": 2, "mgr": "giJ03", "p": "Jayden Daniels", "pos": "QB"}, {"n": 75, "r": 7, "slot": 3, "mgr": "MayockJr", "p": "Caleb Williams", "pos": "QB"}, {"n": 76, "r": 7, "slot": 4, "mgr": "Goldminers1", "p": "Brock Purdy", "pos": "QB"}, {"n": 77, "r": 7, "slot": 5, "mgr": "dahlilama", "p": "Dak Prescott", "pos": "QB"}, {"n": 78, "r": 7, "slot": 6, "mgr": "showmeyourtd23", "p": "Courtland Sutton", "pos": "WR"}, {"n": 79, "r": 7, "slot": 7, "mgr": "kevinnguu", "p": "Sam LaPorta", "pos": "TE"}, {"n": 80, "r": 7, "slot": 8, "mgr": "Bjspjs4", "p": "RJ Harvey", "pos": "RB"}, {"n": 81, "r": 7, "slot": 9, "mgr": "juleon8", "p": "Rico Dowdle", "pos": "RB"}, {"n": 82, "r": 7, "slot": 10, "mgr": "Sleon1000", "p": "Jordan Mason", "pos": "RB"}, {"n": 83, "r": 7, "slot": 11, "mgr": "elysianbeer", "p": "Chuba Hubbard", "pos": "RB"}, {"n": 84, "r": 7, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Harold Fannin", "pos": "TE"}, {"n": 85, "r": 8, "slot": 12, "mgr": "Birdgangflyeagles", "p": "J.K. Dobbins", "pos": "RB"}, {"n": 86, "r": 8, "slot": 11, "mgr": "elysianbeer", "p": "Dalton Kincaid", "pos": "TE"}, {"n": 87, "r": 8, "slot": 10, "mgr": "Sleon1000", "p": "Trevor Lawrence", "pos": "QB"}, {"n": 88, "r": 8, "slot": 9, "mgr": "juleon8", "p": "Michael Pittman", "pos": "WR"}, {"n": 89, "r": 8, "slot": 8, "mgr": "Bjspjs4", "p": "Chris Godwin", "pos": "WR"}, {"n": 90, "r": 8, "slot": 7, "mgr": "kevinnguu", "p": "DK Metcalf", "pos": "WR"}, {"n": 91, "r": 8, "slot": 6, "mgr": "showmeyourtd23", "p": "Blake Corum", "pos": "RB"}, {"n": 92, "r": 8, "slot": 5, "mgr": "dahlilama", "p": "Alec Pierce", "pos": "WR"}, {"n": 93, "r": 8, "slot": 4, "mgr": "Goldminers1", "p": "Brian Thomas", "pos": "WR"}, {"n": 94, "r": 8, "slot": 3, "mgr": "MayockJr", "p": "Jacory Croskey-Merritt", "pos": "RB"}, {"n": 95, "r": 8, "slot": 2, "mgr": "giJ03", "p": "MarShawn Lloyd", "pos": "RB"}, {"n": 96, "r": 8, "slot": 1, "mgr": "rbanuelos3", "p": "Rams", "pos": "DEF"}, {"n": 97, "r": 9, "slot": 1, "mgr": "rbanuelos3", "p": "Makai Lemon", "pos": "WR"}, {"n": 98, "r": 9, "slot": 2, "mgr": "giJ03", "p": "Rachaad White", "pos": "RB"}, {"n": 99, "r": 9, "slot": 3, "mgr": "MayockJr", "p": "De'Zhaun Stribling", "pos": "WR"}, {"n": 100, "r": 9, "slot": 4, "mgr": "Goldminers1", "p": "Michael Wilson", "pos": "WR"}, {"n": 101, "r": 9, "slot": 5, "mgr": "dahlilama", "p": "Texans", "pos": "DEF"}, {"n": 102, "r": 9, "slot": 6, "mgr": "showmeyourtd23", "p": "Jordan Addison", "pos": "WR"}, {"n": 103, "r": 9, "slot": 7, "mgr": "kevinnguu", "p": "Kyle Pitts", "pos": "TE"}, {"n": 104, "r": 9, "slot": 8, "mgr": "Bjspjs4", "p": "Isaiah Likely", "pos": "TE"}, {"n": 105, "r": 9, "slot": 9, "mgr": "juleon8", "p": "Jayden Reed", "pos": "WR"}, {"n": 106, "r": 9, "slot": 10, "mgr": "Sleon1000", "p": "Justin Herbert", "pos": "QB"}, {"n": 107, "r": 9, "slot": 11, "mgr": "elysianbeer", "p": "Matthew Stafford", "pos": "QB"}, {"n": 108, "r": 9, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Eagles", "pos": "DEF"}, {"n": 109, "r": 10, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Stefon Diggs", "pos": "WR"}, {"n": 110, "r": 10, "slot": 11, "mgr": "elysianbeer", "p": "Kyle Monangai", "pos": "RB"}, {"n": 111, "r": 10, "slot": 10, "mgr": "Sleon1000", "p": "Matthew Golden", "pos": "WR"}, {"n": 112, "r": 10, "slot": 9, "mgr": "juleon8", "p": "Patrick Mahomes", "pos": "QB"}, {"n": 113, "r": 10, "slot": 8, "mgr": "Bjspjs4", "p": "Tyler Allgeier", "pos": "RB"}, {"n": 114, "r": 10, "slot": 7, "mgr": "kevinnguu", "p": "Quentin Johnston", "pos": "WR"}, {"n": 115, "r": 10, "slot": 6, "mgr": "showmeyourtd23", "p": "Seahawks", "pos": "DEF"}, {"n": 116, "r": 10, "slot": 5, "mgr": "dahlilama", "p": "KC Concepcion", "pos": "WR"}, {"n": 117, "r": 10, "slot": 4, "mgr": "Goldminers1", "p": "Deebo Samuel", "pos": "WR"}, {"n": 118, "r": 10, "slot": 3, "mgr": "MayockJr", "p": "Mike Washington", "pos": "RB"}, {"n": 119, "r": 10, "slot": 2, "mgr": "giJ03", "p": "Wan'Dale Robinson", "pos": "WR"}, {"n": 120, "r": 10, "slot": 1, "mgr": "rbanuelos3", "p": "Jaxson Dart", "pos": "QB"}, {"n": 121, "r": 11, "slot": 1, "mgr": "rbanuelos3", "p": "Kenny Gainwell", "pos": "RB"}, {"n": 122, "r": 11, "slot": 2, "mgr": "giJ03", "p": "Broncos", "pos": "DEF"}, {"n": 123, "r": 11, "slot": 3, "mgr": "MayockJr", "p": "Josh Downs", "pos": "WR"}, {"n": 124, "r": 11, "slot": 4, "mgr": "Goldminers1", "p": "Kaelon Black", "pos": "RB"}, {"n": 125, "r": 11, "slot": 5, "mgr": "dahlilama", "p": "Romeo Doubs", "pos": "WR"}, {"n": 126, "r": 11, "slot": 6, "mgr": "showmeyourtd23", "p": "Ja'Kobi Lane", "pos": "WR"}, {"n": 127, "r": 11, "slot": 7, "mgr": "kevinnguu", "p": "Ravens", "pos": "DEF"}, {"n": 128, "r": 11, "slot": 8, "mgr": "Bjspjs4", "p": "Jalen Coker", "pos": "WR"}, {"n": 129, "r": 11, "slot": 9, "mgr": "juleon8", "p": "Dallas Goedert", "pos": "TE"}, {"n": 130, "r": 11, "slot": 10, "mgr": "Sleon1000", "p": "Brenton Strange", "pos": "TE"}, {"n": 131, "r": 11, "slot": 11, "mgr": "elysianbeer", "p": "Travis Kelce", "pos": "TE"}, {"n": 132, "r": 11, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Chris Rodriguez", "pos": "RB"}, {"n": 133, "r": 12, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Jonah Coleman", "pos": "RB"}, {"n": 134, "r": 12, "slot": 11, "mgr": "elysianbeer", "p": "Aaron Jones", "pos": "RB"}, {"n": 135, "r": 12, "slot": 10, "mgr": "Sleon1000", "p": "Tank Bigsby", "pos": "RB"}, {"n": 136, "r": 12, "slot": 9, "mgr": "juleon8", "p": "Zach Charbonnet", "pos": "RB"}, {"n": 137, "r": 12, "slot": 8, "mgr": "Bjspjs4", "p": "Woody Marks", "pos": "RB"}, {"n": 138, "r": 12, "slot": 7, "mgr": "kevinnguu", "p": "Jakobi Meyers", "pos": "WR"}, {"n": 139, "r": 12, "slot": 6, "mgr": "showmeyourtd23", "p": "Mark Andrews", "pos": "TE"}, {"n": 140, "r": 12, "slot": 5, "mgr": "dahlilama", "p": "Tyjae Spears", "pos": "RB"}, {"n": 141, "r": 12, "slot": 4, "mgr": "Goldminers1", "p": "Jake Ferguson", "pos": "TE"}, {"n": 142, "r": 12, "slot": 3, "mgr": "MayockJr", "p": "Jordyn Tyson", "pos": "WR"}, {"n": 143, "r": 12, "slot": 2, "mgr": "giJ03", "p": "Denzel Boston", "pos": "WR"}, {"n": 144, "r": 12, "slot": 1, "mgr": "rbanuelos3", "p": "Tyrone Tracy", "pos": "RB"}, {"n": 145, "r": 13, "slot": 1, "mgr": "rbanuelos3", "p": "Patriots", "pos": "DEF"}, {"n": 146, "r": 13, "slot": 2, "mgr": "giJ03", "p": "Emmett Johnson", "pos": "RB"}, {"n": 147, "r": 13, "slot": 3, "mgr": "MayockJr", "p": "T.J. Hockenson", "pos": "TE"}, {"n": 148, "r": 13, "slot": 4, "mgr": "Goldminers1", "p": "Brian Robinson", "pos": "RB"}, {"n": 149, "r": 13, "slot": 5, "mgr": "dahlilama", "p": "Chris Bell", "pos": "WR"}, {"n": 150, "r": 13, "slot": 6, "mgr": "showmeyourtd23", "p": "Bo Nix", "pos": "QB"}, {"n": 151, "r": 13, "slot": 7, "mgr": "kevinnguu", "p": "Jared Goff", "pos": "QB"}, {"n": 152, "r": 13, "slot": 8, "mgr": "Bjspjs4", "p": "Kayshon Boutte", "pos": "WR"}, {"n": 153, "r": 13, "slot": 9, "mgr": "juleon8", "p": "Kyler Murray", "pos": "QB"}, {"n": 154, "r": 13, "slot": 10, "mgr": "Sleon1000", "p": "Chargers", "pos": "DEF"}, {"n": 155, "r": 13, "slot": 11, "mgr": "elysianbeer", "p": "Xavier Worthy", "pos": "WR"}, {"n": 156, "r": 13, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Hunter Henry", "pos": "TE"}, {"n": 157, "r": 14, "slot": 12, "mgr": "Birdgangflyeagles", "p": "Rashid Shaheed", "pos": "WR"}, {"n": 158, "r": 14, "slot": 11, "mgr": "elysianbeer", "p": "Vikings", "pos": "DEF"}, {"n": 159, "r": 14, "slot": 10, "mgr": "Sleon1000", "p": "Jalen Nailor", "pos": "WR"}, {"n": 160, "r": 14, "slot": 9, "mgr": "juleon8", "p": "Alvin Kamara", "pos": "RB"}, {"n": 161, "r": 14, "slot": 8, "mgr": "Bjspjs4", "p": "Jaguars", "pos": "DEF"}, {"n": 162, "r": 14, "slot": 7, "mgr": "kevinnguu", "p": "Khalil Shakir", "pos": "WR"}, {"n": 163, "r": 14, "slot": 6, "mgr": "showmeyourtd23", "p": "Keenan Allen", "pos": "WR"}, {"n": 164, "r": 14, "slot": 5, "mgr": "dahlilama", "p": "Caleb Douglas", "pos": "WR"}, {"n": 165, "r": 14, "slot": 4, "mgr": "Goldminers1", "p": "49ers", "pos": "DEF"}, {"n": 166, "r": 14, "slot": 3, "mgr": "MayockJr", "p": "Cyrus Allen", "pos": "WR"}, {"n": 167, "r": 14, "slot": 2, "mgr": "giJ03", "p": "Tyler Shough", "pos": "QB"}, {"n": 168, "r": 14, "slot": 1, "mgr": "rbanuelos3", "p": "Juwan Johnson", "pos": "TE"}]}};
+const DRAFT_SUPERS = {"supers": [{"label": "Juror No. 8", "value": "3/3 titles", "sub": "Every champion so far drafted from slot 8, the holdout's seat. This year's Juror No. 8: Bjspjs4.", "cls": "pos"}, {"label": "The #1 Overall Pick", "value": "No titles yet", "sub": "2023: Christian McCaffrey → showmeyourtd23 went 8-6 · 2024: Tyreek Hill → deetee333 went 8-6 · 2025: Ja'Marr Chase → Sleon1000 went 11-3", "cls": ""}, {"label": "Earliest QB Ever Taken", "value": "Pick 18", "sub": "Josh Allen · kevinnguu · 2026", "cls": ""}, {"label": "Longest Wait for a QB", "value": "Pick 165", "sub": "Bjspjs4 waited until round 14 for J.J. McCarthy · 2025", "cls": "neg"}, {"label": "Kicker Reach", "value": "Pick 107", "sub": "Brandon Aubrey · rbanuelos3 · round 9, 2024", "cls": "neg"}, {"label": "Earliest Defense", "value": "Pick 74", "sub": "49ers D/ST · Goldminers1 · round 7, 2023", "cls": "neg"}, {"label": "RB Hoarders (Rounds 1–5)", "value": "3 of 5 picks on RBs", "sub": "rbanuelos3 (2023) · sugarmaverick (2023) · deetee333 (2024) · juleon8 (2025) · lxfiggy (2025) · deetee333 (2025) · juleon8 (2026) · elysianbeer (2026)", "cls": ""}, {"label": "RB-Light Starts", "value": "1 RB in rounds 1–5", "sub": "Criscutfries (2023) · showmeyourtd23 (2024) · jayy2690 (2024) · Sleon1000 (2024) · dahlilama (2024) · sugarmaverick (2024) · dahlilama (2025) · MayockJr (2025) · Bjspjs4 (2026)", "cls": ""}, {"label": "Biggest QB Run", "value": "5 straight", "sub": "2026, picks 73–77: Hurts, Daniels, Williams, Purdy, Prescott", "cls": ""}, {"label": "Drafted Every Single Year", "value": "67 players", "sub": "Including Christian McCaffrey, Ja'Marr Chase, Jahmyr Gibbs, Saquon Barkley, Bijan Robinson, Justin Jefferson", "cls": ""}, {"label": "Can't Quit Him", "value": "3× drafted", "sub": "Sleon1000 → Josh Allen · Birdgangflyeagles → Lamar Jackson · dahlilama → Jaxon Smith-Njigba · Birdgangflyeagles → Tyler Allgeier · Goldminers1 → Brock Purdy · Birdgangflyeagles → Derrick Henry", "cls": ""}, {"label": "League Hot Potato", "value": "4 different managers", "sub": "Justin Jefferson, Travis Kelce, Saquon Barkley, Bijan Robinson, Garrett Wilson, A.J. Brown — a new owner every year", "cls": ""}], "dna": [{"manager": "rbanuelos3", "drafts": 4, "RB": 9, "WR": 9, "QB": 1, "TE": 1, "tot": 20}, {"manager": "Goldminers1", "drafts": 4, "RB": 8, "WR": 7, "QB": 1, "TE": 4, "tot": 20}, {"manager": "Birdgangflyeagles", "drafts": 4, "RB": 8, "WR": 7, "QB": 4, "TE": 1, "tot": 20}, {"manager": "showmeyourtd23", "drafts": 4, "RB": 7, "WR": 7, "QB": 3, "TE": 3, "tot": 20}, {"manager": "Sleon1000", "drafts": 4, "RB": 7, "WR": 9, "QB": 3, "TE": 1, "tot": 20}, {"manager": "Bjspjs4", "drafts": 4, "RB": 7, "WR": 10, "QB": 2, "TE": 1, "tot": 20}, {"manager": "MayockJr", "drafts": 4, "RB": 7, "WR": 10, "QB": 2, "TE": 1, "tot": 20}, {"manager": "dahlilama", "drafts": 4, "RB": 6, "WR": 12, "QB": 0, "TE": 2, "tot": 20}, {"manager": "deetee333", "drafts": 3, "RB": 8, "WR": 6, "QB": 0, "TE": 1, "tot": 15}, {"manager": "juleon8", "drafts": 2, "RB": 6, "WR": 3, "QB": 0, "TE": 1, "tot": 10}, {"manager": "lxfiggy", "drafts": 2, "RB": 5, "WR": 5, "QB": 0, "TE": 0, "tot": 10}, {"manager": "elysianbeer", "drafts": 2, "RB": 5, "WR": 4, "QB": 1, "TE": 0, "tot": 10}, {"manager": "sugarmaverick", "drafts": 2, "RB": 4, "WR": 4, "QB": 1, "TE": 1, "tot": 10}, {"manager": "luieloo", "drafts": 1, "RB": 2, "WR": 2, "QB": 0, "TE": 1, "tot": 5}, {"manager": "giJ03", "drafts": 1, "RB": 2, "WR": 2, "QB": 0, "TE": 1, "tot": 5}, {"manager": "kevinnguu", "drafts": 1, "RB": 2, "WR": 2, "QB": 1, "TE": 0, "tot": 5}, {"manager": "Criscutfries", "drafts": 1, "RB": 1, "WR": 3, "QB": 1, "TE": 0, "tot": 5}, {"manager": "jayy2690", "drafts": 1, "RB": 1, "WR": 2, "QB": 1, "TE": 1, "tot": 5}], "champ": {"2023": "dahlilama", "2024": "sugarmaverick", "2025": "deetee333"}};
+function fmt(n){ return Math.round(n).toLocaleString(); }
+
+// ---------- Standings tab ----------
+const picker = document.getElementById('seasonPicker');
+let currentSeason = DATA.seasons[DATA.seasons.length-1];
+
+DATA.seasons.forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s === DATA.seasons[DATA.seasons.length-1] ? s+' (live)' : s;
+  b.dataset.season = s;
+  if (s === currentSeason) b.classList.add('active');
+  b.onclick = () => { currentSeason = s; renderStandings(); 
+    [...picker.children].forEach(c=>c.classList.toggle('active', c.dataset.season===s)); };
+  picker.appendChild(b);
+});
+
+function renderStandings(){
+  const rows = DATA.league[currentSeason];
+  const tbody = document.querySelector('#standingsTable tbody');
+  tbody.innerHTML = '';
+  rows.forEach((r,i) => {
+    const tr = document.createElement('tr');
+    if (r.champ) tr.classList.add('champ');
+    tr.innerHTML = `<td class="rank">${i+1}</td><td>${r.manager}</td><td>${r.team}</td>
+      <td class="num">${r.wins}</td><td class="num">${r.losses}</td>
+      <td class="num">${fmt(r.pf)}</td><td class="num">${fmt(r.pa)}</td>`;
+    tbody.appendChild(tr);
+  });
+  const isLive = currentSeason === DATA.seasons[DATA.seasons.length-1] && !DATA.completed_seasons.includes(currentSeason);
+  document.getElementById('standingsTitle').textContent = isLive ? `${currentSeason} Standings — Live` : `${currentSeason} Final Standings`;
+  const note = document.getElementById('seasonNote');
+  note.textContent = DATA.completed_seasons.includes(currentSeason)
+    ? 'Final standings.' : 'In progress — standings will keep shifting as the season plays out.';
+}
+renderStandings();
+
+// ---------- All-time tab ----------
+(function(){
+  const entries = Object.entries(DATA.alltime).map(([m,v]) => ({manager:m, ...v}));
+  entries.sort((a,b) => b.wins - a.wins || b.pf - a.pf);
+  const tbody = document.querySelector('#alltimeTable tbody');
+  entries.forEach((r,i) => {
+    const g = r.wins + r.losses + r.ties;
+    const pct = g ? ((r.wins/g)*100).toFixed(1) : '0.0';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="rank">${i+1}</td><td>${r.manager}</td>
+      <td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${pct}%</td>
+      <td class="num">${fmt(r.pf)}</td><td class="num">${r.champs || ''}</td>`;
+    tbody.appendChild(tr);
+  });
+})();
+
+// ---------- Superlatives tab ----------
+(function(){
+  const s = DATA.supers;
+  const cards = [
+    {label:'Most All-Time Wins', value: s.most_wins.manager, sub: `${s.most_wins.wins}-${s.most_wins.losses} across ${s.most_wins.seasons} seasons`, cls:'pos'},
+    {label:'Best Win %', value: s.best_winpct.manager, sub: `${s.best_winpct.pct}% (${s.best_winpct.wins}-${s.best_winpct.losses})`, cls:'pos'},
+    {label:'Worst Win %', value: s.worst_winpct.manager, sub: `${s.worst_winpct.pct}% (${s.worst_winpct.wins}-${s.worst_winpct.losses})`, cls:'neg'},
+    {label:'Most Points Scored (career)', value: s.most_pf.manager, sub: `${fmt(s.most_pf.pf)} pts total`, cls:'pos'},
+    {label:'Most Championships', value: s.most_champs.manager, sub: `${s.most_champs.champs} title${s.most_champs.champs===1?'':'s'}`, cls:'pos'},
+    {label:'Best Single Season (points)', value: `${fmt(s.best_single_season_pf.pf)} pts`, sub: `${s.best_single_season_pf.manager} · ${s.best_single_season_pf.season}`, cls:'pos'},
+    {label:'Worst Single Season (points)', value: `${fmt(s.worst_single_season_pf.pf)} pts`, sub: `${s.worst_single_season_pf.manager} · ${s.worst_single_season_pf.season}`, cls:'neg'},
+    {label:'Biggest Point Differential', value: `+${fmt(s.best_diff_season.diff)}`, sub: `${s.best_diff_season.manager} · ${s.best_diff_season.season}`, cls:'pos'},
+    {label:'Worst Point Differential', value: `${fmt(s.worst_diff_season.diff)}`, sub: `${s.worst_diff_season.manager} · ${s.worst_diff_season.season}`, cls:'neg'},
+    {label:'Unluckiest Season (most PA)', value: s.unluckiest_season.manager, sub: `${fmt(s.unluckiest_season.pa)} pts against · ${s.unluckiest_season.season}`, cls:'neg'},
+  ];
+  const grid = document.getElementById('superCards');
+  cards.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'stat-card' + (c.cls ? ' '+c.cls : '');
+    div.innerHTML = `<div class="label">${c.label}</div><div class="value">${c.value}</div><div class="sub">${c.sub}</div>`;
+    grid.appendChild(div);
+  });
+})();
+
+// ---------- Champions tab ----------
+(function(){
+  const list = document.getElementById('champList');
+  DATA.completed_seasons.slice().reverse().forEach(s => {
+    const champ = DATA.league[s].find(r => r.champ);
+    if (!champ) return;
+    const row = document.createElement('div');
+    row.className = 'champ-row';
+    row.innerHTML = `<div class="yr">${s}</div><div><div class="who">🏆 ${champ.manager}</div><div class="team">${champ.team} · ${champ.wins}-${champ.losses}, ${fmt(champ.pf)} pts</div></div>`;
+    list.appendChild(row);
+  });
+})();
+
+// ---------- Trophy timeline row ----------
+(function(){
+  const row = document.getElementById('trophyRow');
+  DATA.completed_seasons.slice().reverse().forEach(s => {
+    const champ = DATA.league[s].find(r => r.champ);
+    if (!champ) return;
+    const card = document.createElement('div');
+    card.className = 'trophy-card';
+    card.innerHTML = `<div class="vd">Verdict</div><div class="yr">${s}</div><div class="tm">${champ.team}</div><div class="mg">${champ.manager}</div><div class="rec">${champ.wins}-${champ.losses}</div>`;
+    row.appendChild(card);
+  });
+})();
+
+// ---------- Draft Central tab ----------
+const draftPicker = document.getElementById('draftPicker');
+const mgrFilter = document.getElementById('mgrFilter');
+const DSEASONS = Object.keys(DRAFTS.boards);
+let currentDraftSeason = DSEASONS[DSEASONS.length-1];
+
+DSEASONS.forEach(s => {
+  const b = document.createElement('button');
+  b.textContent = s; b.dataset.season = s;
+  if (s === currentDraftSeason) b.classList.add('active');
+  b.onclick = () => { currentDraftSeason = s; renderDraft();
+    [...draftPicker.children].forEach(c=>c.classList.toggle('active', c.dataset.season===s)); };
+  draftPicker.appendChild(b);
+});
+
+function esc(t){ return String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function renderDraft(){
+  const s = currentDraftSeason;
+  const picks = DRAFTS.boards[s];
+  const slots = DRAFTS.slots[s];
+  const champ = DRAFT_SUPERS.champ[s];
+  const board = document.getElementById('draftBoard');
+  let html = '<div></div>' + slots.map(m => `<div class="hd${m===champ?' champ':''}" title="${esc(m)}">${m===champ?'🏆 ':''}${esc(m)}</div>`).join('');
+  const grid = {};
+  picks.forEach(p => { grid[p.r+'-'+p.slot] = p; });
+  for (let r = 1; r <= 14; r++) {
+    html += `<div class="rd">R${r}</div>`;
+    for (let c = 1; c <= 12; c++) {
+      const p = grid[r+'-'+c];
+      const inRound = r % 2 ? c : 13 - c;
+      html += `<div class="cell ${p.pos}" data-mgr="${esc(p.mgr)}" title="${esc(p.p)} — ${esc(p.mgr)}"><div class="pn">${r}.${String(inRound).padStart(2,'0')} · #${p.n}</div><div class="nm">${esc(p.p)}</div><div class="ps">${p.pos}</div></div>`;
+    }
+  }
+  board.innerHTML = html;
+  const keep = mgrFilter.value;
+  mgrFilter.innerHTML = '<option value="">Everyone</option>' + slots.map(m => `<option${m===keep?' selected':''}>${esc(m)}</option>`).join('');
+  if (!slots.includes(keep)) mgrFilter.value = '';
+  applyFilter();
+  document.getElementById('draftTitle').textContent = `${s} Draft Board`;
+}
+
+function applyFilter(){
+  const m = mgrFilter.value;
+  const board = document.getElementById('draftBoard');
+  board.classList.toggle('focus', !!m);
+  board.querySelectorAll('.cell').forEach(c => c.classList.toggle('on', c.dataset.mgr === m));
+  const sum = document.getElementById('mgrSummary');
+  if (!m) { sum.textContent = ''; return; }
+  const mine = DRAFTS.boards[currentDraftSeason].filter(p => p.mgr === m);
+  const ct = {}; mine.forEach(p => ct[p.pos] = (ct[p.pos]||0) + 1);
+  sum.textContent = `Slot ${DRAFTS.slots[currentDraftSeason].indexOf(m)+1} · ` + ['QB','RB','WR','TE','K','DEF'].filter(k=>ct[k]).map(k=>`${ct[k]} ${k}`).join(', ');
+}
+mgrFilter.addEventListener('change', applyFilter);
+renderDraft();
+
+(function(){
+  const grid = document.getElementById('draftSuperCards');
+  DRAFT_SUPERS.supers.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'stat-card' + (c.cls ? ' '+c.cls : '');
+    div.innerHTML = `<div class="label">${esc(c.label)}</div><div class="value">${esc(c.value)}</div><div class="sub">${esc(c.sub)}</div>`;
+    grid.appendChild(div);
+  });
+  const tb = document.querySelector('#dnaTable tbody');
+  const col = {RB:'#3f9a63', WR:'#4a7fc4', QB:'#c75a5a', TE:'#d08a2e'};
+  DRAFT_SUPERS.dna.forEach(r => {
+    const bar = ['RB','WR','QB','TE'].map(k => `<i style="width:${(r[k]/r.tot*100).toFixed(1)}%;background:${col[k]}"></i>`).join('');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${esc(r.manager)}</td><td class="num">${r.drafts}</td><td class="num">${r.RB}</td><td class="num">${r.WR}</td><td class="num">${r.QB}</td><td class="num">${r.TE}</td><td><div class="dna-bar">${bar}</div></td>`;
+    tb.appendChild(tr);
+  });
+})();
+
+// ---------- Managers tab ----------
+(function(){
+  const pal = ['#0f3d33','#7a4b12','#2f4f7a','#6b2d3d','#3d5a2a','#4b3b6e','#1f5f5f','#7a3b1f','#34495e','#5b4a1f','#4a2f5c','#2e5d3a'];
+  const e = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const grid = document.getElementById('mgrGrid');
+  MANAGERS.forEach((m, i) => {
+    const juror = DRAFTS.slots['2026'].indexOf(m.manager) + 1;
+    const chips = m.trophies.length
+      ? `<div class="chips">${m.trophies.map(t => `<span class="chip ${t.k}">${t.k==='gold'?'🏆 ':''}${e(t.t)}</span>`).join('')}</div>`
+      : `<div class="empty">Empty — for now.</div>`;
+    const card = document.createElement('div');
+    card.className = 'mgr-card';
+    card.innerHTML = `
+      <div class="mgr-top">
+        <div class="avatar juror${juror===8?' eight':''}" aria-label="Juror number ${juror}">${juror}</div>
+        <div style="min-width:0"><div class="juror-no">Juror No. ${juror}</div><h3>${e(m.manager)}</h3><div class="tn">${e(m.team)}</div></div>
+        <div class="mgr-rank">#${i+1}</div>
+      </div>
+      <div class="case"><div class="ch">Trophy Case</div>${chips}</div>
+      <p class="mgr-blurb">${e(m.blurb)}</p>
+      <table class="mgr-stats"><tbody>${m.stats.map(([k,v]) => `<tr><td>${e(k)}</td><td>${e(v)}</td></tr>`).join('')}</tbody></table>`;
+    grid.appendChild(card);
+  });
+})();
+
+// ---------- Records tab ----------
+(function(){
+  const e = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function card(sec){
+    const [lead, ...rest] = sec.rows;
+    if (!lead) return '';
+    return `<div class="rec-card"><div class="label">${e(sec.title)}</div>${sec.note?`<div class="note2">${e(sec.note)}</div>`:''}
+      <div class="rec-lead"><div class="who">${e(lead.who)}</div><div class="val">${e(lead.val)}</div></div>
+      ${lead.ctx?`<div class="rec-ctx">${e(lead.ctx)}</div>`:''}
+      ${rest.length?`<ol class="rec-list">${rest.map((r,i)=>`<li><span class="n">${i+2}</span><span class="w">${e(r.who)}${r.ctx?`<small>${e(r.ctx)}</small>`:''}</span><span class="v">${e(r.val)}</span></li>`).join('')}</ol>`:''}
+    </div>`;
+  }
+  const fill = (id, secs) => { document.getElementById(id).innerHTML = secs.map(card).join(''); };
+  fill('recSingle', RECORDS.single);
+  fill('recWeekly', RECORDS.streaks.concat(RECORDS.weekly));
+  fill('recPlayoff', RECORDS.playoff_lists);
+  fill('recSeason', RECORDS.season);
+  fill('recRival', [{title: 'Head-to-Head Dominance', rows: RECORDS.rival}]);
+  document.querySelector('#poTable tbody').innerHTML = RECORDS.playoff_table.map(r =>
+    `<tr><td>${e(r.manager)}</td><td class="num">${r.apps}</td><td class="num">${r.w}</td><td class="num">${r.l}</td><td class="num">${r.finals}</td><td class="num">${r.titles||''}</td></tr>`).join('');
+})();
+
+// ---------- Futures & Ballot tab ----------
+(function(){
+  const e = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  document.querySelector('#futTable tbody').innerHTML = FUTURES.map(f =>
+    `<tr><td class="cm"><b>${e(f.m)}</b><br><small style="color:var(--muted)">${e(f.rec)} in 2026</small></td><td class="num co"><span class="odds">${e(f.odds)}</span></td><td class="fcase">${e(f.case)}</td></tr>`).join('');
+
+  const KEY = 'angryMenBallot2026';
+  let state = { me:'', ou:{}, aw:{} };
+  try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && typeof s === 'object') state = Object.assign(state, s); } catch(_) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(_) {} };
+
+  const names = FUTURES.map(f => f.m).slice().sort((a,b)=>a.localeCompare(b, undefined, {sensitivity:'base'}));
+  const meSel = document.getElementById('meSel');
+  meSel.innerHTML += names.map(n => `<option${state.me===n?' selected':''}>${e(n)}</option>`).join('');
+  meSel.onchange = () => { state.me = meSel.value; save(); };
+
+  const ouBody = document.querySelector('#ouTable tbody');
+  const ouRows = FUTURES.slice().sort((a,b)=>b.line-a.line);
+  ouBody.innerHTML = ouRows.map((f,i) => `<tr><td>${e(f.m)}</td><td class="num">${e(f.rec)}</td><td class="num"><b>${f.line}</b></td>
+    <td><div class="ou" role="group" aria-label="${e(f.m)} over or under ${f.line}">
+      <button type="button" class="o" data-m="${e(f.m)}" data-v="O" aria-pressed="${state.ou[f.m]==='O'}">Over</button>
+      <button type="button" class="u" data-m="${e(f.m)}" data-v="U" aria-pressed="${state.ou[f.m]==='U'}">Under</button></div></td></tr>`).join('');
+  ouBody.addEventListener('click', ev => {
+    const b = ev.target.closest('button[data-m]'); if (!b) return;
+    const m = b.dataset.m, v = b.dataset.v;
+    state.ou[m] = state.ou[m] === v ? undefined : v; if (!state.ou[m]) delete state.ou[m];
+    b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(state.ou[m] === x.dataset.v)));
+    save();
+  });
+
+  const AW = [
+    {k:'champ', t:'2026 Champion', type:'mgr'}, {k:'shame', t:'Last Place (Wall of Shame)', type:'mgr'},
+    {k:'seed', t:'#1 Seed', type:'mgr'}, {k:'pts', t:'Points King', type:'mgr'},
+    {k:'trades', t:'Most Trades', type:'mgr'}, {k:'steal', t:'Steal of the Draft', type:'text', ph:'Player name'},
+    {k:'bust', t:'Biggest Bust', type:'text', ph:'Player name'}, {k:'bold', t:'Bold Prediction', type:'area', ph:'Say something you will regret in December'},
+  ];
+  const opts = v => '<option value="">Your pick…</option>' + names.map(n => `<option${v===n?' selected':''}>${e(n)}</option>`).join('');
+  const grid = document.getElementById('awardGrid');
+  grid.innerHTML = AW.map(a => {
+    const v = state.aw[a.k] || '';
+    const ctl = a.type === 'mgr' ? `<select data-k="${a.k}">${opts(v)}</select>`
+      : a.type === 'text' ? `<input type="text" maxlength="60" data-k="${a.k}" placeholder="${e(a.ph)}" value="${e(v)}">`
+      : `<textarea maxlength="280" data-k="${a.k}" placeholder="${e(a.ph)}">${e(v)}</textarea>`;
+    return `<label class="${a.type==='area'?'wide':''}">${e(a.t)}${ctl}</label>`;
+  }).join('');
+  grid.addEventListener('input', ev => { const k = ev.target.dataset.k; if (!k) return; state.aw[k] = ev.target.value; save(); });
+  grid.addEventListener('change', ev => { const k = ev.target.dataset.k; if (!k) return; state.aw[k] = ev.target.value; save(); });
+
+  const status = document.getElementById('copyStatus');
+  const ta = document.getElementById('ballotText');
+  function ballotText(){
+    const lines = [`⚖️ 12 Angry Men — 2026 Jury Ballot${state.me ? ' · ' + state.me : ''}`, '', 'WIN TOTALS'];
+    ouRows.forEach(f => { if (state.ou[f.m]) lines.push(`${state.ou[f.m]==='O'?'OVER ':'UNDER'} ${f.line}  ${f.m}`); });
+    if (lines[lines.length-1] === 'WIN TOTALS') lines.push('(no picks)');
+    lines.push('', 'AWARDS');
+    AW.forEach(a => { const v = (state.aw[a.k]||'').trim(); if (v) lines.push(`${a.t}: ${v}`); });
+    return lines.join('\n');
+  }
+  document.getElementById('copyBtn').onclick = async () => {
+    const text = ballotText();
+    ta.value = text;
+    try { await navigator.clipboard.writeText(text); status.textContent = 'Copied. Paste it in the group chat.'; ta.style.display = 'none'; }
+    catch(_) { ta.style.display = 'block'; ta.focus(); ta.select(); status.textContent = "Couldn't copy automatically. Your ballot is selected below; copy it from there."; }
+  };
+  document.getElementById('clearBtn').onclick = () => {
+    state = { me:'', ou:{}, aw:{} }; save();
+    meSel.value = ''; ouBody.querySelectorAll('button[aria-pressed]').forEach(b => b.setAttribute('aria-pressed','false'));
+    grid.querySelectorAll('[data-k]').forEach(x => x.value = '');
+    ta.style.display = 'none'; status.textContent = 'Cleared.';
+  };
+})();
+
+// ---------- Tabs ----------
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
